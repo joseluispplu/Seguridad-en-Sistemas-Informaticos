@@ -31,6 +31,7 @@ Si algún titular de derechos desea que se retire su material, se hará de inmed
 Fuentes principales:
 - **CCI Castilla-La Mancha** — charla «II Jornada Ciberseguridad 360: Ciberresiliencia
   Industrial», José Luis Jiménez (diagramas del bloque de panorama de amenazas / OT-ICS).
+  **Material reproducido con autorización de su autor.**
 - **MITRE Corporation** — CVE, CWE, CAPEC y ATT&CK ([mitre.org](https://www.mitre.org),
   [attack.mitre.org](https://attack.mitre.org)).
 - **OWASP Foundation** — OWASP Top 10 ([owasp.org](https://owasp.org)).
