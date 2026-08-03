@@ -23,6 +23,7 @@ Seguridad-en-Sistemas-Informaticos/
 | Tema | Título | Carpeta |
 |------|--------|---------|
 | 1.1 | Presentación de la Asignatura | [`tema-1.1/`](tema-1.1/) |
+| 1.2 | Introducción a la Seguridad Informática y de la Información | [`tema-1.2/`](tema-1.2/) |
 
 *(el resto de temas se irán publicando conforme se conviertan a LaTeX)*
 
