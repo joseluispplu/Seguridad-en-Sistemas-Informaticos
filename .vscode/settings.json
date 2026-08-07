@@ -1,0 +1,8 @@
+{
+  // === Evita los conflictos de Dropbox al compilar LaTeX ===
+  // Escribe TODOS los ficheros de compilación (.aux, .synctex, .log, .pdf...)
+  // en la carpeta temporal del sistema, FUERA de Dropbox. Así Dropbox no
+  // sincroniza ni corrompe los temporales (que era la causa del error).
+  // El PDF se sigue viendo con normalidad en el visor de VSCode.
+  "latex-workshop.latex.outDir": "%TMPDIR%"
+}

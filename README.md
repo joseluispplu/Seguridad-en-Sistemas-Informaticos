@@ -25,6 +25,7 @@ Seguridad-en-Sistemas-Informaticos/
 | 1.1 | Presentación de la Asignatura | [`tema-1.1/`](tema-1.1/) |
 | 1.2 | Introducción a la Seguridad Informática y de la Información | [`tema-1.2/`](tema-1.2/) |
 | 1.3 | Montaje de un Laboratorio de Ciberseguridad | [`tema-1.3/`](tema-1.3/) |
+| 2.1 | Footprinting y OSINT | [`tema-2.1/`](tema-2.1/) |
 
 *(el resto de temas se irán publicando conforme se conviertan a LaTeX)*
 
