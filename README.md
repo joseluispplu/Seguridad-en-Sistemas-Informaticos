@@ -27,6 +27,7 @@ Seguridad-en-Sistemas-Informaticos/
 | 1.3 | Montaje de un Laboratorio de Ciberseguridad | [`tema-1.3/`](tema-1.3/) |
 | 2.1 | Footprinting y OSINT | [`tema-2.1/`](tema-2.1/) |
 | 2.2 | Escaneo y Técnicas de Evasión | [`tema-2.2/`](tema-2.2/) |
+| 2.3 | Enumeración | [`tema-2.3/`](tema-2.3/) |
 
 *(el resto de temas se irán publicando conforme se conviertan a LaTeX)*
 
