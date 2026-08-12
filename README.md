@@ -28,6 +28,7 @@ Seguridad-en-Sistemas-Informaticos/
 | 2.1 | Footprinting y OSINT | [`tema-2.1/`](tema-2.1/) |
 | 2.2 | Escaneo y Técnicas de Evasión | [`tema-2.2/`](tema-2.2/) |
 | 2.3 | Enumeración | [`tema-2.3/`](tema-2.3/) |
+| 3.1 | Ataques a las credenciales | [`tema-3.1/`](tema-3.1/) |
 
 *(el resto de temas se irán publicando conforme se conviertan a LaTeX)*
 
