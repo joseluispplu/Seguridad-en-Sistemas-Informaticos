@@ -1,0 +1,38 @@
+# --- Ficheros generados por LaTeX / latexmk ---
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+*.idx
+*.ind
+*.ilg
+*.lof
+*.lot
+*.xdv
+
+# epstopdf: PDFs generados a partir de .eps
+*-eps-converted-to.pdf
+
+# --- Copias de seguridad y basura del sistema ---
+*.bak
+*~
+.DS_Store
+
+# Logs sueltos de compilaciones previas
+c2.log
+compile.log
+
+# Experimento de conversión desde PDF (imágenes de páginas, no versión de trabajo)
+desde-pdf/
+
+# Ficheros de conflicto de Dropbox y synctex sueltos
+*Copia en conflicto*
+*.synctex*

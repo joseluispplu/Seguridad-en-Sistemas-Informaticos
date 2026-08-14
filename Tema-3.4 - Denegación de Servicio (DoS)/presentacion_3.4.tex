@@ -1,0 +1,594 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\usepackage{beamertemplate}
+% --- estilo de comandos (consistente con el resto del temario) ---
+\newcommand{\cmd}[1]{\texttt{\color{uznavy}#1}}
+\newcommand{\cmdbox}[1]{%
+  \begin{center}%
+  {\setlength{\fboxsep}{6pt}\colorbox{uzlav!40}{\parbox{0.88\linewidth}{\ttfamily\footnotesize #1}}}%
+  \end{center}}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{textcomp}
+\usepackage{eurosym}
+\usepackage[normalem]{ulem}
+\usepackage{ragged2e}
+\usepackage{etoolbox}
+\apptocmd{\itemize}{\justifying}{}{}
+\AtBeginEnvironment{frame}{\justifying}
+
+% Repite el índice al empezar cada sección, resaltando la que comienza
+\setbeamertemplate{section in toc shaded}[default][30]
+\AtBeginSection[]{%
+  \begin{frame}{Índice}
+  \footnotesize
+  \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\title[SSI -- Tema 3.4]{Denegación de Servicio (DoS)}
+\subtitle{Seguridad en Sistemas Informáticos --- Tema 3.4}
+\author{José Luis Martínez}
+\institute{Universidad de Castilla-La Mancha}
+\date{Curso 2026/27}
+
+% --- build reproducible / metadatos limpios ---
+\pdfinfoomitdate=1
+\pdftrailerid{}
+\pdfsuppressptexinfo=-1
+
+\begin{document}
+
+\begin{frame}[plain]\titlepage\end{frame}
+
+\begin{frame}[allowframebreaks]{Introducción DoS y DDoS}
+\small
+  \begin{itemize}
+  \item Ataques
+    \begin{itemize}
+    \item Ataques de buffer overflow
+    \item Ataques permanentes o phlashing
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{Introducción}
+
+\begin{frame}[allowframebreaks]{Taxonomía de un Ataque}
+\small
+  \begin{itemize}
+  \item Footprinting
+  \item Escaneo /
+  \item Fingerprinting
+  \item Enumeration
+  \item Access
+  \item Elevación Privilegios
+  \item Pivoting / Mov. Lateral
+  \item Covering
+  \item Persistencia/Back doors
+  \item DoS
+  \item Recopilación de Información / Open Source Intelligence
+  \item Credenciales
+  \item Exploiting
+  \item Postexplotación
+  \item Esta unidad nos centramos aquí
+  \item Recopilación de Información / Open Source Intelligence
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Introducción}
+\small
+  \begin{itemize}
+  \item Tras la fase de recopilación de información en la que se han identificados los activos de la organización, los dos principales vectores de ataque son:
+  \item Ataques de acceso (objetivo principal de un Pentesting)
+  \item Rompiendo o consiguiendo credenciales válidas
+  \item Explotando vulnerabilidades no corregidas (tema siguiente)
+  \item Denegación de Servicio (DoS)
+  \item DoS
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Introducción}
+\small
+  \begin{itemize}
+  \item Los ataques DoS intentan que un recurso de red (host, la red de interconexión) reduzca, restrinja o deje de funcionar para los usuarios legítimos
+  \item Una de las opciones más comunes para perpetrar este ataque es la inundación (flooding) de peticiones para saturar la capacidad de respuesta del recurso
+  \item DoS
+  \end{itemize}
+\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl005_1.png}
+\end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Introducción}
+\small
+  \begin{itemize}
+  \item Los ataques DoS Distribuidos (DDoS) persiguen el mismo objetivo que los DoS pero el impacto es mucho mayor al igual que su probabilidad de éxito, ya que parten de una multitud de sistemas comprometidos (zombies), normalmente, a través de una botnet. Estos bots o zombies son controlados por el atacante a través de un sistema de Command and Control (C\&C)
+  \item DoS
+  \end{itemize}
+\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl006_1.png}
+\end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{El objetivo final de un ataque DoS puede ser:}
+\small
+  \begin{itemize}
+  \item Consumo de recursos
+  \item Consumo de ancho de banda, disco, uso de CPU, etc.
+  \item Ataques físicos de destrucción o alteración de componentes
+  \item Destrucción de ficheros de configuración o programas del host
+  \item Leer: interesante
+  \item Caída de whatsapp, Facebook e Instagram:
+  \item John Graham, el CTO de Cloudflare avisó a través de su cuenta de Twitter que cinco minutos antes de que los DNS de Facebook dejasen de funcionar, vimos un aumento de las BGP [en su mayoría retiradas de ruta] en los sistemas autónomos de Facebook.
+  \item Sin embargo, la hipótesis más extendida es que Facebook se borró a sí mismo por accidente, según explica el CEO de Cloudflare, Matthew Prince. "La explicación más probable es que las rutas de Internet de la empresa (BGP) fueron retiradas por error durante el mantenimiento".
+  \item DoS
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Tipos de ataques de DoS:}
+\small
+  \begin{itemize}
+  \item Ataques de buffer overflow
+  \item Ataques permanentes o phlashing
+  \end{itemize}
+\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl008_1.jpg}
+\end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Introducción DoS y DDoS}
+\small
+  \begin{itemize}
+  \item Ataques
+    \begin{itemize}
+    \item Ataques de buffer overflow
+    \item Ataques permanentes o phlashing
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{Ataques volumétricos}
+
+\begin{frame}[allowframebreaks]{Ataques volumétricos}
+\small
+  \begin{itemize}
+  \item El objetivo de estos ataques es abusar del ancho de banda entre el objetivo (normalmente el servidor) y los usuarios legítimos.
+  \item Se apoyan en protocolos no orientados a la conexión y se basan en inundar la red con este tipo de paquetes y conseguir que el objetivo no sea capaz de responder ni a éstos paquetes ni a los legítimos
+  \item Se pueden abordar también de manera distribuida (DDoS)
+  \item Tipos:
+  \item Inundación UDP / ICMP
+  \item Inundación ICMP
+  \item Smurf
+  \item DoS
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Inundación UDP}
+\small
+  \begin{itemize}
+  \item El objetivo es enviar a un alto ratio de paquetes UDP a varios servidores con la dirección IP origen falseada (spoofed) con la dirección de la víctima.
+  \item Estos servidores hacen de amplificadores puesto que reenviaran las respuestas a la IP de la víctima, consiguiendo que ésta se sature y deje de funcionar
+  \item Ejemplo1 y Ejemplo2
+  \item DoS
+  \end{itemize}
+\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl011_1.png}
+\end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Inundación ICMP}
+\small
+  \begin{itemize}
+  \item El objetivo es enviar a un alto ratio de paquetes ICMP echo reply (ping) a la dirección de la víctima.
+  \item También se puede hacer rebotado y amplificado (Smurf)
+  \end{itemize}
+\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl012_1.png}
+\end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Smurf}
+\small
+  \begin{itemize}
+  \item Es similar al anterior, pero en este caso el atacante falsifica la dirección origen del paquete ICMP, con la IP del objetivo/víctima .
+  \item De esta manera todas las respuestas le llegan a él
+  \item También se puede amplificar enviándolo a la dirección de broadcast con la IP origen de la víctima para que todas las repuestas vayan a ésta
+  \item DoS
+  \end{itemize}
+\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl013_1.png}
+\end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Amplificación DDoS --- DNS, NTP y Memcached}
+\small
+  \begin{itemize}
+  \item Los ataques de amplificación combinan IP spoofing con servicios UDP que generan respuestas mucho mayores que la petición original.
+  \item Factores de amplificación
+  \item DNS amplification --- ratio \textasciitilde{}28--54$\times$ (petición ANY a resolver abierto)
+  \item NTP amplification --- ratio \textasciitilde{}556$\times$ (comando monlist, CVE-2013-5211)
+  \item Memcached --- ratio \textasciitilde{}51.000$\times$ (mayor amplificación conocida, UDP/11211)
+  \item SSDP --- ratio \textasciitilde{}30$\times$ (UPnP en dispositivos domésticos)
+  \item SNMP v2 --- ratio \textasciitilde{}650$\times$ (GetBulk a community 'public')
+  \item CharGEN --- ratio \textasciitilde{}358$\times$ (servicio legacy en puerto 19/UDP)
+  \item Cómo funciona (DNS como ejemplo)
+  \item 1. Atacante falsifica la IP origen $\rightarrow$ pone la IP de la víctima
+  \item 2. Envía petición DNS de tipo ANY a un resolver abierto
+  \item 3. El resolver responde con paquetes grandes $\rightarrow$ a la IP de la víctima
+  \item $\rightarrow$ Poca ancho de banda del atacante genera tráfico masivo sobre la víctima
+  \item Detección y mitigación
+  \item BCP38 / uRPF: filtrado de IP spoofing en origen (operadores ISP)
+  \item Cerrar resolvers DNS abiertos y deshabilitar NTP monlist
+  \item Rate-limiting de respuestas DNS (NXDOMAIN/ANY) en el resolver
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Introducción DoS y DDoS}
+\small
+  \begin{itemize}
+  \item Ataques
+    \begin{itemize}
+    \item Ataques de buffer overflow
+    \item Ataques permanentes o phlashing
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{Ataques de consumo}
+
+\begin{frame}[allowframebreaks]{Ataques consumo}
+\small
+  \begin{itemize}
+  \item Este tipo de ataques de DoS o DDoS se basan en el consumo desmesurado de los recursos de la máquina, tales como memoria, CPU, etc derivados del uso de las conexiones, por ejemplo, del protocolo TCP.
+  \item Tipos
+  \item Inundaciones SYN
+  \item Fragmentación
+  \item Ataques de capa de aplicación
+  \item DoS
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Inundación SYN}
+\small
+  \begin{itemize}
+  \item El atacante envía una gran cantidad de solicitudes SYN al servidor objetivo (víctima) con direcciones IP de origen falsas
+  \item El ataque crea conexiones TCP incompletas que utilizan los recursos de red de la máquina objetivo.
+  \item A partir del método TCP three-way handshake. En un ataque SYN, el atacante explota este método de la siguiente manera: primero, el atacante envía una solicitud de TCP SYN falsa al servidor de destino y cuando el servidor devuelve un SYN / ACK en respuesta a la solicitud del cliente (atacante), el cliente nunca envía una respuesta ACK y deja al servidor esperando para completar la conexión
+  \item DoS
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Inundación SYN}
+\small
+  \begin{itemize}
+  \item El host víctima un seguimiento de las conexiones parcialmente abiertas, mientras espera los paquetes de respuesta ACK en una cola de escucha
+  \item Un host malicioso puede explotar el host enviando muchas solicitudes SYN al host a la vez.
+  \item Cuando la cola está llena, el sistema no puede abrir nuevas conexiones hasta que elimine algunas entradas de la cola de conexión (debido al tiempo de espera del protocolo de enlace).
+  \item DoS
+  \end{itemize}
+\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl018_1.jpg}
+\end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Fragmentación}
+\small
+  \begin{itemize}
+  \item En este tipo de ataques el atacante intenta gastar la memoria de la víctima, fragmentando un paquete muy grande en muchos más pequeños para que, cuando la víctima reconstruya el paquete original
+  \item El impacto es mucho mayor si se incrementa la tasa de envío de paquetes
+  \item DoS
+  \end{itemize}
+\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl019_1.jpg}
+\end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Ataques de capa de aplicación}
+\small
+  \begin{itemize}
+  \item En este caso, se usan protocolos de capa de aplicación como HTTP.
+  \item El atacante envía alto ratio de paquetes GET o POST a la víctima para saturar los recursos de ésta y que no atienda peticiones legítimas
+  \item Un ejemplo de este ataque es slowloris en el que el atacante abre muchas conexiones HTTP sin esperar a que se completen y alcanzar el máximo de conexiones concurrentes que soporta la víctima
+  \item DoS
+  \end{itemize}
+\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl020_1.png}
+\end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{HTTP Rapid Reset y Ataques Lentos de Capa 7}
+\small
+  \begin{itemize}
+  \item Ataques consumo / Aplicación
+  \item Slowloris y variantes de ataques lentos
+  \item Slowloris --- abre conexiones HTTP y envía cabeceras incompletas lentamente
+  \item Slow POST / RUDY --- envía el body de un POST en bytes sueltos cada pocos segundos
+  \item Slow Read --- anuncia ventana TCP de recepción cero; el servidor queda bloqueado
+  \item $\rightarrow$ Herramienta: slowhttptest (cubre los tres vectores anteriores)
+  \item HTTP/2 Rapid Reset --- CVE-2023-44487
+  \item Ataque DDoS más grande de la historia: 398 Mpps (Google, Cloudflare, AWS, 2023)
+  \item Explota el multiplexado de HTTP/2: el atacante abre y cancela (RST\_STREAM) streams
+  \item a velocidad extrema sin esperar respuesta, agotando el servidor con coste mínimo
+  \item El servidor procesa el reset pero ya ha asignado recursos al stream
+  \item Afectó a todos los grandes: Google (>398M rps), Cloudflare, Amazon
+  \item $\rightarrow$ Mitigación: parches en servidores HTTP/2 (nginx, Apache, IIS, Go net/http)
+  \item Otras herramientas capa 7
+  \item LOIC / HOIC --- HTTP flood clásico, fácilmente bloqueable por IP
+  \item GoldenEye --- HTTP flood con keep-alive y cabeceras aleatorias
+  \item PyLoris --- implementación Python de Slowloris con control fino
+  \item blog.cloudflare.com --- 'HTTP/2 Rapid Reset: deconstructing the record-breaking attack'
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Introducción DoS y DDoS}
+\small
+  \begin{itemize}
+  \item Ataques
+    \begin{itemize}
+    \item Ataques de buffer overflow
+    \item Ataques permanentes o phlashing
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{Buffer overflow}
+
+\begin{frame}[allowframebreaks]{Buffer overflow}
+\small
+  \begin{itemize}
+  \item Otra técnica de DoS es conseguir que el sistema objetivo crashee (se rompa) debido a una mala programación o gestión de la memoria, los denominados buffer overflow
+  \item Un buffer overflow no es más que cuando una petición excede los límites de memoria, ya sea de una variable, de un proceso, de la pila, y produce un comportamiento anómalo. Un buffer overflow bien construido puede conseguir que el flujo de ejecución del programa salte a donde el atacante quiere, por ejemplo, hacia un payload que ejecute una Shell (exploiting) o, simplemente desbordando la dirección de memoria hacia una zona de memoria inexistente o una operación aleatoria, hace que el programa deje de funcionar y la aplicación o el sistema operativo (si es a nivel de kernel) se caiga produciendo una DoS
+  \item DoS
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Ping de la muerte}
+\small
+  \begin{itemize}
+  \item Un atacante intenta bloquear, desestabilizar o congelar el sistema mediante el envío de paquetes mal formados o de gran tamaño con un simple comando ping.
+  \item En este caso, el atacante envía un paquete que tiene un tamaño de 65,538 bytes al servidor web de destino. Este tamaño del paquete excede el límite de tamaño prescrito por RFC 791 IP, que es de 65,535 bytes
+  \item El proceso de reensamblaje por parte del sistema receptor puede causar que el sistema se bloquee.
+  \item DoS
+  \end{itemize}
+\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl024_1.jpg}
+\end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Crashing de aplicaciones}
+\small
+  \begin{itemize}
+  \item Existen bugs en aplicaciones que, permiten a un usuario exceder los límites de la aplicación y, haciendo que ésta deje de funcionar.
+  \item Por ejemplo, si un servicio ftp mal programado, no controla la entrada de datos del usuario, puede ocurrir que éste exceda los límites de la variable que recoge la entrada de datos. Si ocurre esto, el atacante estaría sobrescribiendo datos de otras variables contiguas o incluso instrucciones.
+  \item Cuando el programa lee esas posiciones sobrescritas (en caso de variables) o ejecuta las instrucciones machacadas (en caso de instrucciones) se produce un crash de la aplicación ya que no se mantiene la lógica de la aplicación y se produce el famoso ``pantallazo azul'' en sistemas Windows o el crash en Unix, lo que es una DoS
+  \item DoS
+  \end{itemize}
+\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl025_1.png}
+\end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Introducción DoS y DDoS}
+\small
+  \begin{itemize}
+  \item Ataques
+    \begin{itemize}
+    \item Ataques de buffer overflow
+    \item Ataques permanentes o phlashing
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Permanentes o phlashing}
+\small
+  \begin{itemize}
+  \item Este tipo de ataques se dirigen exclusivamente al hardware y causan daños irreversibles.
+  \item Sabotean el hardware del sistema, lo que requiere que la víctima reemplace o reinstale el componente dañado.
+  \item Otra variante a este tipo de ataques es aquellos en los que, a través de un fallo de seguridad o una conexión directa en un dispositivo, se consigue la administración remota en las interfaces de administración y, una vez con acceso, se pueden borrar ficheros de configuración, formatear el sistema, borrar aplicaciones, etc.
+  \item DoS
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Introducción DoS y DDoS}
+\small
+  \begin{itemize}
+  \item Ataques
+    \begin{itemize}
+    \item Ataques de buffer overflow
+    \item Ataques permanentes o phlashing
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{Botnets}
+
+\begin{frame}[allowframebreaks]{Botnets}
+\small
+  \begin{itemize}
+  \item Una botnet es una red de zombies o robots y que son controladas por un pastor.
+  \item Se usan para escaneos, envío de spam, phishing o campañas de DoS
+  \item Los bots son aplicaciones de software que ejecutan tareas automatizadas a través de Internet
+  \item Hay diferentes tipos de bots, como bots de Internet, bots de IRC y bots de chatter.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Procedimiento}
+\small
+  \begin{itemize}
+  \item El atacante realiza una exploración para encontrar máquinas vulnerables disponibles en una red; investigando direcciones IP al azar del rango de IP de la red objetivo y comprueba si dispone de vulnerabilidades.
+  \item Al encontrar una máquina vulnerable, irrumpe en ella e intenta infectarla instalando en ella el mismo código malicioso (exploit)
+  \item Una vez que una máquina ha sido comprometida, ésta descarga el código malicioso, por ejemplo, si el atacante coloca una copia de la botnet en un servidor propiedad del atacante y transfiere al sistema vulnerable recién explotado. Este software dispone de un mecanismo de secuencias de comandos, para que el atacante y el bot se puedan comunicar (C\&C).
+  \item DoS
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Botnets}
+\small
+  \begin{itemize}
+  \item \href{https://unaaldia.hispasec.com/2022/08/google-neutraliza-el-mayor-ataque-ddos-https-registrado-hasta-la-fecha.html}{https://unaaldia.hispasec.com/2022/08/google-neutraliza-el-mayor-ataque-ddos-https-registrado-hasta-la-fecha.html}
+  \end{itemize}
+\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl031_1.png}
+\end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{DoS con anonimato}
+\small
+  \begin{itemize}
+  \item El anonimato te lo ofrece ToR (dark web)\dots{}aunque bueno, no hay nada seguro, la red ToR también tiene vulnerabilidades o malas configuraciones de los nodos por parte de los clientes
+  \item La idea reside en lanzar las peticiones masivas a través de la red ToR para garantizar el anonimato
+  \item Herramientas:
+  \item ddostor
+  \item DoS
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Mitigaciones y Contramedidas DoS / DDoS}
+\small
+  \begin{itemize}
+  \item Contramedidas
+  \item En el servidor / host
+  \item SYN Cookies --- responde al SYN con cookie sin reservar recursos hasta el ACK
+  \item Rate limiting --- limitar conexiones por IP / segundo a nivel de firewall o kernel
+  \item Timeouts agresivos --- reducir tiempo de espera de conexiones semi-abiertas
+  \item Deshabilitar servicios UDP amplificadores (NTP monlist, CharGEN, SNMP v1/v2)
+  \item En la red / ISP
+  \item BCP38 / uRPF --- filtrado de origen: bloquea paquetes con IP spoofed
+  \item BGP Blackholing --- anunciar al upstream que descarte tráfico hacia una IP víctima
+  \item Anycast routing --- distribuir el tráfico malicioso entre múltiples PoPs globales
+  \item $\rightarrow$ Así mitiga Cloudflare: absorbe el tráfico en \textasciitilde{}300 PoPs antes de llegar al origen
+  \item Servicios especializados anti-DDoS
+  \item Scrubbing centers --- centros que limpian el tráfico antes de enviarlo al origen
+  \item CDN + WAF --- Cloudflare, Akamai, AWS Shield, Azure DDoS Protection
+  \item RTBH (Remote Triggered Black Hole) --- blackhole selectivo con comunidades BGP
+  \item Detección y monitorización
+  \item Análisis de flujos NetFlow / IPFIX: detectar volúmenes anómalos
+  \item Umbral de pps (paquetes/segundo): alerta si supera la línea base habitual
+  \item SIEM con correlación de eventos de red + IDS (Snort / Suricata / Zeek)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Introducción DoS y DDoS}
+\small
+  \begin{itemize}
+  \item Ataques
+    \begin{itemize}
+    \item Ataques de buffer overflow
+    \item Ataques permanentes o phlashing
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{Herramientas y ejemplos}
+
+\begin{frame}[allowframebreaks]{Ataque DoS de tipo flooding}
+\small
+  \begin{itemize}
+  \item Hping3
+    \begin{itemize}
+    \item Hping3 --c 15000 --d 120 -S --w 64 --p 80 --flood --rand-source IP
+    \item Hping3 --S --p 135---flood IP
+    \item Hping3 --udp --flood --spoof IP IP
+    \end{itemize}
+  \item \href{https://github.com/gkbrk/slowloris}{slowloris}
+  \end{itemize}
+\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl035_1.jpg}
+\end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Ataque DoS de tipo flooding}
+\small
+  \begin{itemize}
+  \item Metasploit
+    \begin{itemize}
+    \item[] \cmdbox{Auxiliary/dos/tcp/sysflood}
+    \item[] \cmdbox{Auxiliary/dos/http/slowloris.py}
+    \item[] \cmdbox{Auxiliary/dos/Windows/rdp/ms12\_020\_maxchannelsid}
+    \end{itemize}
+  \item Nmap NSE:
+    \begin{itemize}
+    \item[] \cmdbox{nmap --script http-slowloris --max-parallelism 400 <target>}
+    \item[] \cmdbox{nmap --script smb-flood.nse -p445 <host>}
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Ataque DoS}
+\small
+  \begin{itemize}
+  \item \href{https://tools.kali.org/vulnerability-analysis/yersinia}{Yersinia}
+    \begin{itemize}
+    \item[] \cmdbox{yersinia dhcp -attack 1}
+    \item[] \cmdbox{yersinia stp -attack 2}
+    \item[] \cmdbox{sudo yersinia cdp -attack 1}
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Ataques DoS de tipo buffer overflow}
+\small
+  \begin{itemize}
+  \item Metasploit
+    \begin{itemize}
+    \item Search dos (se pueden encontrar múltiples exploits DoS para diferentes aplicaciones)
+    \end{itemize}
+  \item Exploit-db
+    \begin{itemize}
+    \item \href{https://www.exploit-db.com/?type=dos&platform=windows&tag=3}{https://www.exploit-db.com/?type=dos\&platform=windows\&tag=3}
+    \item (exploits DoS para sistemas Windows con exploit en metasploit)
+    \item \href{https://www.exploit-db.com/?type=dos&platform=linux}{https://www.exploit-db.com/?type=dos\&platform=linux}
+    \item (exploits DoS para aplicaciones Linux)
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{DoS Flooding}
+\small
+  \begin{itemize}
+  \item Utiliza la herramienta hping3 para hacer un ataque DoS al servidor web alojado en la máquina metasploitable2
+    \begin{itemize}
+    \item Utiliza metasploit y su módulo synflood para hacer un DoS al servicio ssh de la máquina metasploitable
+    \end{itemize}
+  \item Nota: Si te atreves, puedes probar a hacer un DoS al router de tu casa
+  \end{itemize}
+\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl039_1.jpg}
+\end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{DoS Buffer Overflow}
+\small
+  \begin{itemize}
+  \item A partir de esta máquina \href{https://pruebasaluuclm-my.sharepoint.com/:u:/g/personal/joseluis_martinez_uclm_es/EYN1hmVuf_JIpXwWHJDf1DcBkwVrESyYwNKs8oG8-sedsQ?e=8z0lyr}{Windows XP}en la que he instalado un servidor ftp vulnerable
+  \item Realiza un fingerprinting del servicio ftp
+  \item Localiza un exploit en metasploit para hacer un ataque DoS a dicho servicio
+  \item Realiza el ataque y comprueba como la aplicación crashea
+  \end{itemize}
+\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl040_1.jpg}
+\end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Usaré la aplicación Mikrotik disponible aquí:}
+\small
+  \begin{itemize}
+  \item \href{https://www.exploit-db.com/exploits/24968}{https://www.exploit-db.com/exploits/24968}
+  \item Utiliza metasploit para realizar un ataque de tipo DoS
+  \end{itemize}
+\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl041_1.jpg}
+\end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{DoS Windows RDP}
+\small
+  \begin{itemize}
+  \item A partir del win7 y/o win XP
+  \item Determina si son vulnerables a esta vulnerabilidad DoS:
+    \begin{itemize}
+    \item \href{https://learn.microsoft.com/en-us/security-updates/securitybulletins/2012/ms12-020}{https://learn.microsoft.com/en-us/security-updates/securitybulletins/2012/ms12-020}
+    \end{itemize}
+  \item Puerto 3389
+  \item auxiliary:
+    \begin{itemize}
+    \item[] \cmdbox{msf ms12\_020\_maxchannelsids}
+    \end{itemize}
+  \end{itemize}
+\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl042_1.jpg}
+\end{center}
+\end{frame}
+
+\begin{frame}[plain]
+  \begin{center}
+    {\Huge\bfseries\color{uznavy} ¡Gracias!}\\[1em]
+    {\large Seguridad en Sistemas Informáticos --- Tema 3.4}
+  \end{center}
+\end{frame}
+
+\pdfinfo{ /Title () /Author () /Subject () /Keywords () /Creator () /Producer () }
+\end{document}
