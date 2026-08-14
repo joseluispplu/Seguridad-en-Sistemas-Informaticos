@@ -1,0 +1,150 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamertemplate}[2026/07/09 Plantilla Beamer estilo pptx (base Madrid)]
+
+% ----- Opciones -------------------------------------------------------
+\newif\ifbt@plano
+\bt@planofalse
+\DeclareOption{plano}{\bt@planotrue}
+\ProcessOptions\relax
+
+% ----- Codificacion y fuente tipo Arial -------------------------------
+\RequirePackage{iftex}
+\ifPDFTeX
+  \RequirePackage[T1]{fontenc}
+  \RequirePackage[utf8]{inputenc}
+\fi
+\RequirePackage[spanish,es-noquoting]{babel}
+\RequirePackage{helvet}                       % Helvetica: clon metrico de Arial
+\renewcommand{\familydefault}{\sfdefault}     % todo en sans-serif (como el pptx)
+\usefonttheme{professionalfonts}
+
+% ----- Tema base ------------------------------------------------------
+\usetheme{Madrid}
+
+% ======================================================================
+%  PALETA DE COLOR (extraida del theme del pptx)
+% ======================================================================
+\RequirePackage{xcolor}
+\definecolor{uznavy}{HTML}{00007D}    % azul marino  (lt2)  -> color principal
+\definecolor{uzperi}{HTML}{9999FF}    % periwinkle   (accent1)
+\definecolor{uzmauve}{HTML}{9999CC}   % malva        (accent2)
+\definecolor{uzlav}{HTML}{CACAFF}     % lavanda claro(accent5)
+\definecolor{uzsteel}{HTML}{8A8AB9}   % azul grisaceo(accent6)
+\definecolor{uzlink}{HTML}{666699}    % enlaces      (hlink)
+
+% ======================================================================
+%  RECOLOREADO DEL TEMA
+%  En Madrid (whale) todo deriva de structure.fg. Redefinimos la
+%  estructura y las tres paletas para obtener un degradado
+%  marino -> periwinkle en el pie de pagina, evitando el oscurecido
+%  a negro por defecto.
+% ======================================================================
+\setbeamercolor{structure}{fg=uznavy}
+\setbeamercolor{normal text}{fg=black,bg=white}
+
+\setbeamercolor{palette primary}{fg=white,bg=uznavy}
+\setbeamercolor{palette secondary}{fg=white,bg=uznavy!82!uzperi}
+\setbeamercolor{palette tertiary}{fg=white,bg=uznavy!62!uzperi}
+\setbeamercolor{palette quaternary}{fg=white,bg=uznavy}
+
+% Titulos (portada y titulo de diapositiva)
+\setbeamercolor{titlelike}{fg=white,bg=uznavy}
+\setbeamercolor{frametitle}{fg=white,bg=uznavy}
+\setbeamercolor{framesubtitle}{fg=uzlav}
+\setbeamercolor{title}{fg=white,bg=uznavy}
+\setbeamercolor{subtitle}{fg=uzlav}   % va DENTRO de la caja navy del titulo: color claro
+\setbeamercolor{author}{fg=uzsteel}
+\setbeamercolor{institute}{fg=uznavy}
+\setbeamercolor{date}{fg=uzsteel}
+
+% Bloques (block / alertblock / exampleblock)
+\setbeamercolor{block title}{fg=white,bg=uznavy}
+\setbeamercolor{block body}{fg=black,bg=uzlav!30}
+\setbeamercolor{block title alerted}{fg=white,bg=uzlink}
+\setbeamercolor{block body alerted}{fg=black,bg=uzlink!12}
+\setbeamercolor{block title example}{fg=white,bg=uzmauve}
+\setbeamercolor{block body example}{fg=black,bg=uzmauve!14}
+
+% Notas al pie, enlaces y texto destacado
+\setbeamercolor{alerted text}{fg=uzlink}
+\hypersetup{colorlinks=true,linkcolor=uznavy,urlcolor=uzlink,citecolor=uzlink}
+
+% ======================================================================
+%  PIE DE PAGINA: barra de color uniforme (navy, igual que el titulo).
+%  A la izquierda solo el titulo de la presentacion; a la derecha la
+%  fecha y el numero de diapositiva (como en Madrid/infolines).
+% ======================================================================
+\setbeamercolor{title in head/foot}{fg=white,bg=uznavy}
+\setbeamercolor{date in head/foot}{fg=white,bg=uznavy}
+\setbeamercolor{page number in head/foot}{fg=white,bg=uznavy}
+
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,left]{title in head/foot}%
+      % OJO: \insertshorttitle es un hiperenlace y colorlinks lo pintaria
+      % de navy (invisible sobre la barra navy). Usamos texto plano.
+      \hspace*{2ex}\usebeamerfont{title in head/foot}%
+      \ifx\beamer@shorttitle\@empty\inserttitle\else\beamer@shorttitle\fi
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+      \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}%
+      \usebeamercolor[fg]{page number in head/foot}\usebeamerfont{page number in head/foot}\usebeamertemplate{page number in head/foot}\hspace*{2ex}%
+    \end{beamercolorbox}%
+  }%
+  \vskip0pt%
+}
+
+% ======================================================================
+%  VINETAS CUADRADAS EN AZUL MARINO  (como el pptx)
+% ======================================================================
+\setbeamertemplate{itemize items}[square]
+\setbeamertemplate{enumerate items}[default]
+\setbeamercolor{itemize item}{fg=uznavy}
+\setbeamercolor{itemize subitem}{fg=uznavy!70!uzperi}
+\setbeamercolor{itemize subsubitem}{fg=uzperi}
+\setbeamercolor{enumerate item}{fg=uznavy}
+\setbeamercolor{enumerate subitem}{fg=uznavy!70!uzperi}
+
+% ======================================================================
+%  INDICE: numeros en cuadrados (en vez de los circulos de Madrid)
+% ======================================================================
+\setbeamertemplate{sections/subsections in toc}[square]
+\setbeamercolor{section number projected}{fg=white,bg=uznavy}
+\setbeamercolor{subsection number projected}{fg=white,bg=uznavy!70!uzperi}
+\setbeamercolor{subsubsection number projected}{fg=white,bg=uzperi}
+
+% ======================================================================
+%  DETALLES DE ESTILO
+% ======================================================================
+\setbeamertemplate{navigation symbols}{}      % sin simbolos de navegacion
+% Quitar el contador romano (I, II...) que [allowframebreaks] anade al titulo
+% incluso cuando la diapositiva NO se parte. Asi los titulos quedan limpios.
+\setbeamertemplate{frametitle continuation}{}
+\setbeamertemplate{caption}[numbered]
+\setbeamerfont{frametitle}{series=\bfseries}
+\setbeamerfont{framesubtitle}{series=\bfseries,size=\normalsize}
+\setbeamerfont{title}{series=\bfseries,size=\LARGE}
+\setbeamerfont{block title}{series=\bfseries}
+
+% Sombra suave de los bloques redondeados (heredada de Madrid/rounded)
+\setbeamertemplate{blocks}[rounded][shadow=true]
+
+% ----------------------------------------------------------------------
+%  Opcion [plano]: elimina la barra del titulo para imitar el pptx
+%  (titulo en azul marino, negrita, sobre fondo blanco y sin barra).
+% ----------------------------------------------------------------------
+\ifbt@plano
+  \setbeamercolor{frametitle}{fg=uznavy,bg=white}
+  \setbeamercolor{framesubtitle}{fg=black}
+  \setbeamertemplate{frametitle}{%
+    \vskip0.6em
+    \usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle\par
+    \ifx\insertframesubtitle\@empty\else
+      {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\par}%
+    \fi
+    \vskip0.2em
+  }
+\fi
+
+\endinput

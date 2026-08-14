@@ -29,3 +29,6 @@
 # Logs sueltos de compilaciones previas
 c2.log
 compile.log
+
+# Backups de editor con sufijo de fecha
+*.bak-*
