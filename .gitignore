@@ -32,3 +32,7 @@ compile.log
 
 # Backups de editor con sufijo de fecha
 *.bak-*
+
+# Temas en construcción (se subirán cuando estén terminados)
+/Tema-3.3 - Hacking con Metasploit/
+/Tema-3.4 - Denegación de Servicio (DoS)/
