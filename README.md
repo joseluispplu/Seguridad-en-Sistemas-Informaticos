@@ -30,6 +30,7 @@ Seguridad-en-Sistemas-Informaticos/
 | 2.3 | Enumeración | [`Tema-2.3 - Enumeración/`](Tema-2.3%20-%20Enumeración/) |
 | 3.1 | Ataques a las credenciales | [`Tema-3.1 - Ataques a las credenciales/`](Tema-3.1%20-%20Ataques%20a%20las%20credenciales/) |
 | 3.2 | Ingeniería Social | [`Tema-3.2 - Ingeniería Social/`](Tema-3.2%20-%20Ingeniería%20Social/) |
+| 3.3 | Hacking con Metasploit | [`Tema-3.3 - Hacking con Metasploit/`](Tema-3.3%20-%20Hacking%20con%20Metasploit/) |
 
 *(el resto de temas se irán publicando conforme se conviertan a LaTeX)*
 
