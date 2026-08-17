@@ -32,6 +32,8 @@ Seguridad-en-Sistemas-Informaticos/
 | 3.2 | Ingeniería Social | [`Tema-3.2 - Ingeniería Social/`](Tema-3.2%20-%20Ingeniería%20Social/) |
 | 3.3 | Hacking con Metasploit | [`Tema-3.3 - Hacking con Metasploit/`](Tema-3.3%20-%20Hacking%20con%20Metasploit/) |
 | 3.4 | Denegación de Servicio (DoS) | [`Tema-3.4 - Denegación de Servicio (DoS)/`](Tema-3.4%20-%20Denegación%20de%20Servicio%20%28DoS%29/) |
+| 4.1 | Hacking Web: Ataques Client-side | [`Tema-4.1 - Hacking Web - Ataques Client-side/`](Tema-4.1%20-%20Hacking%20Web%20-%20Ataques%20Client-side/) |
+| 4.2 | Hacking Web: Ataques Server-side | [`Tema-4.2 - Hacking Web - Ataques Server-side/`](Tema-4.2%20-%20Hacking%20Web%20-%20Ataques%20Server-side/) |
 
 *(el resto de temas se irán publicando conforme se conviertan a LaTeX)*
 
