@@ -41,11 +41,44 @@
 
 \begin{frame}{Índice}\scriptsize\tableofcontents\end{frame}
 
-\section{Introducción y fundamentos}
-
-
 \begin{frame}[plain]\begin{center}\includegraphics[width=\textwidth,height=0.92\textheight,keepaspectratio]{img/taxonomia-ataque.pdf}\end{center}\end{frame}
 
+\section{Introducción y fundamentos}
+
+\begin{frame}[allowframebreaks]{Introducción}
+\small
+  \begin{itemize}
+  \item OWASP
+  \item Footprinting web y Burp
+  \item Vulnerabilidades Web
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Introducción}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Introducción}
+\small
+  \begin{itemize}
+  \item Taxonomía de un Ataque
+  \item Footprinting
+  \item Escaneo /
+  \item Fingerprinting
+  \item Enumeration
+  \item Access
+  \item Elevación Privilegios
+  \item Pivoting / Mov. Lateral
+  \item Covering
+  \item Persistencia/Back doors
+  \item DoS
+  \item Recopilación de Información / Open Source Intelligence
+  \item Credenciales
+  \item Exploiting
+  \item Postexplotación
+  \item Esta unidad nos centramos aquí
+  \item Recopilación de Información / Open Source Intelligence
+  \end{itemize}
+\end{frame}
 
 \begin{frame}[allowframebreaks]{Aplicaciones web: fundamentos}
 \small
@@ -874,6 +907,8 @@
 \end{center}
 \end{frame}
 
+\section{Laboratorio}
+
 \begin{frame}[allowframebreaks]{Introducción}
 \small
   \begin{itemize}
@@ -882,8 +917,6 @@
   \item Vulnerabilidades Web
   \end{itemize}
 \end{frame}
-
-\section{Laboratorio}
 
 \begin{frame}[allowframebreaks]{Laboratorio:}
 \small
@@ -1892,6 +1925,16 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}{Referencias y práctica --- Prototype Pollution}
+\footnotesize
+  \begin{itemize}
+  \item \href{https://portswigger.net/web-security/prototype-pollution}{PortSwigger --- Prototype Pollution} (labs)
+  \item \href{https://github.com/BlackFan/client-side-prototype-pollution}{BlackFan --- Client-side Prototype Pollution (gadgets)}
+  \end{itemize}
+\end{frame}
+
+\section{WebSockets}
+
 \begin{frame}[allowframebreaks]{WebSockets --- Pentesting}
 \small
   \begin{itemize}
@@ -1930,16 +1973,6 @@
   \item portswigger.net/web-security/websockets
   \end{itemize}
 \end{frame}
-
-\begin{frame}{Referencias y práctica --- Prototype Pollution}
-\footnotesize
-  \begin{itemize}
-  \item \href{https://portswigger.net/web-security/prototype-pollution}{PortSwigger --- Prototype Pollution} (labs)
-  \item \href{https://github.com/BlackFan/client-side-prototype-pollution}{BlackFan --- Client-side Prototype Pollution (gadgets)}
-  \end{itemize}
-\end{frame}
-
-\section{WebSockets}
 
 \begin{frame}[allowframebreaks]{WebSockets --- Cross-Site WebSocket Hijacking (CSWSH)}
 \small
@@ -2138,6 +2171,16 @@
   \item Una configuración CORS laxa + credenciales = exfiltración de datos autenticados.
   \end{itemize}
 \end{frame}
+
+\begin{frame}{Referencias y práctica --- CORS}
+\footnotesize
+  \begin{itemize}
+  \item \href{https://portswigger.net/web-security/cors}{PortSwigger --- CORS} (labs)
+  \item \href{https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS}{MDN --- Cross-Origin Resource Sharing}
+  \end{itemize}
+\end{frame}
+
+\section{XSS --- PortSwigger Academy}
 
 \begin{frame}[allowframebreaks]{Hacking de Aplicaciones Web:}
 \small
@@ -2626,6 +2669,8 @@
   \end{itemize}
 \end{frame}
 
+\section{CSRF --- PortSwigger Academy}
+
 \begin{frame}[allowframebreaks]{Cross-Site Request Forgery (CSRF) --- Introducción}
 \small
   \begin{itemize}
@@ -2832,6 +2877,8 @@
   \end{itemize}
 \end{frame}
 
+\section{Clickjacking --- PortSwigger Academy}
+
 \begin{frame}[allowframebreaks]{Clickjacking --- Introducción}
 \small
   \begin{itemize}
@@ -2902,15 +2949,6 @@
   \item CSP frame-ancestors es más flexible y tiene precedencia sobre X-Frame-Options
   \item Clickjacking requiere que la acción sea visible en un iframe (sin framebusting)
   \item portswigger.net/web-security/all-labs\#clickjacking
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Referencias y práctica --- CORS}
-\footnotesize
-  \begin{itemize}
-  \item \href{https://portswigger.net/web-security/cors}{PortSwigger --- CORS} (labs)
-  \item \href{https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS}{MDN --- Cross-Origin Resource Sharing}
-  \item \href{https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html\#cross-origin-resource-sharing}{OWASP --- CORS misconfig}
   \end{itemize}
 \end{frame}
 
