@@ -30,5 +30,9 @@
 c2.log
 compile.log
 
-# Backups de editor con sufijo de fecha
-*.bak-*
+# Experimento de conversión desde PDF (imágenes de páginas, no versión de trabajo)
+desde-pdf/
+
+# Ficheros de conflicto de Dropbox y synctex sueltos
+*Copia en conflicto*
+*.synctex*
