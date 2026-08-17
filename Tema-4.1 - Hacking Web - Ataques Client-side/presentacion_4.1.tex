@@ -39,40 +39,13 @@
 
 \begin{frame}[plain]\titlepage\end{frame}
 
-\begin{frame}[allowframebreaks]{Introducción}
-\small
-  \begin{itemize}
-  \item OWASP
-  \item Footprinting web y Burp
-  \item Vulnerabilidades Web
-  \end{itemize}
-\end{frame}
+\begin{frame}{Índice}\scriptsize\tableofcontents\end{frame}
 
-\begin{frame}[allowframebreaks]{Introducción}
-\end{frame}
+\section{Introducción y fundamentos}
 
-\begin{frame}[allowframebreaks]{Introducción}
-\small
-  \begin{itemize}
-  \item Taxonomía de un Ataque
-  \item Footprinting
-  \item Escaneo /
-  \item Fingerprinting
-  \item Enumeration
-  \item Access
-  \item Elevación Privilegios
-  \item Pivoting / Mov. Lateral
-  \item Covering
-  \item Persistencia/Back doors
-  \item DoS
-  \item Recopilación de Información / Open Source Intelligence
-  \item Credenciales
-  \item Exploiting
-  \item Postexplotación
-  \item Esta unidad nos centramos aquí
-  \item Recopilación de Información / Open Source Intelligence
-  \end{itemize}
-\end{frame}
+
+\begin{frame}[plain]\begin{center}\includegraphics[width=\textwidth,height=0.92\textheight,keepaspectratio]{img/taxonomia-ataque.pdf}\end{center}\end{frame}
+
 
 \begin{frame}[allowframebreaks]{Aplicaciones web: fundamentos}
 \small
@@ -93,7 +66,7 @@
   \item Tanto el servidor como los clientes pueden funcionar en diferentes dispositivos, esto dependerá de la naturaleza de la aplicación.
   \item En el modelo actual pueden aparecer otros elementos. Proxies, cachés, servidores especializados, etc.
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl010_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl010_1.png}
 \end{center}
 \end{frame}
 
@@ -118,8 +91,6 @@
   \item Vulnerabilidades Web
   \end{itemize}
 \end{frame}
-
-\section{Control de Acceso e IDOR}
 
 \begin{frame}[allowframebreaks]{El servidor}
 \small
@@ -149,7 +120,7 @@
   \begin{itemize}
   \item Tecnologías Web:
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl015_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl015_1.png}
 \end{center}
 \end{frame}
 
@@ -170,7 +141,7 @@
   \item CSS permite dotar de estilos nuestra página web, Modificando la apariencia del mismo.
   \item Se emplea el tag \textless{}style\textgreater{}
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl017_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl017_1.png}
 \end{center}
 \end{frame}
 
@@ -186,9 +157,9 @@
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Introducción}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl019_1.png}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl019_1.png}
 \end{center}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl019_2.png}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl019_2.png}
 \end{center}
 \end{frame}
 
@@ -209,7 +180,7 @@
   \item PHP es un lenguaje de programación de código abierto muy popular.
   \item PHP puede integrarse dentro del HTML (en el lado del servidor).
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl021_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl021_1.png}
 \end{center}
 \end{frame}
 
@@ -222,7 +193,7 @@
   \end{itemize}
 \end{frame}
 
-\section{OWASP y fundamentos}
+\section{OWASP Top 10}
 
 \begin{frame}[allowframebreaks]{OWASP Top 10}
 \small
@@ -294,17 +265,17 @@
   \item Ref: \href{https://owasp.org/www-project-top-ten/}{https://owasp.org/www-project-top-ten/}
   \item \href{https://systemweakness.com/owasp-top-10-vulnerabilities-latest-2021-cfe44c0d60a7}{Leer}
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl029_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl029_1.png}
 \end{center}
 \end{frame}
 
 \begin{frame}[allowframebreaks]{OWASP}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl030_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl030_1.png}
 \end{center}
 \end{frame}
 
 \begin{frame}[allowframebreaks]{OWASP}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl031_1.jpg}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl031_1.jpg}
 \end{center}
 \end{frame}
 
@@ -367,9 +338,9 @@
   \item Acunetix $\cdot$ Nessus $\cdot$ OpenVAS.
   \item Vulnerabilidades Web
   \end{itemize}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl036_1.png}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl036_1.png}
 \end{center}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl036_2.png}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl036_2.png}
 \end{center}
 \end{frame}
 
@@ -414,7 +385,7 @@
     \item \href{https://www.hackingarticles.in/burp-suite-for-pentester-fuzzing-with-intruder-part-3/}{https://www.hackingarticles.in/burp-suite-for-pentester-fuzzing-with-intruder-part-3/}
     \end{itemize}
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl039_1.jpg}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl039_1.jpg}
 \end{center}
 \end{frame}
 
@@ -570,7 +541,7 @@
   \item (DNS/HTTP) recibidas $\rightarrow$ confirma la vuln a ciegas.
   \item Hacking Articles --- Burp Suite for Pentester: Burp Collaborator
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl046_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl046_1.png}
 \end{center}
 \end{frame}
 
@@ -589,7 +560,7 @@
   \item Si un único payload no funciona $\rightarrow$ fuzzear el punto con Intruder.
   \item Hacking Articles --- Burp Suite for Pentester: Burp Collaborator
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl047_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl047_1.png}
 \end{center}
 \end{frame}
 
@@ -607,7 +578,7 @@
   \item Poll now (o cada 60 s) rellena la tabla de callbacks: Time $\cdot$ Type (DNS/HTTP/SMTP) $\cdot$ Payload $\rightarrow$ confirma la vuln ciega.
   \item Fuente: Hacking Articles / Ignite --- Burp Collaborator
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl048_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl048_1.png}
 \end{center}
 \end{frame}
 
@@ -639,7 +610,7 @@
   \item Optimización Fastest$\leftrightarrow$Deepest. Crawl Limit: tiempo y n de ubicaciones únicas. Application login: credenciales para páginas restringidas. Resource Pool: concurrencia y delay (apps frágiles). URLs fuera de Scope.
   \item Fuente: Burp Suite for Pentester: Web Scanner \& Crawler --- Hacking Articles
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl050_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl050_1.png}
 \end{center}
 \end{frame}
 
@@ -656,7 +627,7 @@
   \item El Scanner es exclusivo de Burp Suite PROFESSIONAL (la Community no lo trae).
   \item Fuente: Burp Suite for Pentester: Web Scanner \& Crawler --- Hacking Articles
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl051_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl051_1.png}
 \end{center}
 \end{frame}
 
@@ -686,7 +657,7 @@
   \item OS Command Injection + Reverse Shells
   \item BApp Store: portswigger.net/bappstore
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl052_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl052_1.png}
 \end{center}
 \end{frame}
 
@@ -714,7 +685,7 @@
   \item -1 UNION SELECT 1,schema\_name,3 FROM information\_schema.schemata --
   \item Fuente: BurpSuite.pdf --- Sección SQL Injection
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl053_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl053_1.png}
 \end{center}
 \end{frame}
 
@@ -745,7 +716,7 @@
   \item Si ningún set funciona: el campo puede usar prepared statements
   \item Fuente: BurpSuite.pdf --- Sección SQLi Login Bypass
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl054_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl054_1.png}
 \end{center}
 \end{frame}
 
@@ -775,7 +746,7 @@
   \item $\rightarrow$ Si aparece el popup: XSS stored/reflected confirmado
   \item Fuente: BurpSuite.pdf --- Sección Cross-Site Scripting
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl055_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl055_1.png}
 \end{center}
 \end{frame}
 
@@ -807,7 +778,7 @@
   \item php://filter/convert.base64-encode/resource=/etc/passwd
   \item Fuente: BurpSuite.pdf --- Sección Local File Inclusion
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl056_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl056_1.png}
 \end{center}
 \end{frame}
 
@@ -837,7 +808,7 @@
   \item de application/json a application/xml e inyectar el XXE.
   \item Fuente: BurpSuite.pdf --- Sección XXE Injection
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl057_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl057_1.png}
 \end{center}
 \end{frame}
 
@@ -867,7 +838,7 @@
   \item Para reverse shell: usar el módulo OS Command Injection de HackBar
   \item Fuente: BurpSuite.pdf --- Sección Unrestricted File Upload
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl058_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl058_1.png}
 \end{center}
 \end{frame}
 
@@ -899,7 +870,7 @@
   \item python3 -c 'import pty;pty.spawn(\textquotedbl{}/bin/bash\textquotedbl{})' $\rightarrow$ TTY completa
   \item Fuente: BurpSuite.pdf --- Sección OS Command Injection
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl059_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl059_1.png}
 \end{center}
 \end{frame}
 
@@ -952,7 +923,7 @@
     \item instalar Docker en Unix: \href{https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04-es}{https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04-es}
     \end{itemize}
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl062_1.jpg}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl062_1.jpg}
 \end{center}
 \end{frame}
 
@@ -1009,6 +980,14 @@
   \item Codificar la salida (HTML-encode) según el contexto; sanear
   \item con allowlist (DOMPurify); CSP. Nunca confiar en la entrada.
   \item PortSwigger Web Security Academy $\cdot$ DVWA para practicar
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Referencias y práctica --- HTML Injection}
+\footnotesize
+  \begin{itemize}
+  \item \href{https://owasp.org/www-community/attacks/HTML_Injection}{OWASP --- HTML Injection}
+  \item \href{https://portswigger.net/web-security/cross-site-scripting}{PortSwigger --- del HTMLi al XSS}
   \end{itemize}
 \end{frame}
 
@@ -1093,7 +1072,7 @@
 \end{frame}
 
 \begin{frame}[allowframebreaks]{XSS}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl092_1.jpg}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl092_1.jpg}
 \end{center}
 \end{frame}
 
@@ -1102,7 +1081,7 @@
   \begin{itemize}
   \item Realiza un ataque de tipo XSS reflejado y de tipo permanente en la aplicación DVWA
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl093_1.jpg}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl093_1.jpg}
 \end{center}
 \end{frame}
 
@@ -1119,7 +1098,7 @@
     \end{itemize}
   \item No es una vulnerabilidad muy crítica:
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl094_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl094_1.png}
 \end{center}
 \end{frame}
 
@@ -1151,21 +1130,21 @@
     \item \href{https://infosecwriteups.com/all-about-file-upload-xss-c72c797aaba3}{leer1}, \href{https://blog.cobalt.io/a-pentesters-guide-to-cross-site-scripting-xss-19f60cf4255f}{leer2}, \href{https://www.cobalt.io/blog/a-pentesters-guide-to-cross-site-scripting-xss}{leer3}
     \end{itemize}
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl095_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl095_1.png}
 \end{center}
 \end{frame}
 
 \begin{frame}[allowframebreaks]{XSS}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl096_1.png}
+\begin{center}\includegraphics[width=0.62\textwidth,height=0.42\textheight,keepaspectratio]{img/sl096_1.png}
 \end{center}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl096_2.png}
+\begin{center}\includegraphics[width=0.62\textwidth,height=0.42\textheight,keepaspectratio]{img/sl096_2.png}
 \end{center}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl096_3.png}
+\begin{center}\includegraphics[width=0.62\textwidth,height=0.42\textheight,keepaspectratio]{img/sl096_3.png}
 \end{center}
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Haz un ataque de tipo defacement a partir de un XSS en DVWA}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl097_1.jpg}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl097_1.jpg}
 \end{center}
 \end{frame}
 
@@ -1176,7 +1155,7 @@
   \item \href{https://xss-quiz.int21h.jp/}{https://xss-quiz.int21h.jp/}
   \item ¿Serías capaz de pasarte todos los niveles?
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl098_1.jpg}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl098_1.jpg}
 \end{center}
 \end{frame}
 
@@ -1188,7 +1167,7 @@
     \item https://pentesterlab.com/exercises/web\_for\_pentester/course
     \end{itemize}
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl099_1.jpg}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl099_1.jpg}
 \end{center}
 \end{frame}
 
@@ -1197,9 +1176,9 @@
   \begin{itemize}
   \item XSS
   \end{itemize}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl100_1.png}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl100_1.png}
 \end{center}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl100_2.png}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl100_2.png}
 \end{center}
 \end{frame}
 
@@ -1212,7 +1191,7 @@
     \end{itemize}
   \item XSS
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl101_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl101_1.png}
 \end{center}
 \end{frame}
 
@@ -1224,7 +1203,7 @@
     \item \href{https://portswigger.net/web-security/cross-site-scripting/dom-based}{Lectura}
     \end{itemize}
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl102_1.jpg}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl102_1.jpg}
 \end{center}
 \end{frame}
 
@@ -1233,9 +1212,9 @@
   \begin{itemize}
   \item XSS
   \end{itemize}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl103_1.png}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl103_1.png}
 \end{center}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl103_2.png}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl103_2.png}
 \end{center}
 \end{frame}
 
@@ -1248,9 +1227,9 @@
     \end{itemize}
   \item XSS
   \end{itemize}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl104_1.png}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl104_1.png}
 \end{center}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl104_2.png}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl104_2.png}
 \end{center}
 \end{frame}
 
@@ -1260,7 +1239,7 @@
   \item El atacante se pone a la escucha con netcat y recibe:
   \item XSS
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl105_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl105_1.png}
 \end{center}
 \end{frame}
 
@@ -1269,7 +1248,7 @@
   \begin{itemize}
   \item Haz un ataque de tipo phising a partir de un XSS en una web vulnerable a tu elección
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl106_1.jpg}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl106_1.jpg}
 \end{center}
 \end{frame}
 
@@ -1279,7 +1258,7 @@
   \item La idea es comprometer un sitio web mediante una inyección XSS y esperar que las posibles víctimas visiten ese dominio y descarguen la pieza de malware
   \item XSS
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl107_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl107_1.png}
 \end{center}
 \end{frame}
 
@@ -1289,7 +1268,7 @@
   \item Explotamos la vulnerabilidad XSS almacenada (un XSS persistente no tendría sentido\dots{}por qué?)
   \item XSS
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl108_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl108_1.png}
 \end{center}
 \end{frame}
 
@@ -1302,14 +1281,14 @@
     \end{itemize}
   \item XSS
   \end{itemize}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl109_1.png}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl109_1.png}
 \end{center}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl109_2.png}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl109_2.png}
 \end{center}
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Realiza un ataque de tipo watering hole con un XSS}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl110_1.jpg}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl110_1.jpg}
 \end{center}
 \end{frame}
 
@@ -1322,9 +1301,9 @@
     \end{itemize}
   \item XSS
   \end{itemize}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl111_1.png}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl111_1.png}
 \end{center}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl111_2.png}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl111_2.png}
 \end{center}
 \end{frame}
 
@@ -1340,7 +1319,7 @@
     \end{itemize}
   \item XSS
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl112_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl112_1.png}
 \end{center}
 \end{frame}
 
@@ -1353,9 +1332,9 @@
     \end{itemize}
   \item XSS
   \end{itemize}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl113_1.png}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl113_1.png}
 \end{center}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl113_2.png}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl113_2.png}
 \end{center}
 \end{frame}
 
@@ -1364,11 +1343,11 @@
   \begin{itemize}
   \item Realiza una intrusión a la máquina donde se aloja DVWA a partir de un XSS que permita la ejecución remota de comandos (RCE)
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl114_1.jpg}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl114_1.jpg}
 \end{center}
 \end{frame}
 
-\begin{frame}[allowframebreaks]{Sessión Hijacking con XSS}
+\begin{frame}[allowframebreaks]{Session Hijacking con XSS}
 \small
   \begin{itemize}
   \item payloads para robar cookies de sesión vía XSS:
@@ -1377,32 +1356,32 @@
     \end{itemize}
   \item XSS
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl115_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl115_1.png}
 \end{center}
 \end{frame}
 
-\begin{frame}[allowframebreaks]{Sessión Hijacking con XSS}
+\begin{frame}[allowframebreaks]{Session Hijacking con XSS}
 \small
   \begin{itemize}
   \item XSS
   \end{itemize}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl116_1.png}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl116_1.png}
 \end{center}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl116_2.png}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl116_2.png}
 \end{center}
 \end{frame}
 
-\begin{frame}[allowframebreaks]{Sessión Hijacking con XSS}
+\begin{frame}[allowframebreaks]{Session Hijacking con XSS}
 \small
   \begin{itemize}
   \item Una vez capturada la cookie la introducimos con un plugin o addon de tipo ``cookie manager''. También se pude reinyectar la cookie con burp
   \item XSS
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl117_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl117_1.png}
 \end{center}
 \end{frame}
 
-\begin{frame}[allowframebreaks]{Sessión Hijacking con XSS}
+\begin{frame}[allowframebreaks]{Session Hijacking con XSS}
 \small
   \begin{itemize}
   \item Más currado todavía, con un programa en php para almacenar todas las cookies robadas
@@ -1414,7 +1393,7 @@
     \end{itemize}
   \item XSS
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl118_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl118_1.png}
 \end{center}
 \end{frame}
 
@@ -1423,9 +1402,9 @@
   \begin{itemize}
   \item Realiza un ataque de sesión hijacking vía robo de cookie usando un ataque XSS
   \end{itemize}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl119_1.jpg}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl119_1.jpg}
 \end{center}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl119_2.png}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl119_2.png}
 \end{center}
 \end{frame}
 
@@ -1438,9 +1417,9 @@
     \end{itemize}
   \item XSS
   \end{itemize}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl120_1.png}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl120_1.png}
 \end{center}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl120_2.png}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl120_2.png}
 \end{center}
 \end{frame}
 
@@ -1453,9 +1432,9 @@
     \end{itemize}
   \item XSS
   \end{itemize}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl121_1.png}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl121_1.png}
 \end{center}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl121_2.png}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl121_2.png}
 \end{center}
 \end{frame}
 
@@ -1465,7 +1444,7 @@
   \item y\dots{}qué herramienta conoces para ``romper'' hashes?
   \item XSS
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl122_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl122_1.png}
 \end{center}
 \end{frame}
 
@@ -1474,7 +1453,7 @@
   \begin{itemize}
   \item Serías capaz de averiguar la password a través de un ataque NTLM+XSS en una máquina Windows y con un servidor web vulnerable
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl123_1.jpg}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl123_1.jpg}
 \end{center}
 \end{frame}
 
@@ -1506,7 +1485,7 @@
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Realiza un ataque XSS con protección CSP en la aplicación DVWA}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl125_1.jpg}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl125_1.jpg}
 \end{center}
 \end{frame}
 
@@ -1519,7 +1498,7 @@
     \end{itemize}
   \item XSS
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl126_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl126_1.png}
 \end{center}
 \end{frame}
 
@@ -1529,7 +1508,7 @@
   \item Se añade el carácter \$ donde se quiere fuzzear
   \item XSS
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl127_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl127_1.png}
 \end{center}
 \end{frame}
 
@@ -1539,7 +1518,7 @@
   \item y se selecciona un diccionario con payload tipo XX
   \item XSS
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl128_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl128_1.png}
 \end{center}
 \end{frame}
 
@@ -1549,9 +1528,9 @@
   \item Podemos ver cada petición e incluso renderizarla en el navegador
   \item XSS
   \end{itemize}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl129_1.png}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl129_1.png}
 \end{center}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl129_2.png}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl129_2.png}
 \end{center}
 \end{frame}
 
@@ -1564,13 +1543,11 @@
     \end{itemize}
   \item XSS
   \end{itemize}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl130_1.png}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl130_1.png}
 \end{center}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl130_2.png}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl130_2.png}
 \end{center}
 \end{frame}
-
-\section{Payloads y práctica}
 
 \begin{frame}[allowframebreaks]{Ejercicio --- socialhub (DockerLabs)}
 \small
@@ -1607,10 +1584,21 @@
   \item \href{https://medium.com/r3d-buck3t/xss-to-exfiltrate-data-from-pdfs-f5bbb35eaba7}{XSS para exfiltrar datos de ficheros pdf}
   \item XSS
   \end{itemize}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl132_1.png}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl132_1.png}
 \end{center}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl132_2.png}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl132_2.png}
 \end{center}
+\end{frame}
+
+\begin{frame}{Referencias y práctica --- Cross-Site Scripting (XSS)}
+\footnotesize
+  \begin{itemize}
+  \item \href{https://portswigger.net/web-security/cross-site-scripting}{PortSwigger Web Security Academy --- XSS} (labs)
+  \item \href{https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html}{OWASP --- XSS Prevention Cheat Sheet}
+  \item \href{https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html}{OWASP --- DOM-based XSS Prevention}
+  \item \href{https://portswigger.net/web-security/cross-site-scripting/cheat-sheet}{PortSwigger --- XSS Cheat Sheet (payloads)}
+  \item \href{https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP}{MDN --- Content Security Policy (CSP)}
+  \end{itemize}
 \end{frame}
 
 \section{CSRF}
@@ -1649,17 +1637,17 @@
 \end{frame}
 
 \begin{frame}[allowframebreaks]{CSRF}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl135_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl135_1.png}
 \end{center}
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Realiza un ataque CSRF en la web DVWA}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl136_1.jpg}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl136_1.jpg}
 \end{center}
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Realiza un ataque XSS almacenado con un CSRF en DVWA}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl137_1.jpg}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl137_1.jpg}
 \end{center}
 \end{frame}
 
@@ -1673,7 +1661,7 @@
     \item Pro ejemplo:
     \end{itemize}
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl138_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl138_1.png}
 \end{center}
 \end{frame}
 
@@ -1689,7 +1677,7 @@
       \end{itemize}
     \end{itemize}
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl139_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl139_1.png}
 \end{center}
 \end{frame}
 
@@ -1701,7 +1689,7 @@
     \item También se puede hacer mediante un mail con un hipervínculo
     \end{itemize}
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl140_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl140_1.png}
 \end{center}
 \end{frame}
 
@@ -1713,7 +1701,7 @@
   \item Para evitar ataques CSRF hay que asegurarse que una acción está realmente siendo llevada a cabo por el usuario en lugar de un tercero (navegador), para ello, hay que asociarlo con algún tipo de identificador único que puede ser verificado después, llamado token.
   \item Vulnerabilidades Web
   \end{itemize}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl141_1.png}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl141_1.png}
 \end{center}
 \end{frame}
 
@@ -1723,12 +1711,21 @@
   \item Serías capaz de hacer un robo de cuenta de usuario explotando una vulnerabilidad CSRF e inyectándola vía XSS en la aplicación bWAPP y en DVWA
   \item Soluciones
   \end{itemize}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl142_1.jpg}
+\begin{center}\includegraphics[width=0.62\textwidth,height=0.42\textheight,keepaspectratio]{img/sl142_1.jpg}
 \end{center}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl142_2.png}
+\begin{center}\includegraphics[width=0.62\textwidth,height=0.42\textheight,keepaspectratio]{img/sl142_2.png}
 \end{center}
-\begin{center}\includegraphics[width=0.6\textwidth,height=0.42\textheight,keepaspectratio]{img/sl142_3.png}
+\begin{center}\includegraphics[width=0.62\textwidth,height=0.42\textheight,keepaspectratio]{img/sl142_3.png}
 \end{center}
+\end{frame}
+
+\begin{frame}{Referencias y práctica --- CSRF}
+\footnotesize
+  \begin{itemize}
+  \item \href{https://portswigger.net/web-security/csrf}{PortSwigger --- CSRF} (labs)
+  \item \href{https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html}{OWASP --- CSRF Prevention Cheat Sheet}
+  \item \href{https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite}{MDN --- SameSite cookies}
+  \end{itemize}
 \end{frame}
 
 \section{Clickjacking}
@@ -1748,8 +1745,17 @@
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Realiza un ataque clickjacking en la web DVWA}
-\begin{center}\includegraphics[width=0.78\textwidth,height=0.6\textheight,keepaspectratio]{img/sl149_1.jpg}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl149_1.jpg}
 \end{center}
+\end{frame}
+
+\begin{frame}{Referencias y práctica --- Clickjacking}
+\footnotesize
+  \begin{itemize}
+  \item \href{https://portswigger.net/web-security/clickjacking}{PortSwigger --- Clickjacking} (labs)
+  \item \href{https://cheatsheetseries.owasp.org/cheatsheets/Clickjacking_Defense_Cheat_Sheet.html}{OWASP --- Clickjacking Defense Cheat Sheet}
+  \item \href{https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options}{MDN --- X-Frame-Options y frame-ancestors}
+  \end{itemize}
 \end{frame}
 
 \section{Open Redirect}
@@ -1822,6 +1828,14 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}{Referencias y práctica --- Open Redirect}
+\footnotesize
+  \begin{itemize}
+  \item \href{https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html}{OWASP --- Unvalidated Redirects Cheat Sheet}
+  \item \href{https://portswigger.net/kb/issues/00500100_open-redirection-reflected}{PortSwigger --- Open Redirection}
+  \end{itemize}
+\end{frame}
+
 \section{Prototype Pollution}
 
 \begin{frame}[allowframebreaks]{Prototype Pollution}
@@ -1878,8 +1892,6 @@
   \end{itemize}
 \end{frame}
 
-\section{WebSockets}
-
 \begin{frame}[allowframebreaks]{WebSockets --- Pentesting}
 \small
   \begin{itemize}
@@ -1918,6 +1930,16 @@
   \item portswigger.net/web-security/websockets
   \end{itemize}
 \end{frame}
+
+\begin{frame}{Referencias y práctica --- Prototype Pollution}
+\footnotesize
+  \begin{itemize}
+  \item \href{https://portswigger.net/web-security/prototype-pollution}{PortSwigger --- Prototype Pollution} (labs)
+  \item \href{https://github.com/BlackFan/client-side-prototype-pollution}{BlackFan --- Client-side Prototype Pollution (gadgets)}
+  \end{itemize}
+\end{frame}
+
+\section{WebSockets}
 
 \begin{frame}[allowframebreaks]{WebSockets --- Cross-Site WebSocket Hijacking (CSWSH)}
 \small
@@ -2005,6 +2027,14 @@
   \item mensaje; autenticar por mensaje; límites de conexión y ritmo.
   \item Trata cada mensaje WS como entrada NO confiable.
   \item cobalt.io $\cdot$ portswigger.net/web-security/websockets
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Referencias y práctica --- WebSockets}
+\footnotesize
+  \begin{itemize}
+  \item \href{https://portswigger.net/web-security/websockets}{PortSwigger --- WebSockets security} (labs)
+  \item \href{https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html}{OWASP --- HTML5 / WebSockets Security}
   \end{itemize}
 \end{frame}
 
@@ -2694,8 +2724,6 @@
   \end{itemize}
 \end{frame}
 
-\section{Vulnerabilidades basadas en DOM}
-
 \begin{frame}[allowframebreaks]{SameSite Strict --- Bypass con Dominio Hermano (Labs 70-71)}
 \small
   \begin{itemize}
@@ -2877,6 +2905,17 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}{Referencias y práctica --- CORS}
+\footnotesize
+  \begin{itemize}
+  \item \href{https://portswigger.net/web-security/cors}{PortSwigger --- CORS} (labs)
+  \item \href{https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS}{MDN --- Cross-Origin Resource Sharing}
+  \item \href{https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html\#cross-origin-resource-sharing}{OWASP --- CORS misconfig}
+  \end{itemize}
+\end{frame}
+
+\section{Vulnerabilidades basadas en DOM}
+
 \begin{frame}[allowframebreaks]{Vulnerabilidades basadas en el DOM --- Introducción}
 \small
   \begin{itemize}
@@ -3008,6 +3047,14 @@
 \small
   \begin{itemize}
   \item Ataques en el Lado del Cliente
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Referencias y práctica --- Vulnerabilidades basadas en DOM}
+\footnotesize
+  \begin{itemize}
+  \item \href{https://portswigger.net/web-security/dom-based}{PortSwigger --- DOM-based vulnerabilities} (labs)
+  \item \href{https://github.com/wisec/domxsswiki/wiki}{DOM XSS Wiki --- sources \& sinks}
   \end{itemize}
 \end{frame}
 
